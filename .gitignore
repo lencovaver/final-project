@@ -1,0 +1,6 @@
+venv/
+.idea/
+webapp/db.sqlite3
+
+*.pyc
+__pycache__/
