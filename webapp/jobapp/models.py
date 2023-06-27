@@ -20,3 +20,4 @@ class PostJob(models.Model):
     status = models.BooleanField()
     place = models.ForeignKey(Place,related_name="postjobs", on_delete=models.CASCADE)
 
+
