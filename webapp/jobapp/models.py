@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class Position(models.Model):
     name_position = models.CharField(max_length=100)
 
@@ -13,10 +12,10 @@ class Position(models.Model):
     def __str__(self):
         return repr(self)
 
-
 class Place(models.Model):
     name_place = models.CharField(max_length=100)
     shortname = models.CharField(max_length=3)
+
 
     class Meta:
         ordering = ['name_place']
@@ -26,7 +25,6 @@ class Place(models.Model):
 
     def __str__(self):
         return repr(self)
-
 
 class PostJob(models.Model):
     id = models.AutoField(primary_key=True)
@@ -59,3 +57,4 @@ class PostJob(models.Model):
 
     def __str__(self):
         return f"{self.positions} - {self.place} ({self.salary}CHF)"
+
