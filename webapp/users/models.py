@@ -6,21 +6,6 @@ class User(AbstractUser):
     pass
 
 
-class UserAgent(models.Model):
-    agent_name = models.CharField(max_length=50)
-    agent_surname = models.CharField(max_length=50)
-    company = models.CharField(max_length=255)
-    phone = models.IntegerField(default="no_number")
-    email = models.EmailField()
-
-
-class UserPerson(models.Model):
-    name = models.CharField(max_length=50)
-    surname = models.CharField(max_length=50)
-    phone = models.IntegerField(default="no_number")
-    email = models.EmailField()
-
-
 class Company(models.Model):
     name = models.CharField(max_length=255, blank=False, null=False)
     contact_person = models.CharField(max_length=255, blank=False, null=False)
@@ -33,3 +18,21 @@ class Company(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class UserAgent(models.Model):
+    agent_name = models.CharField(max_length=50)
+    agent_surname = models.CharField(max_length=50)
+    company = models.ForeignKey(Company, on_delete=models.PROTECT, related_name="Companies")
+    phone = models.IntegerField(default="no_number")
+    email = models.EmailField()
+
+
+class UserPerson(models.Model):
+    name = models.CharField(max_length=50)
+    surname = models.CharField(max_length=50)
+    phone = models.IntegerField(default="no_number")
+    email = models.EmailField()
+
+
+
