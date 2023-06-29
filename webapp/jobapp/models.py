@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Position(models.Model):
     name_position = models.CharField(max_length=100)
 
@@ -11,6 +12,7 @@ class Position(models.Model):
 
     def __str__(self):
         return repr(self)
+
 
 class Place(models.Model):
     name_place = models.CharField(max_length=100)
@@ -25,6 +27,7 @@ class Place(models.Model):
 
     def __str__(self):
         return repr(self)
+
 
 class PostJob(models.Model):
     id = models.AutoField(primary_key=True)
@@ -51,7 +54,7 @@ class PostJob(models.Model):
     ])
     place = models.ForeignKey(Place, related_name="postjobs", on_delete=models.CASCADE)
     info_position = models.TextField()
-    #language = models.ForeignKey(Language, related_name="language", on_delete=models.CASCADE)
+    # language = models.ForeignKey(Language, related_name="language", on_delete=models.CASCADE)
     salary = models.IntegerField()
     status = models.BooleanField()
 
