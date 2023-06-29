@@ -4,7 +4,7 @@ from .models import User, Company, UserAgent, UserPerson
 
 
 class CompanyAdmin(admin.ModelAdmin):
-    list_display = ["name", "contact_person", "telephone_number", "email", "place"]
+    list_display = ["name", "address", "contact_person", "telephone_number", "email", "place"]
 
 
 class UserAgentAdmin(admin.ModelAdmin):
