@@ -59,7 +59,7 @@ class PostJob(models.Model):
     id = models.AutoField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
     positions = models.ForeignKey(Position, related_name="position", on_delete=models.CASCADE)
-    category = models.CharField(max_length=100, blank=True, null=True, choices=[
+    category = models.CharField(max_length=100, blank=True, default="", choices=[
         ('', '---------'),
         ('AM', 'AM 🛵'),
         ('A1', 'A1'),
@@ -85,7 +85,6 @@ class PostJob(models.Model):
     info_position = models.TextField()
     salary = models.IntegerField(choices=[(i, i) for i in range(100)], default=30)
     diet = models.IntegerField(choices=[(i, i) for i in range(31)], default=0)
-
 
     def __str__(self):
         return f"{self.positions} - {self.place} ({self.salary}CHF + spessen {self.diet}CHF)"
