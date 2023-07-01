@@ -3,7 +3,9 @@ from django.db import models
 
 
 class User(AbstractUser):
-    pass
+
+    class Meta:
+        verbose_name_plural = ('users')
 
 
 class City(models.Model):
@@ -34,6 +36,7 @@ class Company(models.Model):
 
 
 class UserAgent(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     agent_name = models.CharField(max_length=50, blank=False)
     agent_surname = models.CharField(max_length=50)
     company = models.ForeignKey(Company, on_delete=models.PROTECT, related_name="Companies")
@@ -43,11 +46,12 @@ class UserAgent(models.Model):
         ("CHE", "+41")
     ])
     phone = models.IntegerField(default="no_number")
-    email = models.EmailField()
+    email = models.EmailField(blank=False)
 
 
 class UserPerson(models.Model):
-    name = models.CharField(max_length=50)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    first_name = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
     area_code = models.CharField(max_length=4, blank=True, choices=[
         ("CZ", "+420"),
@@ -55,5 +59,5 @@ class UserPerson(models.Model):
         ("CHE", "+41")
     ])
     phone = models.IntegerField(default="no_number")
-    email = models.EmailField()
+    email = models.EmailField(blank=False)
 
