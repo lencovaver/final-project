@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Jobs</title>
+</head>
+<body>
+<h2 class="content h2">All Jobs</h2>
+<table>
+    <colgroup span="2"></colgroup>
+    <tr>
+        <th>Position</th>
+        <th>Description</th>
+    </tr>
+
+    {% for job in all_jobs %}
+    <tr>
+        <td>{{ job.positions }}</td>
+        <td>{{ job.info_position}}</td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
