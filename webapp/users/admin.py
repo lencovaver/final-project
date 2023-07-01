@@ -12,11 +12,16 @@ class UserAgentAdmin(admin.ModelAdmin):
 
 
 class UserPersonAdmin(admin.ModelAdmin):
-    list_display = ["name", "surname", "phone", "email"]
+    list_display = ["first_name", "surname", "phone", "email"]
+
+
+class CityAdmin(admin.ModelAdmin):
+    list_display=["name_city"]
 
 
 admin.site.register(User, UserAdmin)
 admin.site.register(Company, CompanyAdmin)
 admin.site.register(UserAgent, UserAgentAdmin)
 admin.site.register(UserPerson, UserPersonAdmin)
-admin.site.register(City)
+admin.site.register(City, CityAdmin)
+
