@@ -16,14 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
 from jobapp.views import HomepageView, AllJobsView
+
+from users.views import RegistrationView, RegSuccessView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", HomepageView.as_view(), name="homepage"),
     path("all-jobs/", AllJobsView.as_view(), name="all_jobs"),
-    # path("login/", LoginView.as_view(), name="login"),
-    # path("logout/", LogoutView.as_view(), name="logout"),
-    # path("registration/", RegistrationView.as_view(), name="register"),
+    path("registration/", RegistrationView.as_view(), name="registration"),
+    path("registration-success/", RegSuccessView.as_view(), name="registration-success"),
 ]

@@ -12,7 +12,7 @@ class UserAgentAdmin(admin.ModelAdmin):
 
 
 class UserPersonAdmin(admin.ModelAdmin):
-    list_display = ["name", "surname", "phone", "email"]
+    list_display = ["first_name", "surname", "phone", "email"]
 
 
 class CityAdmin(admin.ModelAdmin):
