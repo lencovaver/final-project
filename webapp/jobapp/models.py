@@ -29,14 +29,12 @@ class Place(models.Model):
 
 
 class PostJob(models.Model):
-
     EXPERIENCE_CHOICES = [
         ('1-3', '1-3'),
         ('4-6', '4-6'),
         ('6-9', '6-9'),
         ('10+', '10 a více'),
     ]
-
     LANGUAGE_CHOICES = [
         ('NO', 'žádný'),
         ('ENG1', '🇬🇧 english/beginner'),
@@ -55,7 +53,6 @@ class PostJob(models.Model):
         ('ITA2', '🇮🇹 italy/advanced'),
         ('ITA3', '🇮🇹 italy/native speaker'),
     ]
-    
     id = models.AutoField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
     positions = models.ForeignKey(Position, related_name="position", on_delete=models.CASCADE)
@@ -78,7 +75,6 @@ class PostJob(models.Model):
         ('DE', 'DE'),
         ('T', 'T 🚜')
     ])
-    
     experience = models.CharField(max_length=100, choices=EXPERIENCE_CHOICES, default='1-3')
     place = models.ForeignKey(Place, related_name="postjobs", on_delete=models.CASCADE)
     language = models.CharField(max_length=100, choices=LANGUAGE_CHOICES, default='NO')
@@ -88,4 +84,5 @@ class PostJob(models.Model):
 
     def __str__(self):
         return f"{self.positions} - {self.place} ({self.salary}CHF + spessen {self.diet}CHF)"
+
 
