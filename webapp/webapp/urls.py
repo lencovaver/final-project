@@ -18,12 +18,13 @@ from django.contrib import admin
 from django.urls import path
 from jobapp.views import HomepageView, AllJobsView
 
-from users.views import RegistrationView, RegSuccessView
+from users.views import RegSuccessView, UserRegistrationView, AgentRegistrationView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", HomepageView.as_view(), name="homepage"),
     path("all-jobs/", AllJobsView.as_view(), name="all_jobs"),
-    path("registration/", RegistrationView.as_view(), name="registration"),
+    path("registration/", UserRegistrationView.as_view(), name="registration"),
+    path("business-registration/", AgentRegistrationView.as_view(), name="business-registration"),
     path("registration-success/", RegSuccessView.as_view(), name="registration-success"),
 ]
