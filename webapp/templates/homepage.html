@@ -4,21 +4,23 @@
     <title>Homepage</title>
 </head>
 <body>
+   <ul>
+        <li><a href="{% url 'all-jobs' %}">View All Available Jobs</a></li>
+        <li><a href="{% url 'registration' %}">Registration</a></li>
+        <li><a href="{% url 'business-registration' %}">Register as a Company</a></li>
+
+    </ul>
 <ul>
     {% for job in jobs %}
     <li>
         {{ job.positions }}
-        <a href="{% url 'job' job.id %}">>>>Job Detail<<<</a>
+        <a href="{% url 'job-detail' job.id %}">Job Detail></a>
     </li>
     {% endfor %}
 
     <a href="{% url 'create' %}">>>>new ad<<<</a>
 
-    <ul>
-        <li><a href="{% url 'all_jobs' %}">View All Available Jobs</a></li>
-        <li><a href="{% url 'registration' %}">Registration</a></li>
-        <li><a href="{% url 'business-registration' %}">Register as a Company</a></li>
 
-    </ul>
+</ul>
 </body>
 </html>

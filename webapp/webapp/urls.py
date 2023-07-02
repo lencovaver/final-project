@@ -16,9 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-<<<<<<< HEAD
+
 from jobapp.views import HomepageView, AllJobsView, JobDetailView, JobCreateView, JobUpdateView, JobDeleteView
-from users.views import RegistrationView, RegSuccessView, UserRegistrationView, AgentRegistrationView
+from users.views import RegSuccessView, UserRegistrationView, AgentRegistrationView
 
 
 urlpatterns = [
@@ -28,7 +28,7 @@ urlpatterns = [
     path("registration/", UserRegistrationView.as_view(), name="registration"),
     path("business-registration/", AgentRegistrationView.as_view(), name="business-registration"),
     path("registration-success/", RegSuccessView.as_view(), name="registration-success"),
-    path("job/<int:job_id>/", JobDetailView.as_view(), name='job'),
+    path("job/<int:job_id>/", JobDetailView.as_view(), name='job-detail'),
     path("create/", JobCreateView.as_view(), name='create'),
     path("job/<int:pk>/update", JobUpdateView.as_view(), name='update'),
     path("job/<int:pk>/delete", JobDeleteView.as_view(), name='delete'),

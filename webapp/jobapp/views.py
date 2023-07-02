@@ -29,7 +29,7 @@ class AllJobsView(ListView):
 class JobDetailView(DetailView):
     model = PostJob
     context_object_name = 'job'
-    template_name = "job.html"
+    template_name = "job-detail.html"
 
     def get_object(self):
         job_id = self.kwargs.get("job_id")
