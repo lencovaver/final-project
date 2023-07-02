@@ -11,29 +11,11 @@
 <div>
     <form method="POST" action="{% url 'registration' %}">
         {% csrf_token %}
-        <div>
-            <label for="{{ form.username.id_for_label }}">Username:</label>
-            {{ form.username }}
-            <span class="error-message">{{ form.username.errors }}</span>
-        </div>
-        <div>
-            <label for="{{ form.email.id_for_label }}">Email:</label>
-            {{ form.email }}
-            <span class="error-message">{{ form.email.errors }}</span>
-        </div>
-        <div>
-            <label for="{{ form.password1.id_for_label }}">Password:</label>
-            {{ form.password1 }}
-            <span class="error-message">{{ form.password1.errors }}</span>
-        </div>
-        <div>
-            <label for="{{ form.password2.id_for_label }}">Confirm Password:</label>
-            {{ form.password2 }}
-            <span class="error-message">{{ form.password2.errors }}</span>
-        </div>
-        <div>
-            <input type="submit" value="Register Account">
-        </div>
+        <h2>Register with us to see the jobs</h2>
+        {% csrf_token %}
+
+        {{ form.as_p }}
+        <button type="submit">Register</button>
     </form>
 </div>
 </body>

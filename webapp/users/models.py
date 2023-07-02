@@ -3,6 +3,9 @@ from django.db import models
 
 
 class User(AbstractUser):
+    is_useragent = models.BooleanField(default=False)
+    is_userperson = models.BooleanField(default=False)
+
     class Meta:
         verbose_name_plural = ('users')
 
@@ -35,21 +38,21 @@ class Company(models.Model):
 
 
 class UserAgent(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name="useragent")
     agent_name = models.CharField(max_length=50, blank=False)
     agent_surname = models.CharField(max_length=50)
-    company = models.ForeignKey(Company, on_delete=models.PROTECT, related_name="Companies")
+    company = models.ForeignKey(Company, on_delete=models.PROTECT, related_name="Companies", null=True)
     area_code = models.CharField(max_length=4, blank=True, choices=[
         ("CZ", "+420"),
         ("SK", "+421"),
         ("CHE", "+41")
     ])
-    phone = models.IntegerField(default="no_number")
+    phone = models.IntegerField(blank=True, null=True)
     email = models.EmailField(blank=False)
 
 
 class UserPerson(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name="userperson")
     first_name = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
     area_code = models.CharField(max_length=4, blank=True, choices=[
@@ -57,5 +60,5 @@ class UserPerson(models.Model):
         ("SK", "+421"),
         ("CHE", "+41")
     ])
-    phone = models.IntegerField(default="no_number")
+    phone = models.IntegerField(blank=True, null=True)
     email = models.EmailField(blank=False)
