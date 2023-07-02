@@ -4,8 +4,6 @@
     <title>Homepage</title>
 </head>
 <body>
-<a href="{% url 'all-jobs' %}">>>>All Jobs<<<</a>
-<a href="{% url 'registration' %}">>>>REGISTRATION<<<</a>
 <ul>
     {% for job in jobs %}
     <li>
@@ -14,7 +12,13 @@
     </li>
     {% endfor %}
 
-<a href="{% url 'create' %}">>>>new ad<<<</a>
-</ul>
+    <a href="{% url 'create' %}">>>>new ad<<<</a>
+
+    <ul>
+        <li><a href="{% url 'all_jobs' %}">View All Available Jobs</a></li>
+        <li><a href="{% url 'registration' %}">Registration</a></li>
+        <li><a href="{% url 'business-registration' %}">Register as a Company</a></li>
+
+    </ul>
 </body>
 </html>

@@ -16,13 +16,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+<<<<<<< HEAD
 from jobapp.views import HomepageView, AllJobsView, JobDetailView, JobCreateView, JobUpdateView, JobDeleteView
-from users.views import RegistrationView, RegSuccessView
+from users.views import RegistrationView, RegSuccessView, UserRegistrationView, AgentRegistrationView
+
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", HomepageView.as_view(), name="homepage"),
     path("all-jobs/", AllJobsView.as_view(), name="all-jobs"),
-    path("registration/", RegistrationView.as_view(), name="registration"),
+    path("registration/", UserRegistrationView.as_view(), name="registration"),
+    path("business-registration/", AgentRegistrationView.as_view(), name="business-registration"),
     path("registration-success/", RegSuccessView.as_view(), name="registration-success"),
     path("job/<int:job_id>/", JobDetailView.as_view(), name='job'),
     path("create/", JobCreateView.as_view(), name='create'),
