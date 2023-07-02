@@ -76,7 +76,7 @@ class PostJob(models.Model):
         ('T', 'T 🚜')
     ])
     experience = models.CharField(max_length=100, choices=EXPERIENCE_CHOICES, default='1-3')
-    place = models.ForeignKey(Place, related_name="postjobs", on_delete=models.CASCADE)
+    place = models.ForeignKey(Place, related_name="postjobs", on_delete=models.CASCADE, null=True)
     language = models.CharField(max_length=100, choices=LANGUAGE_CHOICES, default='NO')
     info_position = models.TextField()
     salary = models.IntegerField(choices=[(i, i) for i in range(100)], default=30)

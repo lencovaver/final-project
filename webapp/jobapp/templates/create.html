@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create new job ad</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create a Job</title>
+</head>
+<body>
+<h1>Create a Job</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
+
+</body>
+</html>

@@ -21,14 +21,6 @@ class RegistrationView(CreateView):
         else:
             return TemplateResponse(request, 'registration.html', context={'form': form})
 
-    #def form_valid(self, form):
-    #    valid = super().form_valid(form)
-    #    username, password = form.cleaned_data.get('username'), form.cleaned_data.get('password1')
-    #    user = User.objects.get(username=username)
-    #    user.set_password(password)
-    #    user.save()
-    #    return valid
-
 
 class RegSuccessView(View):
 
