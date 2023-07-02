@@ -1,5 +1,5 @@
 from django.db import models
-from multiselectfield import MultiSelectField
+from django.core.exceptions import ValidationError
 
 
 class Position(models.Model):
@@ -55,17 +55,8 @@ class Language(models.Model):
         return f"{state_display} - {level_display}"
 
 
-class PostJob(models.Model):
-    EXPERIENCE_CHOICES = [
-        ('1-3', '1-3'),
-        ('4-6', '4-6'),
-        ('6-9', '6-9'),
-        ('10+', '10 a více'),
-    ]
-    id = models.AutoField(primary_key=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    positions = models.ForeignKey(Position, related_name="position", on_delete=models.CASCADE)
-    category = models.CharField(max_length=100, blank=True, default="", choices=[
+class DrivingLicence(models.Model):
+    CATEGORY_CHOICES = [
         ('', '---------'),
         ('AM', 'AM 🛵'),
         ('A1', 'A1'),
@@ -83,7 +74,25 @@ class PostJob(models.Model):
         ('D1E', 'D1E'),
         ('DE', 'DE'),
         ('T', 'T 🚜')
-    ])
+    ]
+
+    licence = models.CharField(max_length=6, choices=CATEGORY_CHOICES)
+
+    def __str__(self):
+        return self.get_licence_display()
+
+
+class PostJob(models.Model):
+    EXPERIENCE_CHOICES = [
+        ('1-3', '1-3'),
+        ('4-6', '4-6'),
+        ('6-9', '6-9'),
+        ('10+', '10 a více'),
+    ]
+    id = models.AutoField(primary_key=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    positions = models.ForeignKey(Position, related_name="position", on_delete=models.CASCADE)
+    category = models.ManyToManyField(DrivingLicence, blank=True)
     experience = models.CharField(max_length=100, choices=EXPERIENCE_CHOICES, default='1-3')
     place = models.ForeignKey(Place, related_name="postjobs", on_delete=models.CASCADE, null=True)
     language = models.ManyToManyField(Language, blank=True)
