@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Job detail</title>
+</head>
+<body>
+<div>
+    <h2>{{ job.positions }}</h2>
+    <p>{{ job.info_position }}</p>
+    <p>{{ job.salary }} + {{ job.diet}}</p>
+    <a href="{% url 'update' job.id %}">>>>EDIT<<<</a>
+    <a href="{% url 'delete' job.id %}">>>>DELETE<<<</a>
+</div>
+</body>
+</html>
