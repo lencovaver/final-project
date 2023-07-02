@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Place, PostJob,Position, Language, DrivingLicence
+from .models import Place, PostJob, Position, Language, DrivingLicence
+
 
 admin.site.register(Place)
 admin.site.register(PostJob)
