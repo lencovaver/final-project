@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "jobapp.apps.JobappConfig",
     "users.apps.UsersConfig",
-    "multiselectfield",
 ]
 
 MIDDLEWARE = [
