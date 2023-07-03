@@ -28,3 +28,4 @@ admin.site.register(Company, CompanyAdmin)
 admin.site.register(UserAgent, UserAgentAdmin)
 admin.site.register(UserPerson, UserPersonAdmin)
 admin.site.register(City, CityAdmin)
+
