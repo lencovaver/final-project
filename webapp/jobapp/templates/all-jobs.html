@@ -1,3 +1,5 @@
+{% load offer_filters %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +17,7 @@
 
     {% for job in all_jobs %}
     <tr>
-        <td>{{ job.positions }}</td>
+        <td>{{ job.positions|format_job_offer }}</td>
         <td>{{ job.info_position}}</td>
     </tr>
     {% endfor %}
