@@ -1,4 +1,4 @@
-from django.db import modelsqe
+from django.db import models
 
 
 class Position(models.Model):
