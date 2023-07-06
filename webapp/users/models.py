@@ -62,4 +62,3 @@ class UserPerson(models.Model):
     ])
     phone = models.IntegerField(blank=True, null=True)
     email = models.EmailField(blank=False)
-

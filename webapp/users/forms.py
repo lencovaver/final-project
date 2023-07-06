@@ -1,7 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.db.transaction import commit
 from django import forms
-
 from users.models import User, UserAgent, UserPerson, Company
 
 

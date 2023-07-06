@@ -25,8 +25,28 @@ class Place(models.Model):
 
     def __str__(self):
         return repr(self)
-
-
+      
+class DrivingLicence(models.Model):
+    CATEGORY_CHOICES = [
+        ('', '---------'),
+        ('AM', 'AM 🛵'),
+        ('A1', 'A1'),
+        ('A2', 'A2'),
+        ('A', 'A 🏍️'),
+        ('B1', 'B1 🚚'),
+        ('B', 'B 🚗'),
+        ('C1', 'C1 🚛'),
+        ('C', 'C'),
+        ('D1', 'D1 🚐'),
+        ('D', 'D 🚌'),
+        ('BE', 'BE '),
+        ('C1E', 'C1E'),
+        ('CE', 'CE'),
+        ('D1E', 'D1E'),
+        ('DE', 'DE'),
+        ('T', 'T 🚜')
+    ]
+    
 class PostJob(models.Model):
     EXPERIENCE_CHOICES = [
         ('1-3 roky', '1-3'),
@@ -56,25 +76,6 @@ class PostJob(models.Model):
         ('vlastní ubytování', 'vlastní'),
         ('zajištěné ubytování', 'zajištěné'),
     ]
-    CATEGORY_CHOICES = [
-        ('', '---------'),
-        ('AM', 'AM 🛵'),
-        ('A1', 'A1'),
-        ('A2', 'A2'),
-        ('A', 'A 🏍️'),
-        ('B1', 'B1 🚚'),
-        ('B', 'B 🚗'),
-        ('C1', 'C1 🚛'),
-        ('C', 'C'),
-        ('D1', 'D1 🚐'),
-        ('D', 'D 🚌'),
-        ('BE', 'BE '),
-        ('C1E', 'C1E'),
-        ('CE', 'CE'),
-        ('D1E', 'D1E'),
-        ('DE', 'DE'),
-        ('T', 'T 🚜')
-    ]
     id = models.AutoField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
     positions = models.ForeignKey(Position, related_name="position", on_delete=models.CASCADE)
@@ -83,9 +84,13 @@ class PostJob(models.Model):
     place = models.ForeignKey(Place, related_name="postjobs", on_delete=models.CASCADE, null=True)
     language = models.CharField(max_length=100, choices=LANGUAGE_CHOICES, default='NO')
     accommodation = models.CharField(max_length=30, choices=ACCOMMODATION_CHOICES, default='')
+    licence = models.CharField(max_length=6, choices=CATEGORY_CHOICES)
     info_position = models.TextField()
     salary = models.IntegerField(choices=[(i, i) for i in range(100)], default=30)
     diet = models.IntegerField(choices=[(i, i) for i in range(31)], default=0)
+    
+    def __str__(self):
+        return self.get_licence_display()
 
     def clean(self):
         if self.category:
@@ -94,3 +99,4 @@ class PostJob(models.Model):
             for choice in selected_choices:
                 if choice not in choices:
                     raise ValidationError(f"Neplatná kategorie: {choice}")
+
