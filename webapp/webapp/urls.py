@@ -16,7 +16,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
 from jobapp.views import HomepageView, AllJobsView, JobDetailView, JobCreateView, JobUpdateView, JobDeleteView
 from users.views import RegSuccessView, UserRegistrationView, AgentRegistrationView
 

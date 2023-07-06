@@ -114,6 +114,11 @@ USE_I18N = True
 
 USE_TZ = True
 
+LANGUAGES = [
+    ('en', 'English'),  # Seznam podporovaných jazyků a jejich názvů
+    ('cz', 'Česky'),  # Můžete přidat další jazyky podle potřeby
+]
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
