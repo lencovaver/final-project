@@ -8,3 +8,4 @@ register = template.Library()
 def format_job_offer(value):
     formatted_value = f"<div class='job-offer'>{value}</div>"
     return format_html(formatted_value)
+

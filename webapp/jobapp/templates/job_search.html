@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vyhledávač</title>
+</head>
+<body>
+</ul>
+
+ <main role="main" class="container">
+
+      <h3>Jakou práci hledáš</h3>
+      <form method="GET" action=".">
+        <div class="form-row">
+            <div class="form-group col-12">
+                <div class="input-group">
+                    <input class="form-control py-2 border-right-0 border" type="search" name="title_contains" placeholder="Zadej pozici..." />
+                    <span class="input-group-append">
+                        <div class="input-group-text bg-transparent">
+                            <i class="fa fa-search"></i>
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Vyhledat</button>
+      </form>
+    </main>
+
+    <ul>
+        {% for job in jobs %}
+            {% if job.positions == pozice %}
+                <li>
+                    {{ job.positions }}
+                    <a href="{% url 'job-detail' job.id %}">Detail práce</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</body>
+</html>

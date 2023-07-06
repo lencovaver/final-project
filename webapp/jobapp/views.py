@@ -1,8 +1,8 @@
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.template.response import TemplateResponse
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.views.generic.edit import FormMixin
+
 
 from .forms import PostJobForm
 from .models import PostJob
@@ -66,3 +66,16 @@ class JobDeleteView(DeleteView):
 
     def get_success_url(self):
         return reverse_lazy('homepage')
+
+
+class JobSearchView(ListView):
+    model = PostJob
+    template_name = "job_search.html"
+    context_object_name = "jobs"
+
+    def get_queryset(self):
+        query = self.request.GET.get("title_contains")
+        if query:
+            return PostJob.objects.filter(positions__contains=query)
+        else:
+            return PostJob.objects.all()
