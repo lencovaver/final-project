@@ -35,7 +35,7 @@ urlpatterns = [
     path("create/", JobCreateView.as_view(), name='create'),
     path("job/<int:pk>/update", JobUpdateView.as_view(), name='update'),
     path("job/<int:pk>/delete", JobDeleteView.as_view(), name='delete'),
-    path('jobs/', JobSearchView.as_view(), name='job-search'),
+    path("job-search/", JobSearchView.as_view(), name='job-search'),
 ]
 
 if settings.DEBUG:

@@ -88,6 +88,10 @@ class PostJob(models.Model):
         ('6-9', '6-9'),
         ('10+', '10 a více'),
     ]
+    ACCOMMODATION_CHOICES = [
+        ('vlastní ubytování', 'vlastní'),
+        ('zajištěné ubytování', 'zajištěné'),
+    ]
     id = models.AutoField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
     positions = models.ForeignKey(Position, related_name="position", on_delete=models.CASCADE)
@@ -95,6 +99,7 @@ class PostJob(models.Model):
     experience = models.CharField(max_length=100, choices=EXPERIENCE_CHOICES, default='1-3')
     place = models.ForeignKey(Place, related_name="postjobs", on_delete=models.CASCADE, null=True)
     language = models.ManyToManyField(Language, blank=True)
+    accommodation = models.CharField(max_length=30, choices=ACCOMMODATION_CHOICES, default='')
     info_position = models.TextField()
     salary = models.IntegerField(choices=[(i, i) for i in range(100)], default=30)
     diet = models.IntegerField(choices=[(i, i) for i in range(31)], default=0)

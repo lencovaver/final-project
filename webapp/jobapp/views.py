@@ -2,8 +2,6 @@ from django.shortcuts import get_object_or_404, render
 from django.template.response import TemplateResponse
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
-
-
 from .forms import PostJobForm
 from .models import PostJob
 
@@ -70,12 +68,16 @@ class JobDeleteView(DeleteView):
 
 class JobSearchView(ListView):
     model = PostJob
-    template_name = "job_search.html"
+    template_name = "job-search.html"
     context_object_name = "jobs"
 
     def get_queryset(self):
-        query = self.request.GET.get("title_contains")
+        query = self.request.GET.get("position")
+        print("Query:", query)
         if query:
-            return PostJob.objects.filter(positions__contains=query)
+            jobs = PostJob.objects.filter(positions__contains=query)
+            print(jobs)  # Toto vypíše nalezené pracovní pozice do konzoly pro kontrolu
+            return jobs
+            # return PostJob.objects.filter(positions__contains=query)
         else:
             return PostJob.objects.all()
