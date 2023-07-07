@@ -9,10 +9,10 @@ class Position(models.Model):
         ordering = ['name_position']
 
     def __repr__(self):
-        return f"{self.name_position}"
+        return self.name_position
 
     def __str__(self):
-        return repr(self)
+        return self.name_position
 
 
 class Place(models.Model):
@@ -79,7 +79,7 @@ class DrivingLicence(models.Model):
     licence = models.CharField(max_length=6, choices=CATEGORY_CHOICES)
 
     def __str__(self):
-        return self.get_licence_display()
+        return self.licence
 
 
 class PostJob(models.Model):
@@ -106,14 +106,13 @@ class PostJob(models.Model):
     diet = models.IntegerField(choices=[(i, i) for i in range(31)], default=0)
 
     def __str__(self):
-        return self.get_licence_display()
-
+        return self.positions.name_position
 
     def clean(self):
-        if self.category:
-            choices = [choice[0] for choice in self.CATEGORY_CHOICES]
-            selected_choices = self.category.split(',')
+        if self.driving_licence:
+            choices = [choice[0] for choice in DrivingLicence.CATEGORY_CHOICES]
+            selected_choices = self.driving_licence.values_list('licence', flat=True)
             for choice in selected_choices:
                 if choice not in choices:
-                    raise ValidationError(f"Neplatná kategorie: {choice}")
+                    raise ValidationError(f"Neplatná kategorie řidičského průkazu: {choice}")
 
