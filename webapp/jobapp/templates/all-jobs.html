@@ -85,6 +85,16 @@
         <button type="submit" class="btn btn-primary">Vyhledat</button>
     </form>
 
+    {% if jobs %}
+        <ul>
+            {% for job in jobs %}
+                <li>{{ job.positions }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No jobs found.</p>
+    {% endif %}
+
 </main>
 
 <br>
@@ -100,7 +110,7 @@
             <th>požadovaná praxe</th>
             <th>požadované jazykové znalosti</th>
             <th>Mzda v CHF</th>
-            <th>Spessen</th>
+            <th>Diety v CHF</th>
 
         </tr>
 

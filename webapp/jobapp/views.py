@@ -68,14 +68,14 @@ class JobDeleteView(DeleteView):
 
 class JobSearchView(ListView):
     model = PostJob
-    template_name = "job-search.html"
+    template_name = "all-jobs.html"
     context_object_name = "jobs"
 
     def get_queryset(self):
-        query = self.request.GET.get("position")
+        query = self.request.GET.get("title_contains")
         print("Query:", query)
         if query:
-            jobs = PostJob.objects.filter(positions__contains=query)
+            jobs = PostJob.objects.filter(positions__name_position__icontains=query)
             print(jobs)  # Toto vypíše nalezené pracovní pozice do konzoly pro kontrolu
             return jobs
             # return PostJob.objects.filter(positions__contains=query)
