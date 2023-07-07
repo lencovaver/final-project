@@ -3,7 +3,7 @@ from .models import Place, PostJob, Position, Language, DrivingLicence
 
 
 class PostJobAdmin(admin.ModelAdmin):
-    list_display = ["positions", "place", "language", "accommodation", "salary", "diet"]
+    list_display = ["positions", "place", "accommodation", "salary", "diet"]
 
 
 admin.site.register(Place)

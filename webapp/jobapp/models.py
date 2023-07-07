@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 
 class Position(models.Model):
@@ -73,7 +74,7 @@ class DrivingLicence(models.Model):
         ('T', 'T 🚜')
     ]
 
-    licence = models.CharField(max_length=6, choices=CATEGORY_CHOICES)
+    licence = models.CharField(max_length=6, choices=CATEGORY_CHOICES, null=True)
 
     def __str__(self):
         return self.get_licence_display()

@@ -25,7 +25,7 @@
 
         .job-list {
             list-style-type: none;
-    padding: 0;
+            padding: 0;
         }
 
 
@@ -78,41 +78,41 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'all-jobs' %}">View All Available Jobs</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'registration' %}">Registration</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'business-registration' %}">Register as a Company</a>
-            </li>
-        </ul>
+<div class="container">
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'all-jobs' %}">View All Available Jobs</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'registration' %}">Registration</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'business-registration' %}">Register as a Company</a>
+        </li>
+    </ul>
 
-        <h2 class="text-justify">Latest Jobs</h2>
-        <ul class="job-list">
-    {% for job in jobs %}
-    <li>
-        <div class="job-title">{{ job.positions }}</div>
-        <div class="job-details">
-            <span class="job-label">Kanton:</span> {{ job.place }}<br>
-            <span class="job-label">Požadovaná praxe:</span> {{ job.experience }}<br>
-            <span class="job-label">Požadovaná úroveň jazyka:</span> {{ job.language }}<br>
-            <a href="{% url 'job-detail' job.id %}">Job Detail</a>
-        </div>
-    </li>
-    {% endfor %}
-</ul>
+    <h2 class="text-justify">Latest Jobs</h2>
+    <ul class="job-list">
+        {% for job in jobs %}
+        <li>
+            <div class="job-title">{{ job.positions }}</div>
+            <div class="job-details">
+                <span class="job-label">Kanton:</span> {{ job.place }}<br>
+                <span class="job-label">Požadovaná praxe:</span> {{ job.experience }}<br>
+                <span class="job-label">Požadovaná úroveň jazyka:</span> {{ job.language }}<br>
+                <a href="{% url 'job-detail' job.id %}">Job Detail</a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
 
 
-        <div class="text-justify">
-            <a class="new-ad-link" href="{% url 'create' %}">Create a New Ad</a>
-        </div>
+    <div class="text-justify">
+        <a class="new-ad-link" href="{% url 'create' %}">Create a New Ad</a>
     </div>
+</div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
