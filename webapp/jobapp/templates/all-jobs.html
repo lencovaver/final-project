@@ -69,7 +69,7 @@
 <main role="main" class="container">
 
     <h3>Jakou práci hledáš</h3>
-    <form method="GET" action=".">
+    <form method="GET" action="{% url 'job-search' %}">
         <div class="form-row">
             <div class="form-group col-12">
                 <div class="input-group">
@@ -95,38 +95,35 @@
         <p>No jobs found.</p>
     {% endif %}
 
+    {% if not jobs %}
+        <br>
+        <br>
+        <div class="container">
+            <h2>Aktuální nabídky práce</h2>
+            <table id="jobs-table">
+                <colgroup span="2"></colgroup>
+                <tr>
+                    <th>Pozice</th>
+                    <th>Kanton</th>
+                    <th>požadovaná praxe</th>
+                    <th>požadované jazykové znalosti</th>
+                    <th>Mzda v CHF</th>
+                    <th>Diety v CHF</th>
+                </tr>
+                {% for job in all_jobs %}
+                    <tr>
+                        <td>{{ job.positions }}</td>
+                        <td>{{ job.place }}</td>
+                        <td>{{ job.experience }}</td>
+                        <td>{{ job.language }}</td>
+                        <td>{{ job.salary }}</td>
+                        <td>{{ job.diet }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    {% endif %}
 </main>
-
-<br>
-<br>
-
-<div class="container">
-    <h2>Aktuální nabídky práce</h2>
-    <table id="jobs-table">
-        <colgroup span="2"></colgroup>
-        <tr>
-            <th>Pozice</th>
-            <th>Kanton</th>
-            <th>požadovaná praxe</th>
-            <th>požadované jazykové znalosti</th>
-            <th>Mzda v CHF</th>
-            <th>Diety v CHF</th>
-
-        </tr>
-
-        {% for job in all_jobs %}
-        <tr>
-            <td>{{ job.positions }}</td>
-            <td>{{ job.place }}</td>
-            <td>{{ job.experience }}</td>
-            <td>{{ job.language }}</td>
-            <td>{{ job.salary }}</td>
-            <td>{{ job.diet }}</td>
-
-        </tr>
-        {% endfor %}
-    </table>
-</div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

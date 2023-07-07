@@ -73,10 +73,10 @@ class JobSearchView(ListView):
 
     def get_queryset(self):
         query = self.request.GET.get("title_contains")
-        print("Query:", query)
+        # print("Query:", query)
         if query:
             jobs = PostJob.objects.filter(positions__name_position__icontains=query)
-            print(jobs)  # Toto vypíše nalezené pracovní pozice do konzoly pro kontrolu
+            # print(jobs)  # Toto vypíše nalezené pracovní pozice do konzoly pro kontrolu
             return jobs
             # return PostJob.objects.filter(positions__contains=query)
         else:
