@@ -15,9 +15,9 @@ class Migration(migrations.Migration):
             field=models.CharField(
                 blank=True,
                 choices=[
-                    ("🇨🇿 Czechia", "+420"),
-                    ("🇸🇰 Slovakia", "+421"),
-                    ("🇨🇭 Switzerland", "+41"),
+                    ("🇨🇿 Czechia", "🇨🇿 +420"),
+                    ("🇸🇰 Slovakia", "🇸🇰 +421"),
+                    ("🇨🇭 Switzerland", "🇨🇭 +41"),
                 ],
                 max_length=20,
             ),
@@ -28,9 +28,9 @@ class Migration(migrations.Migration):
             field=models.CharField(
                 blank=True,
                 choices=[
-                    ("🇨🇿 Czechia", "+420"),
-                    ("🇸🇰 Slovakia", "+421"),
-                    ("🇨🇭 Switzerland", "+41"),
+                    ("🇨🇿 Czechia", "🇨🇿 +420"),
+                    ("🇸🇰 Slovakia", "🇸🇰 +421"),
+                    ("🇨🇭 Switzerland", "🇨🇭 +41"),
                 ],
                 max_length=20,
             ),

@@ -1,8 +1,13 @@
+{% load static offer_filters %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
     <title>All Jobs</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -48,33 +53,81 @@
     </style>
 </head>
 <body>
-<div class="container">
-    <h2>All Jobs</h2>
-    <table id="jobs-table">
-        <colgroup span="2"></colgroup>
-        <tr>
-            <th>Pozice</th>
-            <th>Kanton</th>
-            <th>požadovaná praxe</th>
-            <th>požadované jazykové znalosti</th>
-            <th>Mzda v CHF</th>
-            <th>Spessen</th>
+<br>
+<br>
+<br>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Nabídky práce ve Švýcarsku</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
-        </tr>
+<main role="main" class="container">
 
-        {% for job in all_jobs %}
-        <tr>
-            <td>{{ job.positions }}</td>
-            <td>{{ job.place }}</td>
-            <td>{{ job.experience }}</td>
-            <td>{{ job.language }}</td>
-            <td>{{ job.salary }}</td>
-            <td>{{ job.diet }}</td>
+    <h3>Jakou práci hledáš</h3>
+    <form method="GET" action="{% url 'job-search' %}">
+        <div class="form-row">
+            <div class="form-group col-12">
+                <div class="input-group">
+                    <input class="form-control py-2 border-right-0 border" type="search" name="title_contains" placeholder="Zadej pozici..." />
+                    <span class="input-group-append">
+                        <div class="input-group-text bg-transparent">
+                            <i class="fa fa-search"></i>
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Vyhledat</button>
+    </form>
 
-        </tr>
-        {% endfor %}
-    </table>
-</div>
+    {% if jobs %}
+        <ul>
+            {% for job in jobs %}
+                <li>{{ job.positions }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No jobs found.</p>
+    {% endif %}
+
+    {% if not jobs %}
+        <br>
+        <br>
+        <div class="container">
+            <h2>Aktuální nabídky práce</h2>
+            <table id="jobs-table">
+                <colgroup span="2"></colgroup>
+                <tr>
+                    <th>Pozice</th>
+                    <th>Kanton</th>
+                    <th>požadovaná praxe</th>
+                    <th>požadované jazykové znalosti</th>
+                    <th>Mzda v CHF</th>
+                    <th>Diety v CHF</th>
+                </tr>
+                {% for job in all_jobs %}
+                    <tr>
+                        <td>{{ job.positions }}</td>
+                        <td>{{ job.place }}</td>
+                        <td>{{ job.experience }}</td>
+                        <td>{{ job.language }}</td>
+                        <td>{{ job.salary }}</td>
+                        <td>{{ job.diet }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    {% endif %}
+</main>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 <script>
     // Function to create a table row for a job

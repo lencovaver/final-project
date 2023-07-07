@@ -15,8 +15,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
-from jobapp.views import HomepageView, AllJobsView, JobDetailView, JobCreateView, JobUpdateView, JobDeleteView
+
+from jobapp.views import HomepageView, AllJobsView, JobDetailView, JobCreateView, JobUpdateView, JobDeleteView, \
+    JobSearchView
 from users.views import RegSuccessView, UserRegistrationView, AgentRegistrationView
 
 
@@ -31,5 +35,11 @@ urlpatterns = [
     path("create/", JobCreateView.as_view(), name='create'),
     path("job/<int:pk>/update", JobUpdateView.as_view(), name='update'),
     path("job/<int:pk>/delete", JobDeleteView.as_view(), name='delete'),
-
+    path("job-search/", JobSearchView.as_view(), name='job-search'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL,
+                          document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

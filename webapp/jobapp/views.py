@@ -14,7 +14,7 @@ class HomepageView(TemplateView):
         context['jobs'] = PostJob.objects.all()
         return context
 
-
+      
 class AllJobsView(ListView):
     def get(self, request, *args, **kwargs):
         context = {
@@ -64,3 +64,20 @@ class JobDeleteView(DeleteView):
 
     def get_success_url(self):
         return reverse_lazy('homepage')
+
+
+class JobSearchView(ListView):
+    model = PostJob
+    template_name = "all-jobs.html"
+    context_object_name = "jobs"
+
+    def get_queryset(self):
+        query = self.request.GET.get("title_contains")
+        # print("Query:", query)
+        if query:
+            jobs = PostJob.objects.filter(positions__name_position__icontains=query)
+            # print(jobs)  # Toto vypíše nalezené pracovní pozice do konzoly pro kontrolu
+            return jobs
+            # return PostJob.objects.filter(positions__contains=query)
+        else:
+            return PostJob.objects.all()
