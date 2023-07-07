@@ -7,7 +7,7 @@ class PostJobAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Place)
-admin.site.register(PostJob)
+admin.site.register(PostJob, PostJobAdmin)
 admin.site.register(Position)
 admin.site.register(Language)
 admin.site.register(DrivingLicence)
