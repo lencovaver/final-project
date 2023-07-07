@@ -83,10 +83,10 @@ class DrivingLicence(models.Model):
 
 class PostJob(models.Model):
     EXPERIENCE_CHOICES = [
-        ('1-3', '1-3'),
-        ('4-6', '4-6'),
-        ('6-9', '6-9'),
-        ('10+', '10 a více'),
+        ('1-3 roky', '1-3'),
+        ('4-6 let', '4-6'),
+        ('6-9 let', '6-9'),
+        ('10 a více let', '10 a více'),
     ]
     ACCOMMODATION_CHOICES = [
         ('vlastní ubytování', 'vlastní'),
