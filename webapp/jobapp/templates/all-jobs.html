@@ -8,26 +8,68 @@
     <title>All Jobs</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-</head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
 
+        h2 {
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background-color: #e0e0e0;
+        }
+
+        .highlight {
+            background-color: yellow;
+        }
+    </style>
+</head>
 <body>
 <br>
 <br>
 <br>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                  <a class="nav-link" href="#">Nabídky práce ve Švýcarsku</a>
-              </li>
-            </ul>
-        </div>
-    </nav>
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Nabídky práce ve Švýcarsku</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
-    <main role="main" class="container">
+<main role="main" class="container">
 
-      <h3>Jakou práci hledáš</h3>
-      <form method="GET" action=".">
+    <h3>Jakou práci hledáš</h3>
+    <form method="GET" action=".">
         <div class="form-row">
             <div class="form-group col-12">
                 <div class="input-group">
@@ -41,33 +83,85 @@
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Vyhledat</button>
-      </form>
+    </form>
 
-    </main>
+</main>
 
 <br>
 <br>
 
+<div class="container">
+    <h2>Aktuální nabídky práce</h2>
+    <table id="jobs-table">
+        <colgroup span="2"></colgroup>
+        <tr>
+            <th>Pozice</th>
+            <th>Kanton</th>
+            <th>požadovaná praxe</th>
+            <th>požadované jazykové znalosti</th>
+            <th>Mzda v CHF</th>
+            <th>Spessen</th>
 
-<h2 class="content h2">Aktuální nabídky práce</h2>
-<ul>
-      {% for job in jobs %}
-        {% if job.positions|lower == pozice|lower %}
-        <li>
-          {{ job.positions }}
-          <a href="{% url 'job-detail' job.id %}">Detail práce</a>
-        </li>
-        {% endif %}
-      {% empty %}
-        <li>No jobs found.</li>
-      {% endfor %}
-</ul>
+        </tr>
 
-<a href="{% url 'create' %}">Přidat novou pozici</a>
+        {% for job in all_jobs %}
+        <tr>
+            <td>{{ job.positions }}</td>
+            <td>{{ job.place }}</td>
+            <td>{{ job.experience }}</td>
+            <td>{{ job.language }}</td>
+            <td>{{ job.salary }}</td>
+            <td>{{ job.diet }}</td>
+
+        </tr>
+        {% endfor %}
+    </table>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
+<script>
+    // Function to create a table row for a job
+    function createJobRow(job) {
+        var row = document.createElement("tr");
+        var positionCell = document.createElement("td");
+        var descriptionCell = document.createElement("td");
+
+        positionCell.textContent = job.positions;
+        descriptionCell.textContent = job.info_position;
+
+        row.appendChild(positionCell);
+        row.appendChild(descriptionCell);
+
+        return row;
+    }
+
+    // Function to display all jobs in the table
+    function displayAllJobs(jobs) {
+        var table = document.getElementById("jobs-table");
+
+        for (var i = 0; i < jobs.length; i++) {
+            var job = jobs[i];
+            var row = createJobRow(job);
+            table.appendChild(row);
+        }
+    }
+
+    // Highlight row on hover
+    var rows = document.querySelectorAll("#jobs-table tr");
+    for (var i = 0; i < rows.length; i++) {
+        rows[i].addEventListener("mouseover", function() {
+            this.classList.add("highlight");
+        });
+        rows[i].addEventListener("mouseout", function() {
+            this.classList.remove("highlight");
+        });
+    }
+
+    // Display all jobs
+    displayAllJobs(allJobs);
+</script>
 </body>
 </html>
