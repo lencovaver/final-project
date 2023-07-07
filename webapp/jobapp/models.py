@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 
 
@@ -105,5 +106,14 @@ class PostJob(models.Model):
     diet = models.IntegerField(choices=[(i, i) for i in range(31)], default=0)
 
     def __str__(self):
-        return f"{self.positions} - {self.place} ({self.salary}CHF + spessen {self.diet}CHF)"
+        return self.get_licence_display()
+
+
+    def clean(self):
+        if self.category:
+            choices = [choice[0] for choice in self.CATEGORY_CHOICES]
+            selected_choices = self.category.split(',')
+            for choice in selected_choices:
+                if choice not in choices:
+                    raise ValidationError(f"Neplatná kategorie: {choice}")
 
