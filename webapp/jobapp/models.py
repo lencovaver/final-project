@@ -14,7 +14,6 @@ class Position(models.Model):
     def __str__(self):
         return self.name_position
 
-
 class Place(models.Model):
     name_place = models.CharField(max_length=100)
     shortname = models.CharField(max_length=3)
@@ -93,7 +92,6 @@ class PostJob(models.Model):
         ('vlastní ubytování', 'vlastní'),
         ('zajištěné ubytování', 'zajištěné'),
     ]
-    id = models.AutoField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
     positions = models.ForeignKey(Position, related_name="position", on_delete=models.CASCADE)
     driving_licence = models.ManyToManyField(DrivingLicence, blank=True)
@@ -115,4 +113,3 @@ class PostJob(models.Model):
             for choice in selected_choices:
                 if choice not in choices:
                     raise ValidationError(f"Neplatná kategorie řidičského průkazu: {choice}")
-
