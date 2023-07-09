@@ -1,7 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-
 class User(AbstractUser):
     is_useragent = models.BooleanField(default=False)
     is_userperson = models.BooleanField(default=False)

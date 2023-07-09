@@ -26,9 +26,14 @@ class Place(models.Model):
     def __str__(self):
         return repr(self)
 
-
-class Language(models.Model):
-    STATE_CHOICES = [
+class PostJob(models.Model):
+    EXPERIENCE_CHOICES = [
+        ('1-3', '1-3'),
+        ('4-6', '4-6'),
+        ('6-9', '6-9'),
+        ('10+', '10 a více'),
+    ]
+    LANGUAGE_CHOICES = [
         ('NO', 'žádný'),
         ('ENG', '🇬🇧 angličtina'),
         ('CHF', '🇨🇭 švýcarská němčina'),
@@ -36,25 +41,12 @@ class Language(models.Model):
         ('FRA', '🇫🇷 francouzština'),
         ('ITA', '🇮🇹 italština'),
     ]
-    LEVEL_CHOICES = [
-        ('1', 'A1 - začátečník'),
-        ('2', 'A2 - pokročilý začátečník'),
-        ('3', 'B1 - mírně pokročilý'),
-        ('4', 'B2 - středně pokročilý'),
-        ('5', 'C1 - velmi pokročilý'),
-        ('6', 'C2 - expert'),
-    ]
-    state = models.CharField(max_length=5, choices=STATE_CHOICES)
-    level = models.CharField(max_length=30, choices=LEVEL_CHOICES)
 
-    def __str__(self):
-        state_display = dict(self.STATE_CHOICES)[self.state]
-        level_display = dict(self.LEVEL_CHOICES).get(self.level)
-        return f"{state_display} - {level_display}"
+    id = models.AutoField(primary_key=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    positions = models.ForeignKey(Position, related_name="position", on_delete=models.CASCADE)
+    category = models.CharField(max_length=100, blank=True, null=True, choices=[
 
-
-class DrivingLicence(models.Model):
-    CATEGORY_CHOICES = [
         ('', '---------'),
         ('AM', 'AM 🛵'),
         ('A1', 'A1'),
@@ -72,37 +64,9 @@ class DrivingLicence(models.Model):
         ('D1E', 'D1E'),
         ('DE', 'DE'),
         ('T', 'T 🚜')
-    ]
-
-<<<<<<< HEAD
-    licence = models.CharField(max_length=6, choices=CATEGORY_CHOICES, null=True)
-
-    def __str__(self):
-        return self.licence
+    ])
 
 
-=======
-    licence = models.CharField(max_length=6, choices=CATEGORY_CHOICES)
-
-    def __str__(self):
-        return self.get_licence_display()
-
-    
->>>>>>> 00ffb30c5c092a3e708cc07937c623757ed0b51b
-class PostJob(models.Model):
-    EXPERIENCE_CHOICES = [
-        ('1-3 roky', '1-3'),
-        ('4-6 let', '4-6'),
-        ('6-9 let', '6-9'),
-        ('10 a více let', '10 a více'),
-    ]
-    ACCOMMODATION_CHOICES = [
-        ('vlastní ubytování', 'vlastní'),
-        ('zajištěné ubytování', 'zajištěné'),
-    ]
-    created_at = models.DateTimeField(auto_now_add=True)
-    positions = models.ForeignKey(Position, related_name="position", on_delete=models.CASCADE)
-    driving_licence = models.ManyToManyField(DrivingLicence, blank=True)
     experience = models.CharField(max_length=100, choices=EXPERIENCE_CHOICES, default='1-3')
     place = models.ForeignKey(Place, related_name="postjobs", on_delete=models.CASCADE, null=True)
     language = models.ManyToManyField(Language, blank=True)
@@ -110,12 +74,7 @@ class PostJob(models.Model):
     info_position = models.TextField()
     salary = models.IntegerField(choices=[(i, i) for i in range(100)], default=30)
     diet = models.IntegerField(choices=[(i, i) for i in range(31)], default=0)
-<<<<<<< HEAD
 
-=======
-    
-        
->>>>>>> 00ffb30c5c092a3e708cc07937c623757ed0b51b
     def __str__(self):
         return self.positions.name_position
 
@@ -126,8 +85,5 @@ class PostJob(models.Model):
             selected_choices = self.driving_licence.values_list('licence', flat=True)
             for choice in selected_choices:
                 if choice not in choices:
-<<<<<<< HEAD
-                    raise ValidationError(f"Neplatná kategorie řidičského průkazu: {choice}")
-=======
                     raise ValidationError(f"Neplatná kategorie: {choice}")
->>>>>>> 00ffb30c5c092a3e708cc07937c623757ed0b51b
+
