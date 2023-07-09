@@ -15,7 +15,7 @@ class HomepageView(TemplateView):
         context['jobs'] = PostJob.objects.all()
         return context
 
-      
+
 class AllJobsView(ListView):
     def get(self, request, *args, **kwargs):
         context = {

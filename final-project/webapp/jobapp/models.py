@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 
 
@@ -74,21 +75,12 @@ class DrivingLicence(models.Model):
         ('T', 'T 🚜')
     ]
 
-<<<<<<< HEAD
     licence = models.CharField(max_length=6, choices=CATEGORY_CHOICES, null=True)
 
     def __str__(self):
         return self.licence
 
 
-=======
-    licence = models.CharField(max_length=6, choices=CATEGORY_CHOICES)
-
-    def __str__(self):
-        return self.get_licence_display()
-
-    
->>>>>>> 00ffb30c5c092a3e708cc07937c623757ed0b51b
 class PostJob(models.Model):
     EXPERIENCE_CHOICES = [
         ('1-3 roky', '1-3'),
@@ -110,15 +102,9 @@ class PostJob(models.Model):
     info_position = models.TextField()
     salary = models.IntegerField(choices=[(i, i) for i in range(100)], default=30)
     diet = models.IntegerField(choices=[(i, i) for i in range(31)], default=0)
-<<<<<<< HEAD
 
-=======
-    
-        
->>>>>>> 00ffb30c5c092a3e708cc07937c623757ed0b51b
     def __str__(self):
         return self.positions.name_position
-
 
     def clean(self):
         if self.driving_licence:
@@ -126,8 +112,4 @@ class PostJob(models.Model):
             selected_choices = self.driving_licence.values_list('licence', flat=True)
             for choice in selected_choices:
                 if choice not in choices:
-<<<<<<< HEAD
                     raise ValidationError(f"Neplatná kategorie řidičského průkazu: {choice}")
-=======
-                    raise ValidationError(f"Neplatná kategorie: {choice}")
->>>>>>> 00ffb30c5c092a3e708cc07937c623757ed0b51b
