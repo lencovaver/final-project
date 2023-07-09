@@ -56,26 +56,7 @@ class User(AbstractUser):
 
 class UserAgent(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name="useragent")
-    #agent_name = models.CharField(max_length=50, blank=False)
-    #agent_surname = models.CharField(max_length=50)
-    #company = models.ForeignKey(Company, on_delete=models.PROTECT, related_name="Companies", null=True)
-    #area_code = models.CharField(max_length=20, blank=True, choices=[
-    #    ("🇨🇿 Czechia", "🇨🇿 +420"),
-    #    ("🇸🇰 Slovakia", "🇸🇰 +421"),
-    #    ("🇨🇭 Switzerland", "🇨🇭 +41")
-    #])
-    #phone = models.IntegerField(blank=True, null=True)
-    #email = models.EmailField(blank=False)
 
 
 class UserPerson(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name="userperson")
-    #first_name = models.CharField(max_length=50)
-    #surname = models.CharField(max_length=50)
-    #area_code = models.CharField(max_length=20, blank=True, choices=[
-    #    ("🇨🇿 Czechia", "🇨🇿 +420"),
-    #    ("🇸🇰 Slovakia", "🇸🇰 +421"),
-    #    ("🇨🇭 Switzerland", "🇨🇭 +41")
-    #])
-    #phone = models.IntegerField(blank=True, null=True)
-    #email = models.EmailField(blank=False)
