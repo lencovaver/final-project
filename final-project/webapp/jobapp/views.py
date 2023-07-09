@@ -1,10 +1,10 @@
-from django.shortcuts import get_object_or_404
-from django.template.response import TemplateResponse
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
+
 from .forms import PostJobForm
 from .models import PostJob
-from django.http import HttpResponse
 
 
 class HomepageView(TemplateView):
@@ -17,18 +17,15 @@ class HomepageView(TemplateView):
 
 
 class AllJobsView(ListView):
-    def get(self, request, *args, **kwargs):
-        context = {
-            "all_jobs": PostJob.objects.all()
-        }
-
-        return TemplateResponse(request, "all-jobs.html", context=context)
+    model = PostJob
+    template_name = "all-jobs.html"
+    context_object_name = "all_jobs"
 
 
 class JobDetailView(DetailView):
     model = PostJob
-    context_object_name = 'job'
     template_name = "job-detail.html"
+    context_object_name = 'job'
 
     def get_object(self):
         job_id = self.kwargs.get("job_id")
@@ -39,32 +36,25 @@ class JobCreateView(CreateView):
     model = PostJob
     form_class = PostJobForm
     template_name = 'create.html'
-    success_url = '/'
-
-    def post(self, request, *args, **kwargs):
-        form = self.get_form()
-        if form.is_valid():
-            return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
+    success_url = reverse_lazy('job-success')
 
 
 class JobUpdateView(UpdateView):
     model = PostJob
     form_class = PostJobForm
     template_name = 'update.html'
-    success_url = '/'
-
-    def get_success_url(self):
-        return reverse_lazy('homepage')
+    success_url = reverse_lazy('job-success')
 
 
 class JobDeleteView(DeleteView):
     model = PostJob
     template_name = 'delete.html'
+    success_url = reverse_lazy('job-success')
 
-    def get_success_url(self):
-        return reverse_lazy('homepage')
+
+class JobSuccessView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'job-success.html')
 
 
 class JobSearchView(ListView):

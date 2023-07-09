@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth import logout
+from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect, render
@@ -16,14 +16,19 @@ from users.models import User
 class RegistrationView(CreateView):
     template_name = 'registration.html'
     form_class = RegistrationForm
+    success_url = reverse_lazy('registration-success')
 
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('registration-success')
-        else:
-            return render(request, self.template_name, {'form': form})
+    def form_valid(self, form):
+        response = super().form_valid(form)
+
+        user = form.save()
+        user = authenticate(
+            self.request,
+            username=form.cleaned_data['username'],
+            password=form.cleaned_data['password1']
+        )
+        login(self.request, user)
+        return response
 
 
 class UserLoginView(LoginView):
@@ -59,8 +64,7 @@ class EditProfileView(LoginRequiredMixin, UpdateView):
         return self.request.user
 
     def form_valid(self, form):
-        messages.success(self.request, 'Your profile was successfully updated!')
-        return super().form_valid(form)
+        return redirect(self.success_url)
 
     def form_invalid(self, form):
         messages.error(self.request, 'Please correct the error below.')

@@ -110,7 +110,9 @@
             <div class="job-details">
                 <span class="job-label">Kanton:</span> {{ job.place }}<br>
                 <span class="job-label">Požadovaná praxe:</span> {{ job.experience }}<br>
-                <span class="job-label">Požadovaná úroveň jazyka:</span> {{ job.language }}<br>
+                <span class="job-label">Požadovaná úroveň jazyka:</span>
+
+                <br>
                 <a href="{% url 'job-detail' job.id %}">Job Detail</a>
             </div>
         </li>

@@ -9,7 +9,7 @@
 <h2>Edit Profile</h2>
 <form method="post">
     {% csrf_token %}
-    <h2>Edit Your Profile</h2>
+
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" value="{{ user.username }}" required>
 
