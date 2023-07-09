@@ -3,6 +3,10 @@ from django.contrib.auth.admin import UserAdmin
 from .models import User, Company, UserAgent, UserPerson, City
 
 
+class UserAdmin(admin.ModelAdmin):
+    list_display = ["username", "email", "first_name", "last_name", "is_userperson"]
+
+
 class CompanyAdmin(admin.ModelAdmin):
     list_display = ["name", "street", "num", "city"]
 
@@ -24,3 +28,4 @@ admin.site.register(Company, CompanyAdmin)
 admin.site.register(UserAgent, UserAgentAdmin)
 admin.site.register(UserPerson, UserPersonAdmin)
 admin.site.register(City, CityAdmin)
+

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit your profile info</title>
+
+</head>
+<body>
+<h2>Edit Profile</h2>
+<form method="post">
+    {% csrf_token %}
+    <h2>Edit Your Profile</h2>
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" value="{{ user.username }}" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" value="{{ user.email }}" required>
+
+    {% if user.is_useragent %}
+    <label for="firstName">Contact person's first name:</label>
+    <input type="text" id="firstName" name="firstName" value="{{ user.first_name }}">
+
+    <label for="lastName">Contact person's last name:</label>
+    <input type="text" id="lastName" name="lastName" value="{{ user.last_name }}">
+
+    <label for="company">Company:</label>
+    <input type="text" id="company" name="company" value="{{ user.company }}" required>
+
+    <label for="bio">Company description:</label>
+    <input type="text" id="bio" name="bio" value="{{ user.bio }}">
+
+    {% else %}
+    <label for="firstName">First name:</label>
+    <input type="text" id="firstName" name="firstName" value="{{ user.first_name }}">
+
+    <label for="lastName">Last name:</label>
+    <input type="text" id="lastName" name="lastName" value="{{ user.last_name }}">
+
+    <label for="bio">Biography:</label>
+    <input type="text" id="bio" name="bio" value="{{ user.bio }}">
+
+    <label for="language">Language:</label>
+    <input type="text" id="language" name="language" value="{{ user.language }}">
+
+    <label for="lang_level">Language level:</label>
+    <input type="text" id="lang_level" name="lang_level" value="{{ user.lang_level }}">
+    {% endif %}
+
+    <label for="areaCode">Area code:</label>
+    <input type="text" id="areaCode" name="areaCode" value="{{ user.area_code }}">
+
+    <label for="phone">Phone number:</label>
+    <input type="text" id="phone" name="phone" value="{{ user.phone_number }}">
+
+    <button type="submit">Update Profile</button>
+</form>
+
+</body>
+</html>

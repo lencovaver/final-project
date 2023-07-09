@@ -15,15 +15,31 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
-from jobapp.views import HomepageView, AllJobsView
 
-from users.views import RegistrationView, RegSuccessView
+from jobapp.views import HomepageView, AllJobsView, JobDetailView, JobCreateView, JobUpdateView, JobDeleteView, \
+    JobSearchView
+from users.views import RegSuccessView, UserRegistrationView, AgentRegistrationView
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", HomepageView.as_view(), name="homepage"),
-    path("all-jobs/", AllJobsView.as_view(), name="all_jobs"),
-    path("registration/", RegistrationView.as_view(), name="registration"),
+    path("all-jobs/", AllJobsView.as_view(), name="all-jobs"),
+    path("registration/", UserRegistrationView.as_view(), name="registration"),
+    path("business-registration/", AgentRegistrationView.as_view(), name="business-registration"),
     path("registration-success/", RegSuccessView.as_view(), name="registration-success"),
+    path("job/<int:job_id>/", JobDetailView.as_view(), name='job-detail'),
+    path("create/", JobCreateView.as_view(), name='create'),
+    path("job/<int:pk>/update", JobUpdateView.as_view(), name='update'),
+    path("job/<int:pk>/delete", JobDeleteView.as_view(), name='delete'),
+    path("job-search/", JobSearchView.as_view(), name='job-search'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL,
+                          document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

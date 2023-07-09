@@ -8,11 +8,10 @@ class Position(models.Model):
         ordering = ['name_position']
 
     def __repr__(self):
-        return f"{self.name_position}"
+        return self.name_position
 
     def __str__(self):
-        return repr(self)
-
+        return self.name_position
 
 class Place(models.Model):
     name_place = models.CharField(max_length=100)
@@ -27,7 +26,6 @@ class Place(models.Model):
     def __str__(self):
         return repr(self)
 
-
 class PostJob(models.Model):
     EXPERIENCE_CHOICES = [
         ('1-3', '1-3'),
@@ -37,26 +35,18 @@ class PostJob(models.Model):
     ]
     LANGUAGE_CHOICES = [
         ('NO', 'žádný'),
-        ('ENG1', '🇬🇧 english/beginner'),
-        ('ENG2', '🇬🇧 english/advanced'),
-        ('ENG3', '🇬🇧 english/native speaker'),
-        ('CHF1', '🇨🇭 swiss german/beginner'),
-        ('CHF2', '🇨🇭 swiss german/advanced'),
-        ('CHF3', '🇨🇭 swiss german/native speaker'),
-        ('DEU1', '🇩🇪 germany/beginner'),
-        ('DEU2', '🇩🇪 germany/advanced'),
-        ('DEU3', '🇩🇪 germany/native speaker'),
-        ('FRA1', '🇫🇷 french/beginner'),
-        ('FRA2', '🇫🇷 french/advanced'),
-        ('FRA3', '🇫🇷 french/native speaker'),
-        ('ITA1', '🇮🇹 italy/beginner'),
-        ('ITA2', '🇮🇹 italy/advanced'),
-        ('ITA3', '🇮🇹 italy/native speaker'),
+        ('ENG', '🇬🇧 angličtina'),
+        ('CHF', '🇨🇭 švýcarská němčina'),
+        ('DEU', '🇩🇪 němčina'),
+        ('FRA', '🇫🇷 francouzština'),
+        ('ITA', '🇮🇹 italština'),
     ]
+
     id = models.AutoField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
     positions = models.ForeignKey(Position, related_name="position", on_delete=models.CASCADE)
     category = models.CharField(max_length=100, blank=True, null=True, choices=[
+
         ('', '---------'),
         ('AM', 'AM 🛵'),
         ('A1', 'A1'),
@@ -76,13 +66,24 @@ class PostJob(models.Model):
         ('T', 'T 🚜')
     ])
 
+
     experience = models.CharField(max_length=100, choices=EXPERIENCE_CHOICES, default='1-3')
-    place = models.ForeignKey(Place, related_name="postjobs", on_delete=models.CASCADE)
-    language = models.CharField(max_length=100, choices=LANGUAGE_CHOICES, default='NO')
+    place = models.ForeignKey(Place, related_name="postjobs", on_delete=models.CASCADE, null=True)
+    language = models.ManyToManyField(Language, blank=True)
+    accommodation = models.CharField(max_length=30, choices=ACCOMMODATION_CHOICES, default='')
     info_position = models.TextField()
     salary = models.IntegerField(choices=[(i, i) for i in range(100)], default=30)
     diet = models.IntegerField(choices=[(i, i) for i in range(31)], default=0)
 
     def __str__(self):
-        return f"{self.positions} - {self.place} ({self.salary}CHF + spessen {self.diet}CHF)"
+        return self.positions.name_position
+
+
+    def clean(self):
+        if self.driving_licence:
+            choices = [choice[0] for choice in DrivingLicence.CATEGORY_CHOICES]
+            selected_choices = self.driving_licence.values_list('licence', flat=True)
+            for choice in selected_choices:
+                if choice not in choices:
+                    raise ValidationError(f"Neplatná kategorie: {choice}")
 

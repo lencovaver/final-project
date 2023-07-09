@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h3>REGISTRACE UŽIVATELE</h3>
+</div>
+<div class="container">
+    <form id="registrationForm" action="{% url 'registration' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" class="form-control" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="password1">Password:</label>
+            <input type="password" class="form-control" id="password1" name="password1" required>
+        </div>
+        <div class="form-group">
+            <label for="password2">Confirm password:</label>
+            <input type="password" class="form-control" id="password2" name="password2" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <input type="checkbox" id="is_useragent" name="is_useragent">
+            <label for="is_useragent">Register as a company</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Registrovat</button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#RegistrationForm').submit(function (e) {
+            e.preventDefault(); // Prevent the form from submitting normally
+
+            $.ajax({
+                url: $('#registrationForm').attr('action'),
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function (response) {
+                    // Handle the success response here
+                    console.log(response);
+                },
+                error: function (xhr, errmsg, err) {
+                    // Handle the error response here
+                    console.log(xhr.status + ": " + xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

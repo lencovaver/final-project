@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your info</title>
+</head>
+<body>
+<form method="post">
+    <h2>Your Profile</h2>
+    <p>Username: {{ user.username }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>Password - TBD - </p>
+    {% if user.is_useragent %}
+    <p>Contact Person First name: {{ user.first_name }}</p>
+    <p>Contact Person Last name: {{ user.last_name }}</p>
+    <p>Company name: {{ user.company }}</p>
+    {% else %}
+    <p>First name: {{ user.first_name }}</p>
+    <p>Last name: {{ user.last_name }}</p>
+    <p>Biography: {{ user.bio }}</p>
+    <p>Language: {{ user.language }}</p>
+    <p>Language level: {{ user.lang_level }}</p>
+    {% endif %}
+    <p>Area code: {{ user.area_code }}</p>
+    <p>Phone number: {{ user.phone_number }}</p>
+
+    <a href="{% url 'edit-profile' %}">Edit Profile</a>
+    <a href="{% url 'homepage' %}">back</a>
+</form>
+</body>
+</html>
