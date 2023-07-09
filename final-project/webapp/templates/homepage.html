@@ -83,13 +83,24 @@
         <li class="nav-item">
             <a class="nav-link" href="{% url 'all-jobs' %}">View All Available Jobs</a>
         </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'profile' %}">Your profile</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">Login</a>
+        </li>
         <li class="nav-item">
             <a class="nav-link" href="{% url 'registration' %}">Registration</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'business-registration' %}">Register as a Company</a>
-        </li>
+        {% endif %}
+
     </ul>
+
 
     <h2 class="text-justify">Latest Jobs</h2>
     <ul class="job-list">

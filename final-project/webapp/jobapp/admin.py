@@ -12,7 +12,6 @@ class PostJobAdmin(admin.ModelAdmin):
     get_languages.short_description = "Languages"
 
 
-
 admin.site.register(Place)
 admin.site.register(PostJob, PostJobAdmin)
 admin.site.register(Position)
