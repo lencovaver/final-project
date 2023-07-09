@@ -9,13 +9,10 @@ class City(models.Model):
 
     class Meta:
         ordering = ['name_city']
-        verbose_name_plural = ('Cities')
-
-    def __repr__(self):
-        return f"{self.name_city}"
+        verbose_name_plural = 'Cities'
 
     def __str__(self):
-        return repr(self)
+        return self.name_city
 
 
 class Company(models.Model):
@@ -25,7 +22,7 @@ class Company(models.Model):
     city = models.ForeignKey(City, related_name="companies", on_delete=models.CASCADE)
 
     class Meta:
-        verbose_name_plural = ('Companies')
+        verbose_name_plural = 'Companies'
 
     def __str__(self):
         return self.name
@@ -42,10 +39,10 @@ class User(AbstractUser):
     lang_level = models.CharField(max_length=30, choices=Language.LEVEL_CHOICES, blank=True, null=True)
     address = models.CharField(max_length=200, blank=True, default="")
 
-    area_code = models.CharField(max_length=20, blank=True, choices=[
-       ("🇨🇿 Czechia", "🇨🇿 +420"),
-       ("🇸🇰 Slovakia", "🇸🇰 +421"),
-       ("🇨🇭 Switzerland", "🇨🇭 +41")
+    area_code = models.CharField(max_length=6, blank=True, choices=[
+       ("🇨🇿 CZ", "🇨🇿 +420"),
+       ("🇸🇰 SK", "🇸🇰 +421"),
+       ("🇨🇭 CH", "🇨🇭 +41")
     ])
     phone_number = models.IntegerField(blank=True, null=True)
 

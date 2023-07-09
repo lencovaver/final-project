@@ -1,14 +1,14 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
-from django.db.transaction import commit
 from django import forms
+from django.contrib.auth.forms import AuthenticationForm
+
 
 from users.models import User
 from jobapp.models import Language
 
 
 class RegistrationForm(UserCreationForm):
-
     class Meta:
         model = User
         fields = ("username", "email", "password1", "password2", "is_useragent")
@@ -26,12 +26,19 @@ class RegistrationForm(UserCreationForm):
         return email
 
 
+class UserLoginForm(AuthenticationForm):
+    username = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control'}))
+
+
 class EditProfileForm(UserChangeForm):
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
-    language = forms.ChoiceField(choices=Language.STATE_CHOICES, widget=forms.Select(attrs={'class': 'form-control'}))
+    language = forms.ModelChoiceField(queryset=Language.objects.all(),
+                                      widget=forms.Select(attrs={'class': 'form-control'}),
+                                      required=False)
     lang_level = forms.ModelChoiceField(queryset=Language.objects.all(),
-                                        widget=forms.Select(attrs={'class': 'form-control'}))
-    password = None
+                                        widget=forms.Select(attrs={'class': 'form-control'}),
+                                        required=False)
 
     class Meta:
         model = User
@@ -46,4 +53,5 @@ class EditProfileForm(UserChangeForm):
             "phone_number",
             "company"
         ]
+        exclude = ['password']
 

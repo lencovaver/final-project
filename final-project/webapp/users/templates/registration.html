@@ -40,19 +40,20 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
     $(document).ready(function () {
-        $('#RegistrationForm').submit(function (e) {
-            e.preventDefault(); // Prevent the form from submitting normally
-
+        $('#registrationForm').submit(function (e) {
+            e.preventDefault();
             $.ajax({
-                url: $('#registrationForm').attr('action'),
+                url: $(this).attr('action'),
                 type: 'POST',
                 data: $(this).serialize(),
                 success: function (response) {
-                    // Handle the success response here
+
                     console.log(response);
+
+                    window.location.href = "/login/";
                 },
                 error: function (xhr, errmsg, err) {
-                    // Handle the error response here
+
                     console.log(xhr.status + ": " + xhr.responseText);
                 }
             });
