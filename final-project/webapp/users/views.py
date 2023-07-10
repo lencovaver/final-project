@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import logout
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect, render
@@ -7,7 +8,7 @@ from django.urls import reverse, reverse_lazy
 from django.views import View
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView
-from users.forms import RegistrationForm, EditProfileForm, UserLoginForm
+from users.forms import RegistrationForm, EditProfileForm
 from users.models import User
 
 
@@ -23,7 +24,7 @@ class RegistrationView(CreateView):
 
 class UserLoginView(LoginView):
     template_name = 'login.html'
-    form_class = UserLoginForm
+    form_class = AuthenticationForm
     redirect_authenticated_user = True
 
     def get_success_url(self):

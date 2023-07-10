@@ -115,7 +115,7 @@
             </tr>
             {% for job in all_jobs %}
             <tr>
-                <td>{{ job.positions }}</td>
+                <td><a href="{% url 'job-detail' job.id %}">{{ job.positions }}</td>
                 <td>{{ job.place }}</td>
                 <td>{{ job.experience }}</td>
                 <td>

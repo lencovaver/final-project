@@ -30,24 +30,19 @@
     <input type="text" id="bio" name="bio" value="{{ user.bio }}">
 
     {% else %}
-    <label for="firstName">First name:</label>
-    <input type="text" id="firstName" name="firstName" value="{{ user.first_name }}">
+    <label for="first_name">First name:</label>
+    <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}">
 
-    <label for="lastName">Last name:</label>
-    <input type="text" id="lastName" name="lastName" value="{{ user.last_name }}">
+    <label for="last_name">Last name:</label>
+    <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}">
 
     <label for="bio">Biography:</label>
     <input type="text" id="bio" name="bio" value="{{ user.bio }}">
 
-    <label for="language">Language:</label>
-    <input type="text" id="language" name="language" value="{{ user.language }}">
-
-    <label for="lang_level">Language level:</label>
-    <input type="text" id="lang_level" name="lang_level" value="{{ user.lang_level }}">
     {% endif %}
 
-    <label for="areaCode">Area code:</label>
-    <input type="text" id="areaCode" name="areaCode" value="{{ user.area_code }}">
+    <label for="area_code">Area code:</label>
+    <input type="text" id="area_code" name="area_code" value="{{ user.area_code }}">
 
     <label for="phone">Phone number:</label>
     <input type="text" id="phone" name="phone" value="{{ user.phone_number }}">

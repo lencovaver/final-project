@@ -79,24 +79,30 @@
 </head>
 <body>
 <div class="container">
+    {% if user.is_authenticated %}
+        <h2>Hello {{ user.username }}</h2>
+    {% else %}
+        <p>Welcome!</p>
+    {% endif %}
+
     <ul class="nav">
-        <li class="nav-item">
+        <li class=" nav-item">
             <a class="nav-link" href="{% url 'all-jobs' %}">View All Available Jobs</a>
         </li>
         {% if user.is_authenticated %}
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'profile' %}">Your profile</a>
-        </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'profile' %}">Your profile</a>
+            </li>
         {% else %}
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'login' %}">Login</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'registration' %}">Registration</a>
-        </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'registration' %}">Registration</a>
+            </li>
         {% endif %}
 
     </ul>
@@ -105,17 +111,17 @@
     <h2 class="text-justify">Latest Jobs</h2>
     <ul class="job-list">
         {% for job in jobs %}
-        <li>
-            <div class="job-title">{{ job.positions }}</div>
-            <div class="job-details">
-                <span class="job-label">Kanton:</span> {{ job.place }}<br>
-                <span class="job-label">Požadovaná praxe:</span> {{ job.experience }}<br>
-                <span class="job-label">Požadovaná úroveň jazyka:</span>
+            <li>
+                <div class="job-title">{{ job.positions }}</div>
+                <div class="job-details">
+                    <span class="job-label">Kanton:</span> {{ job.place }}<br>
+                    <span class="job-label">Požadovaná praxe:</span> {{ job.experience }}<br>
+                    <span class="job-label">Požadovaná úroveň jazyka:</span>
 
-                <br>
-                <a href="{% url 'job-detail' job.id %}">Job Detail</a>
-            </div>
-        </li>
+                    <br>
+                    <a href="{% url 'job-detail' job.id %}">Job Detail</a>
+                </div>
+            </li>
         {% endfor %}
     </ul>
 
