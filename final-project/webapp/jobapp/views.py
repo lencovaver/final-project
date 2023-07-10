@@ -1,10 +1,12 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
-
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from .forms import PostJobForm
 from .models import PostJob
+
+from django.contrib import messages
 
 
 class HomepageView(TemplateView):
@@ -22,7 +24,7 @@ class AllJobsView(ListView):
     context_object_name = "all_jobs"
 
 
-class JobDetailView(DetailView):
+class JobDetailView(LoginRequiredMixin, DetailView):
     model = PostJob
     template_name = "job-detail.html"
     context_object_name = 'job'
@@ -32,24 +34,45 @@ class JobDetailView(DetailView):
         return get_object_or_404(PostJob, id=job_id)
 
 
-class JobCreateView(CreateView):
+class JobCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = PostJob
     form_class = PostJobForm
     template_name = 'create.html'
     success_url = reverse_lazy('job-success')
 
+    def test_func(self):
+        return self.request.user.is_useragent or self.request.user.is_superuser
 
-class JobUpdateView(UpdateView):
+    def handle_no_permission(self):
+        messages.error(self.request, "You don't have permission.")
+        return redirect('homepage')
+
+
+class JobUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = PostJob
     form_class = PostJobForm
     template_name = 'update.html'
     success_url = reverse_lazy('job-success')
 
+    def test_func(self):
+        return self.request.user.is_useragent or self.request.user.is_superuser
 
-class JobDeleteView(DeleteView):
+    def handle_no_permission(self):
+        messages.error(self.request, "You don't have permission.")
+        return redirect('homepage')
+
+
+class JobDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = PostJob
     template_name = 'delete.html'
     success_url = reverse_lazy('job-success')
+
+    def test_func(self):
+        return self.request.user.is_useragent or self.request.user.is_superuser
+
+    def handle_no_permission(self):
+        messages.error(self.request, "You don't have permission")
+        return redirect('homepage')
 
 
 class JobSuccessView(View):
