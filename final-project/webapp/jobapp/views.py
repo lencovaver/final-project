@@ -1,8 +1,9 @@
+from django.http import request
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin, PermissionRequiredMixin
 from .forms import PostJobForm
 from .models import PostJob
 
@@ -48,26 +49,31 @@ class JobCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         return redirect('homepage')
 
     def form_valid(self, form):
+        form.instance.author = self.request.user
         instance = form.save(commit=False)
         instance.save()
-
         form.save_m2m()
-
         return redirect('job-success')
 
 
-class JobUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class JobUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = PostJob
     form_class = PostJobForm
     template_name = 'update.html'
     success_url = reverse_lazy('job-success')
 
     def test_func(self):
-        return self.request.user.is_useragent or self.request.user.is_superuser
+        return self.request.user == self.get_object().author or self.request.user.is_superuser
+
+    permission_required = 'jobapp.add_postjob'
 
     def handle_no_permission(self):
-        messages.error(self.request, "You don't have permission.")
+        messages.error(self.request, "No permission.")
         return redirect('homepage')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        return response
 
 
 class JobDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -76,11 +82,17 @@ class JobDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     success_url = reverse_lazy('job-success')
 
     def test_func(self):
-        return self.request.user.is_useragent or self.request.user.is_superuser
+        return self.request.user == self.get_object().author or self.request.user.is_superuser
+
+    permission_required = 'jobapp.add_postjob'
 
     def handle_no_permission(self):
-        messages.error(self.request, "You don't have permission")
+        messages.error(self.request, "No permission.")
         return redirect('homepage')
+
+    def form_valid(self, form):
+        response = super().delete(request)
+        return response
 
 
 class JobSuccessView(View):

@@ -83,6 +83,7 @@ class PostJob(models.Model):
         ('vlastní ubytování', 'vlastní'),
         ('zajištěné ubytování', 'zajištěné'),
     ]
+    author = models.ForeignKey("users.User", on_delete=models.CASCADE, default='')
     created_at = models.DateTimeField(auto_now_add=True)
     positions = models.ForeignKey(Position, related_name="position", on_delete=models.CASCADE)
     driving_licence = models.ManyToManyField(DrivingLicence, blank=True)

@@ -108,15 +108,19 @@
     <div class="text-justify">
         <a class="new-ad-link" href="{% url 'all-jobs' %}">Back to Job Listings</a>
     </div>
-      <div class="text-justify">
+    <div class="text-justify">
         <a class="new-ad-link" href="{% url 'homepage' %}">Back Home</a>
     </div>
-   <div class="text-justify">
-    <a class="new-ad-link" href="{% url 'update' pk=job.pk %}">Update</a>
-</div>
-<div class="text-justify">
-    <a class="new-ad-link" href="{% url 'delete' pk=job.pk %}">Delete</a>
-</div>
+    {% if job.author == request.user or is_superuser %}
+        <div class="text-justify">
+            {% csrf_token %}
+            <a class="new-ad-link" href="{% url 'update' pk=job.pk %}">Update</a>
+        </div>
+        <div class="text-justify">
+            {% csrf_token %}
+            <a class="new-ad-link" href="{% url 'delete' pk=job.pk %}">Delete</a>
+        </div>
+    {% endif %}
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
