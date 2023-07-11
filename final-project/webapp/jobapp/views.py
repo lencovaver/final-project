@@ -47,6 +47,14 @@ class JobCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         messages.error(self.request, "You don't have permission.")
         return redirect('homepage')
 
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.save()
+
+        form.save_m2m()
+
+        return redirect('job-success')
+
 
 class JobUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = PostJob
@@ -92,6 +100,6 @@ class JobSearchView(ListView):
             jobs = PostJob.objects.filter(positions__name_position__icontains=query)
             # print(jobs)  # Toto vypíše nalezené pracovní pozice do konzoly pro kontrolu
             return jobs
-            # return PostJob.objects.filter(positions__contains=query)
+            # return PostJob.objects.filter(positions__contains=query)git
         else:
             return PostJob.objects.all()
