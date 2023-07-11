@@ -47,6 +47,14 @@ class JobCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         messages.error(self.request, "You don't have permission.")
         return redirect('homepage')
 
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.save()
+
+        form.save_m2m()
+
+        return redirect('job-success')
+
 
 class JobUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = PostJob
