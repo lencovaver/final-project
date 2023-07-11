@@ -19,7 +19,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from jobapp.views import HomepageView, AllJobsView, JobDetailView, JobCreateView, JobUpdateView, JobDeleteView, \
-    JobSearchView
+    JobSearchView, JobSuccessView
 from users.views import RegSuccessView, RegistrationView, UserLoginView, UserLogoutView, EditProfileView, \
     UserProfileView
 
@@ -37,9 +37,11 @@ urlpatterns = [
     path("all-jobs/", AllJobsView.as_view(), name="all-jobs"),
     path("job/<int:job_id>/", JobDetailView.as_view(), name='job-detail'),
     path("create/", JobCreateView.as_view(), name='create'),
+    path("job-success/", JobSuccessView.as_view(), name='job-success'),
     path("job/<int:pk>/update", JobUpdateView.as_view(), name='update'),
     path("job/<int:pk>/delete", JobDeleteView.as_view(), name='delete'),
     path("job-search/", JobSearchView.as_view(), name='job-search'),
+
 ]
 
 if settings.DEBUG:

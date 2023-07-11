@@ -56,59 +56,70 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'homepage' %}">Back</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'registration' %}">Registration</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'business-registration' %}">Register as a Company</a>
-            </li>
-        </ul>
+<div class="container">
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'homepage' %}">Back</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'registration' %}">Registration</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'profile' %}">Your profile</a>
+        </li>
+    </ul>
 
-        <h2 class="text-justify">{{ job.positions }}</h2>
-        <div class="job-details">
-            <div class="job-label">Category:</div>
-            <div>{{ job.category }}</div>
-        </div>
-        <div class="job-details">
-            <div class="job-label">Experience:</div>
-            <div>{{ job.experience }}</div>
-        </div>
-        <div class="job-details">
-            <div class="job-label">Place:</div>
-            <div>{{ job.place }}</div>
-        </div>
-        <div class="job-details">
-            <div class="job-label">Language:</div>
-            <div>{{ job.language }}</div>
-        </div>
-        <div class="job-details">
-            <div class="job-label">Accommodation:</div>
-            <div>{{ job.accommodation }}</div>
-        </div>
-        <div class="job-details">
-            <div class="job-label">Information about the position:</div>
-            <div>{{ job.info_position }}</div>
-        </div>
-        <div class="job-details">
-            <div class="job-label">Salary:</div>
-            <div>{{ job.salary }}</div>
-        </div>
-        <div class="job-details">
-            <div class="job-label">Diet:</div>
-            <div>{{ job.diet }}</div>
-        </div>
+    <h2 class="text-justify">{{ job.positions }}</h2>
+    <div class="job-details">
+        <div class="job-label">Category:</div>
+        <div>{{ job.category }}</div>
+    </div>
+    <div class="job-details">
+        <div class="job-label">Experience:</div>
+        <div>{{ job.experience }}</div>
+    </div>
+    <div class="job-details">
+        <div class="job-label">Place:</div>
+        <div>{{ job.place }}</div>
+    </div>
+    <div class="job-details">
+        <div class="job-label">Language:</div>
+        <div>
 
-        <div class="text-justify">
-            <a class="new-ad-link" href="{% url 'all-jobs' %}">Back to Job Listings</a>
         </div>
     </div>
+    <div class="job-details">
+        <div class="job-label">Accommodation:</div>
+        <div>{{ job.accommodation }}</div>
+    </div>
+    <div class="job-details">
+        <div class="job-label">Information about the position:</div>
+        <div>{{ job.info_position }}</div>
+    </div>
+    <div class="job-details">
+        <div class="job-label">Salary:</div>
+        <div>{{ job.salary }}</div>
+    </div>
+    <div class="job-details">
+        <div class="job-label">Diet:</div>
+        <div>{{ job.diet }}</div>
+    </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+    <div class="text-justify">
+        <a class="new-ad-link" href="{% url 'all-jobs' %}">Back to Job Listings</a>
+    </div>
+      <div class="text-justify">
+        <a class="new-ad-link" href="{% url 'homepage' %}">Back Home</a>
+    </div>
+   <div class="text-justify">
+    <a class="new-ad-link" href="{% url 'update' pk=job.pk %}">Update</a>
+</div>
+<div class="text-justify">
+    <a class="new-ad-link" href="{% url 'delete' pk=job.pk %}">Delete</a>
+</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

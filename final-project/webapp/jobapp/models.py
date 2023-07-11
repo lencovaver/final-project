@@ -1,4 +1,3 @@
-from django.core.exceptions import ValidationError
 from django.db import models
 
 
@@ -8,11 +7,9 @@ class Position(models.Model):
     class Meta:
         ordering = ['name_position']
 
-    def __repr__(self):
-        return self.name_position
-
     def __str__(self):
         return self.name_position
+
 
 class Place(models.Model):
     name_place = models.CharField(max_length=100)
@@ -21,16 +18,12 @@ class Place(models.Model):
     class Meta:
         ordering = ['name_place']
 
-    def __repr__(self):
-        return f"{self.name_place}"
-
     def __str__(self):
-        return repr(self)
+        return self.name_place
 
 
 class Language(models.Model):
     STATE_CHOICES = [
-        ('NO', 'žádný'),
         ('ENG', '🇬🇧 angličtina'),
         ('CHF', '🇨🇭 švýcarská němčina'),
         ('DEU', '🇩🇪 němčina'),
@@ -45,13 +38,11 @@ class Language(models.Model):
         ('5', 'C1 - velmi pokročilý'),
         ('6', 'C2 - expert'),
     ]
-    state = models.CharField(max_length=5, choices=STATE_CHOICES)
-    level = models.CharField(max_length=30, choices=LEVEL_CHOICES)
+    state = models.CharField(max_length=3, choices=STATE_CHOICES, default="ENG")
+    level = models.CharField(max_length=2, choices=LEVEL_CHOICES, default="1")
 
     def __str__(self):
-        state_display = dict(self.STATE_CHOICES)[self.state]
-        level_display = dict(self.LEVEL_CHOICES).get(self.level)
-        return f"{state_display} - {level_display}"
+        return f"{self.get_state_display} - {self.get_level_display()}"
 
 
 class DrivingLicence(models.Model):
@@ -75,7 +66,7 @@ class DrivingLicence(models.Model):
         ('T', 'T 🚜')
     ]
 
-    licence = models.CharField(max_length=6, choices=CATEGORY_CHOICES, null=True)
+    licence = models.CharField(max_length=6, choices=CATEGORY_CHOICES, blank=True)
 
     def __str__(self):
         return self.licence
@@ -97,7 +88,7 @@ class PostJob(models.Model):
     driving_licence = models.ManyToManyField(DrivingLicence, blank=True)
     experience = models.CharField(max_length=100, choices=EXPERIENCE_CHOICES, default='1-3')
     place = models.ForeignKey(Place, related_name="postjobs", on_delete=models.CASCADE, null=True)
-    language = models.ManyToManyField(Language, blank=True)
+    language = models.ManyToManyField(Language, related_name="language")
     accommodation = models.CharField(max_length=30, choices=ACCOMMODATION_CHOICES, default='')
     info_position = models.TextField()
     salary = models.IntegerField(choices=[(i, i) for i in range(100)], default=30)
@@ -105,11 +96,3 @@ class PostJob(models.Model):
 
     def __str__(self):
         return self.positions.name_position
-
-    def clean(self):
-        if self.driving_licence:
-            choices = [choice[0] for choice in DrivingLicence.CATEGORY_CHOICES]
-            selected_choices = self.driving_licence.values_list('licence', flat=True)
-            for choice in selected_choices:
-                if choice not in choices:
-                    raise ValidationError(f"Neplatná kategorie řidičského průkazu: {choice}")

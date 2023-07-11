@@ -2,20 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Registration successful</title>
+    <title>Success!</title>
 </head>
 <body>
-<h2>Registration successful! You are good to go. 🎉🎉🎉</h2>
+<body>
+<h2>Done! 🎉🎉🎉</h2>
 <br>
-<p>🗝️Redirecting in five... ️</p>
+<p>Redirecting in a moment... ️</p>
 <script>
     function redirectToNewPage() {
         setTimeout(function() {
-            window.location.href = "{% url 'login' %}";
+            window.location.href = "{% url 'homepage' %}";
         }, 1200);
     }
 
     window.onload = redirectToNewPage;
 </script>
+</body>
 </body>
 </html>
