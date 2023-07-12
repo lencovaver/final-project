@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration successful</title>
+</head>
+<body>
+<h2>Registration successful! You are good to go. 🎉🎉🎉</h2>
+<br>
+<p>🗝️Redirecting in five... ️</p>
+<script>
+    function redirectToNewPage() {
+        setTimeout(function() {
+            window.location.href = "{% url 'login' %}";
+        }, 1200);
+    }
+
+    window.onload = redirectToNewPage;
+</script>
+</body>
+</html>
