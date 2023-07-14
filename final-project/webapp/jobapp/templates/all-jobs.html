@@ -1,185 +1,190 @@
-{% load static offer_filters %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Homepage</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <title>All Jobs</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
 
-        h2 {
-            color: #333;
+        body {
+            background-color: #EDF2F4;
+            color: #FFFFFF;
+            padding: 20px;
+            font-family: Roboto, sans-serif;
         }
 
         .container {
-            max-width: 800px;
-            margin: 0 auto;
+            background-color: #2B2D42;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            color: #FFFFFF;
+
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
+        .nav-link {
+            color: #FFFFFF;
+            font-weight: bold;
+            background-color: #D80032;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            font-weight: bold;
+            margin-top: 10px;
+            margin-right: 3px; /* Přidá mezeru mezi tlačítky vlevo */
         }
 
-        th, td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
+        .new-ad-link {
+            display: inline-block;
+            color: #FFFFFF;
+            background-color: #D80032;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
         }
 
-        th {
-            background-color: #f2f2f2;
-            color: #333;
+        .new-ad-link:hover {
+            background-color: #2B2D42;
+        }
+
+        .nav {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        h1,h5 {
+            color: #FFFFFF;
+            font-family: 'Montserrat', Arial, sans-serif;
             font-weight: bold;
         }
 
-        tr:hover {
-            background-color: #e0e0e0;
+        .table th {
+            background-color: #cecece;
+            color: #FFFFFF;
+            font-weight: bold;
+            text-align: left;
+            border-radius: 10px;
         }
 
-        .highlight {
-            background-color: yellow;
+        .table td {
+            background-color: #FFFFFF;
+            color: #2B2D42;
         }
+
+        .button {
+            background-color: #FFFFFF;
+            color: #2B2D42;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            color: #FFFFFF;
+        }
+
+        .logo img {
+            margin-right: 10px;
+            width: 100px;
+            height: 60px;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            width: calc(33% - 20px);
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.1);
+            z-index: 1;
+        }
+
+        .card-title {
+            font-size: 2em;
+            color: #2B2D42;
+        }
+
     </style>
 </head>
 <body>
-<br>
-<br>
-<br>
-<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Nabídky práce ve Švýcarsku</a>
-            </li>
-        </ul>
-    </div>
-</nav>
-
-<main role="main" class="container">
-
-    <h3>Jakou práci hledáš</h3>
-    <form method="GET" action="{% url 'job-search' %}">
-        <div class="form-row">
-            <div class="form-group col-12">
-                <div class="input-group">
-                    <input class="form-control py-2 border-right-0 border" type="search" name="title_contains"
-                           placeholder="Zadej pozici..."/>
-                    <span class="input-group-append">
-                        <div class="input-group-text bg-transparent">
-                            <i class="fa fa-search"></i>
-                        </div>
-                    </span>
+    <meta charset="UTF-8">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="logo">
+                    <img src="https://www.wyssenseilbahnen.com/wp-content/uploads/2014/07/ch.jpeg" alt="Swissapp logo">
+                    <h1 class="display-4">Swissapp</h1>
                 </div>
             </div>
+            <div class="col-md-6">
+                <ul class="nav justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'homepage' %}">Back</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'profile' %}">Your profile</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'registration' %}">Registration</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary">Vyhledat</button>
-    </form>
-
-    {% if jobs %}
-    <ul>
+<body>
+<div class="container">
+    {% if user.is_authenticated %}
+        <h1>Hello {{ user.username }}</h1>
+    {% else %}
+        <p>Welcome!</p>
+    {% endif %}<br>
+    <h3 class="text-justify">Na Vámi zvolenou pozici jsme našli tyto nabídky:</h3>
+    <ul class="job-list">
         {% for job in jobs %}
-        <li>{{ job.positions }}</li>
+            <li>
+                <div class="job-title">{{ job.positions }}</div>
+                <div class="job-details">
+                    <span class="job-label">Kanton:</span> {{ job.place }}<br>
+                    <span class="job-label">Požadovaná praxe:</span> {{ job.experience }}<br>
+                    <span class="job-label">Požadovaná úroveň jazyka:</span><br>
+                    <a href="{% url 'job-detail' job.id %}">Job Detail</a>
+                </div>
+            </li>
         {% endfor %}
     </ul>
-    {% else %}
-    <p>No jobs found.</p>
-    {% endif %}
-
-    {% if not jobs %}
-    <br>
-    <br>
-    <div class="container">
-        <h2>Aktuální nabídky práce</h2>
-        <table id="jobs-table">
-            <colgroup span="2"></colgroup>
-            <tr>
-                <th>Pozice</th>
-                <th>Kanton</th>
-                <th>požadovaná praxe</th>
-                <th>požadované jazykové znalosti</th>
-                <th>Mzda v CHF</th>
-                <th>Diety v CHF</th>
-            </tr>
-            {% for job in all_jobs %}
-            <tr>
-                <td><a href="{% url 'job-detail' job.id %}">{{ job.positions }}</td>
-                <td>{{ job.place }}</td>
-                <td>{{ job.experience }}</td>
-                <td>
-
-                </td>
-                <td>{{ job.salary }}</td>
-                <td>{{ job.diet }}</td>
-            </tr>
-            {% endfor %}
-        </table>
+    <div class="text-justify">
+        <a class="new-ad-link" href="{% url 'create' %}">Create a New Ad</a>
     </div>
-    {% endif %}
-</main>
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-
-<script>
-    // Function to create a table row for a job
-    function createJobRow(job) {
-        var row = document.createElement("tr");
-        var positionCell = document.createElement("td");
-        var descriptionCell = document.createElement("td");
-
-        positionCell.textContent = job.positions;
-        descriptionCell.textContent = job.info_position;
-
-        row.appendChild(positionCell);
-        row.appendChild(descriptionCell);
-
-        return row;
-    }
-
-    // Function to display all jobs in the table
-    function displayAllJobs(jobs) {
-        var table = document.getElementById("jobs-table");
-
-        for (var i = 0; i < jobs.length; i++) {
-            var job = jobs[i];
-            var row = createJobRow(job);
-            table.appendChild(row);
-        }
-    }
-
-    // Highlight row on hover
-    var rows = document.querySelectorAll("#jobs-table tr");
-    for (var i = 0; i < rows.length; i++) {
-        rows[i].addEventListener("mouseover", function () {
-            this.classList.add("highlight");
-        });
-        rows[i].addEventListener("mouseout", function () {
-            this.classList.remove("highlight");
-        });
-    }
-
-    // Display all jobs
-    displayAllJobs(allJobs);
-</script>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -1,12 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>job-succes</title>
     <meta charset="UTF-8">
-    <title>Success!</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <style>
+
+        body {
+            background-color: #EDF2F4;
+            color: #FFFFFF;
+            padding: 20px;
+            font-family: Roboto, sans-serif;
+        }
+
+        .container {
+            background-color: #2B2D42;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            color: #FFFFFF;
+
+        }
+
+        .nav-link {
+            color: #FFFFFF;
+            font-weight: bold;
+            background-color: #D80032;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            font-weight: bold;
+            margin-top: 25px;
+            margin-right: 20px; /* Přidá mezeru mezi tlačítky vlevo */
+        }
+
+        .new-ad-link {
+            display: inline-block;
+            color: #FFFFFF;
+            background-color: #D80032;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .new-ad-link:hover {
+            background-color: #2B2D42;
+        }
+
+        .nav {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        h1,h5 {
+            color: #FFFFFF;
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: bold;
+        }
+
+        .table th {
+            background-color: #cecece;
+            color: #FFFFFF;
+            font-weight: bold;
+            text-align: left;
+            border-radius: 10px;
+        }
+
+        .table td {
+            background-color: #FFFFFF;
+            color: #2B2D42;
+        }
+
+        .button {
+            background-color: #FFFFFF;
+            color: #2B2D42;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            color: #FFFFFF;
+        }
+
+        .logo img {
+            margin-right: 10px;
+            width: 100px;
+            height: 60px;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            width: calc(33% - 20px);
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.1);
+            z-index: 1;
+        }
+
+        .card-title {
+            font-size: 2em;
+            color: #2B2D42;
+        }
+
+    </style>
 </head>
 <body>
+<ul class="nav">
+        <ul class="nav justify-content-end"> <!-- Upraveno z "nav" na "nav justify-content-end" -->
+            <li class=" nav-item">
+                <a class="nav-link" href="{% url 'all-jobs' %}">View All Available Jobs</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'profile' %}">Your profile</a>
+            </li>
+        {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'registration' %}">Registration</a>
+            </li>
+        {% endif %}
+
+    </ul>
+    <meta charset="UTF-8">
+    <title>job-succes</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
 <body>
-<h2>Done! 🎉🎉🎉</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="logo">
+                    <img src="https://www.wyssenseilbahnen.com/wp-content/uploads/2014/07/ch.jpeg" alt="Swissapp logo">
+                    <h1 class="display-4">Swissapp</h1>
+                </div>
+            </div>
+        </div>
+<body>
+<h2>Gratulujeme!!!</h2>
+<br>
+<p>🎉🎉🎉</p>
+<h4>Váš inzerát byl vložen na zeď! 🎉🎉🎉</h4>
 <br>
 <p>Redirecting in a moment... ️</p>
 <script>
