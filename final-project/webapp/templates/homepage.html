@@ -2,13 +2,19 @@
 <html lang="en">
 <head>
     <title>Homepage</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <style>
+
         body {
             background-color: #EDF2F4;
             color: #FFFFFF;
             padding: 20px;
-            font-family: Arial, sans-serif;
+            font-family: Roboto, sans-serif;
         }
 
         .container {
@@ -16,41 +22,21 @@
             border-radius: 5px;
             padding: 20px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            color: #FFFFFF;
+
         }
 
         .nav-link {
-            color: #D80032;
-            font-weight: bold
-        }
-
-        .job-list {
-            list-style-type: none;
-            padding: 0;
-        }
-
-
-        .job-list li {
-            margin-bottom: 20px;
-            padding: 10px;
-            background-color: #FFFFFF;
+            color: #FFFFFF;
+            font-weight: bold;
+            background-color: #D80032;
+            padding: 10px 20px;
             border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            color: #2B2D42;
-            display: flex;
-            align-items: center;
-        }
-
-        .job-title {
+            text-decoration: none;
+            transition: background-color 0.3s;
             font-weight: bold;
-            font-size: 18px;
-        }
-
-        .job-details {
-            margin-left: 20px;
-        }
-
-        .job-label {
-            font-weight: bold;
+            margin-top: 10px;
+            margin-right: 3px; /* Přidá mezeru mezi tlačítky vlevo */
         }
 
         .new-ad-link {
@@ -67,71 +53,221 @@
             background-color: #2B2D42;
         }
 
-        h2 {
-            color: #FFFFFF; /* Upravená barva nadpisu Latest Jobs */
-            margin-bottom: 20px;
-        }
-
         .nav {
             margin-bottom: 20px;
+            display: flex;
+            justify-content: flex-end;
         }
+
+        h1,h5 {
+            color: #FFFFFF;
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: bold;
+        }
+
+        .table th {
+            background-color: #cecece;
+            color: #FFFFFF;
+            font-weight: bold;
+            text-align: left;
+            border-radius: 10px;
+        }
+
+        .table td {
+            background-color: #FFFFFF;
+            color: #2B2D42;
+        }
+
+        .button {
+            background-color: #FFFFFF;
+            color: #2B2D42;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            color: #FFFFFF;
+        }
+
+        .logo img {
+            margin-right: 10px;
+            width: 100px;
+            height: 60px;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            width: calc(33% - 20px);
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.1);
+            z-index: 1;
+        }
+
+        .card-title {
+            font-size: 2em;
+            color: #2B2D42;
+        }
+
     </style>
 </head>
 <body>
-<div class="container">
+    <meta charset="UTF-8">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="logo">
+                    <img src="https://www.wyssenseilbahnen.com/wp-content/uploads/2014/07/ch.jpeg" alt="Swissapp logo">
+                    <h1 class="display-4">Swissapp</h1>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <ul class="nav justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'all-jobs' %}">View All Available Jobs</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'profile' %}">Your profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'registration' %}">Registration</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        <div class="container">
     {% if user.is_authenticated %}
         <h2>Hello {{ user.username }}</h2>
     {% else %}
-        <p>Welcome!</p>
+        <p><h1>Welcome!</h1></p>
     {% endif %}
-
-    <ul class="nav">
-        <li class=" nav-item">
-            <a class="nav-link" href="{% url 'all-jobs' %}">View All Available Jobs</a>
-        </li>
-        {% if user.is_authenticated %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'profile' %}">Your profile</a>
-            </li>
-        {% else %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}">Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'registration' %}">Registration</a>
-            </li>
-        {% endif %}
-
-    </ul>
-
-
-    <h2 class="text-justify">Latest Jobs</h2>
-    <ul class="job-list">
-        {% for job in jobs %}
-            <li>
-                <div class="job-title">{{ job.positions }}</div>
-                <div class="job-details">
-                    <span class="job-label">Kanton:</span> {{ job.place }}<br>
-                    <span class="job-label">Požadovaná praxe:</span> {{ job.experience }}<br>
-                    <span class="job-label">Požadovaná úroveň jazyka:</span>
-
-                    <br>
-                    <a href="{% url 'job-detail' job.id %}">Job Detail</a>
+        <p class="lead mt-4">
+            Spojujeme lidi, kteří nabízí pracovní příležitosti s těmi, kdo hledají nové výzvy v zahraničí nebo si chtějí jenom zlepšit své jazykové dovednosti.
+        </p><br>
+        <b></b>
+        <h5>Najděte svoji vysněnou práci podle:</h5>
+        <div class="card-container">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="mb-0 card-title">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#skodaCollapse" aria-expanded="true" aria-controls="skodaCollapse">
+                            🏫 Oboru
+                        </button>
+                    </h2>
                 </div>
-            </li>
-        {% endfor %}
-    </ul>
+                <div id="skodaCollapse" class="collapse show" aria-labelledby="skodaHeading" data-parent="#carModelsAccordion">
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <td><a href="{% url 'job-search' %}?title_contains=zedník">zedník</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="{% url 'job-search' %}?title_contains=kurýr">kurýr</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="{% url 'job-search' %}?title_contains=šaler">šaler</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="{% url 'job-search' %}?title_contains=kuchař">kuchař</a></td>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="mb-0 card-title">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#languageCollapse" aria-expanded="false" aria-controls="languageCollapse">
+                            🏔️ Kantonu
+                        </button>
+                    </h2>
+                </div>
+                <div id="languageCollapse" class="collapse" aria-labelledby="languageHeading" data-parent="#carModelsAccordion">
+                    <div class="card-body">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td><a href="{% url 'job-search' %}?location=Argau">📍 Argau</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="{% url 'job-search' %}?location=Basilej">📍 Basilej</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="{% url 'job-search' %}?location=Bern">📍 Bern</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="{% url 'job-search' %}?location=Luzern">📍 Luzern</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="{% url 'job-search' %}?location=Zug">📍 Zug</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="{% url 'job-search' %}?location=Zürich">📍 Zürich</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
-
-    <div class="text-justify">
-        <a class="new-ad-link" href="{% url 'create' %}">Create a New Ad</a>
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="mb-0 card-title">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#audiCollapse" aria-expanded="false" aria-controls="audiCollapse">
+                            📚 Jazyka
+                        </button>
+                    </h2>
+                </div>
+                <div id="audiCollapse" class="collapse" aria-labelledby="audiHeading" data-parent="#carModelsAccordion">
+                    <div class="card-body">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td><a href="{% url 'job-search' %}?language=angličtina">🇬🇧 angličtina</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="{% url 'job-search' %}?language=němčina">🇩🇪 němčina</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="{% url 'job-search' %}?language=italština">🇮🇹 italština</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="{% url 'job-search' %}?language=francouzština">🇫🇷 francouzština</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
-</html>
