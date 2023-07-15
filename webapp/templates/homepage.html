@@ -212,6 +212,7 @@
                     <div class="card-body">
                         <table class="table">
                             <tbody>
+                            <!--
                                 <tr>
                                     <td><a href="{% url 'job-search' %}?location=Argau">📍 Argau</a></td>
                                 </tr>
@@ -230,6 +231,12 @@
                                 <tr>
                                     <td><a href="{% url 'job-search' %}?location=Zürich">📍 Zürich</a></td>
                                 </tr>
+                            -->
+                                {% for place in places %}
+                                <tr>
+                                    <td><a href="{% url 'place-search' place_id=place.id %}">📍 {{ place.name_place }}</a></td>
+                                </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -249,16 +256,19 @@
                         <table class="table">
                             <tbody>
                                 <tr>
-                                    <td><a href="{% url 'job-search' %}?language=angličtina">🇬🇧 angličtina</a></td>
+                                    <td><a href="{% url 'state-search' %}?state=ENG">📍 angličtina</a></td>
                                 </tr>
                                 <tr>
-                                    <td><a href="{% url 'job-search' %}?language=němčina">🇩🇪 němčina</a></td>
+                                    <td><a href="{% url 'state-search' %}?state=CHF">📍 švýcarská němčina</a></td>
                                 </tr>
                                 <tr>
-                                    <td><a href="{% url 'job-search' %}?language=italština">🇮🇹 italština</a></td>
+                                    <td><a href="{% url 'state-search' %}?state=DEU">📍 němčina</a></td>
                                 </tr>
                                 <tr>
-                                    <td><a href="{% url 'job-search' %}?language=francouzština">🇫🇷 francouzština</a></td>
+                                    <td><a href="{% url 'state-search' %}?state=FRA">📍 francouzština</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="{% url 'state-search' %}?state=ITA">📍 italština</a></td>
                                 </tr>
                             </tbody>
                         </table>
