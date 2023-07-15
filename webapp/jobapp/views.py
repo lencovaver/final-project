@@ -5,7 +5,7 @@ from django.views import View
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin, PermissionRequiredMixin
 from .forms import PostJobForm
-from .models import PostJob, Place
+from .models import PostJob, Place, Language
 
 from django.contrib import messages
 
@@ -138,8 +138,8 @@ class LanguageSearchView(ListView):
     template_name = "all-jobs.html"
     context_object_name = "jobs"
 
-    def get_queryset(self):
-        language_id = self.kwargs.get("language_id")
+    def get_queryset(self, *args, **kwargs):
+        state_name = self.request.GET.get("state")
 
-        jobs = PostJob.objects.filter(language__pk=language_id)
+        jobs = PostJob.objects.filter(language__state=state_name)
         return jobs

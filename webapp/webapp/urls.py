@@ -41,8 +41,8 @@ urlpatterns = [
     path("job/<int:pk>/update", JobUpdateView.as_view(), name='update'),
     path("job/<int:pk>/delete", JobDeleteView.as_view(), name='delete'),
     path("job-search/", JobSearchView.as_view(), name='job-search'),
-    path("job/place/<int:place_id>/", PlaceSearchView.as_view(), name='job-search-place'),
-    path("job/language/<int:language_id>/", LanguageSearchView.as_view(), name='job-search-language'),
+    path("job/place/<int:place_id>/", PlaceSearchView.as_view(), name='place-search'),
+    path("state-search/", LanguageSearchView.as_view(), name='state-search'),
 ]
 
 if settings.DEBUG:

@@ -234,7 +234,7 @@
                             -->
                                 {% for place in places %}
                                 <tr>
-                                    <td><a href="{% url 'job-search-place' place_id=place.id %}">📍 {{ place.name_place }}</a></td>
+                                    <td><a href="{% url 'place-search' place_id=place.id %}">📍 {{ place.name_place }}</a></td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
@@ -256,23 +256,20 @@
                         <table class="table">
                             <tbody>
                                 <tr>
-                                    <td><a href="{% url 'job-search' %}?language=angličtina">🇬🇧 angličtina</a></td>
+                                    <td><a href="{% url 'state-search' %}?state=ENG">📍 angličtina</a></td>
                                 </tr>
                                 <tr>
-                                    <td><a href="{% url 'job-search' %}?language=němčina">🇩🇪 němčina</a></td>
+                                    <td><a href="{% url 'state-search' %}?state=CHF">📍 švýcarská němčina</a></td>
                                 </tr>
                                 <tr>
-                                    <td><a href="{% url 'job-search' %}?language=italština">🇮🇹 italština</a></td>
+                                    <td><a href="{% url 'state-search' %}?state=DEU">📍 němčina</a></td>
                                 </tr>
                                 <tr>
-                                    <td><a href="{% url 'job-search' %}?language=francouzština">🇫🇷 francouzština</a></td>
+                                    <td><a href="{% url 'state-search' %}?state=FRA">📍 francouzština</a></td>
                                 </tr>
-
-                                {% for language in languages %}
                                 <tr>
-                                    <td><a href="{% url 'job-search-language' language_id=language.id %}">📍 {{ language.name_language }}</a></td>
+                                    <td><a href="{% url 'state-search' %}?state=ITA">📍 italština</a></td>
                                 </tr>
-                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
