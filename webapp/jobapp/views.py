@@ -5,7 +5,7 @@ from django.views import View
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin, PermissionRequiredMixin
 from .forms import PostJobForm
-from .models import PostJob
+from .models import PostJob, Place
 
 from django.contrib import messages
 
@@ -15,6 +15,10 @@ class HomepageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
+        places = Place.objects.all()
+        context["places"] = places
+
         context['jobs'] = PostJob.objects.all()
         return context
 
@@ -115,3 +119,27 @@ class JobSearchView(ListView):
             # return PostJob.objects.filter(positions__contains=query)git
         else:
             return PostJob.objects.all()
+
+
+class PlaceSearchView(ListView):
+    model = PostJob
+    template_name = "all-jobs.html"
+    context_object_name = "jobs"
+
+    def get_queryset(self, *args, **kwargs):
+        place_id = self.kwargs.get("place_id")
+
+        jobs = PostJob.objects.filter(place__pk=place_id)
+        return jobs
+
+
+class LanguageSearchView(ListView):
+    model = PostJob
+    template_name = "all-jobs.html"
+    context_object_name = "jobs"
+
+    def get_queryset(self):
+        language_id = self.kwargs.get("language_id")
+
+        jobs = PostJob.objects.filter(language__pk=language_id)
+        return jobs

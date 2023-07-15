@@ -212,6 +212,7 @@
                     <div class="card-body">
                         <table class="table">
                             <tbody>
+                            <!--
                                 <tr>
                                     <td><a href="{% url 'job-search' %}?location=Argau">📍 Argau</a></td>
                                 </tr>
@@ -230,6 +231,12 @@
                                 <tr>
                                     <td><a href="{% url 'job-search' %}?location=Zürich">📍 Zürich</a></td>
                                 </tr>
+                            -->
+                                {% for place in places %}
+                                <tr>
+                                    <td><a href="{% url 'job-search-place' place_id=place.id %}">📍 {{ place.name_place }}</a></td>
+                                </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -260,6 +267,12 @@
                                 <tr>
                                     <td><a href="{% url 'job-search' %}?language=francouzština">🇫🇷 francouzština</a></td>
                                 </tr>
+
+                                {% for language in languages %}
+                                <tr>
+                                    <td><a href="{% url 'job-search-language' language_id=language.id %}">📍 {{ language.name_language }}</a></td>
+                                </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
