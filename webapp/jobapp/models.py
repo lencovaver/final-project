@@ -41,8 +41,13 @@ class Language(models.Model):
     state = models.CharField(max_length=3, choices=STATE_CHOICES, default="ENG")
     level = models.CharField(max_length=2, choices=LEVEL_CHOICES, default="1")
 
+    def get_level_name(self):
+        for level in self.LEVEL_CHOICES:
+            if level[0] == self.level:
+                return level[1]
+
     def __str__(self):
-        return f"{self.get_state_display} - {self.get_level_display()}"
+        return f"{self.state} - {self.get_level_name()}"
 
 
 class DrivingLicence(models.Model):

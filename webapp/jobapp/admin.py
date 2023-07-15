@@ -5,7 +5,6 @@ from .models import Place, PostJob, Position, Language, DrivingLicence
 
 
 class PostJobAdmin(admin.ModelAdmin):
-    form = PostJobForm
 
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)
