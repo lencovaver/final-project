@@ -19,9 +19,11 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from jobapp.views import HomepageView, AllJobsView, JobDetailView, JobCreateView, JobUpdateView, JobDeleteView, \
-    JobSearchView, JobSuccessView, PlaceSearchView, LanguageSearchView
+    JobSearchView, JobSuccessView, PlaceSearchView, LanguageSearchView, JobArchiveView
 from users.views import RegSuccessView, RegistrationView, UserLoginView, UserLogoutView, EditProfileView, \
     UserProfileView
+
+from jobapp.views import archive_job
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -43,6 +45,8 @@ urlpatterns = [
     path("job-search/", JobSearchView.as_view(), name='job-search'),
     path("job/place/<int:place_id>/", PlaceSearchView.as_view(), name='place-search'),
     path("state-search/", LanguageSearchView.as_view(), name='state-search'),
+    path('archiv/', JobArchiveView.as_view(), name='job-archive'),
+    path('archivovat/<int:pk>/', archive_job, name='archive-job'),
 ]
 
 if settings.DEBUG:

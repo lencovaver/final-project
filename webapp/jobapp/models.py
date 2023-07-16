@@ -88,7 +88,12 @@ class PostJob(models.Model):
         ('vlastní ubytování', 'vlastní'),
         ('zajištěné ubytování', 'zajištěné'),
     ]
+    STATUS_CHOICES = [
+        ("active", "Aktivní"),
+        ("archived", "Archivovaný"),
+    ]
     author = models.ForeignKey("users.User", on_delete=models.CASCADE, default='')
+    archived = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     positions = models.ForeignKey(Position, related_name="position", on_delete=models.CASCADE)
     driving_licence = models.ManyToManyField(DrivingLicence, blank=True)
@@ -99,6 +104,7 @@ class PostJob(models.Model):
     info_position = models.TextField()
     salary = models.IntegerField(choices=[(i, i) for i in range(100)], default=30)
     diet = models.IntegerField(choices=[(i, i) for i in range(31)], default=0)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default="active")
 
     def __str__(self):
         return self.positions.name_position
