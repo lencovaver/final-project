@@ -11,7 +11,7 @@ class PostJobForm(forms.ModelForm):
 
     class Meta:
         model = PostJob
-        fields = ['positions', 'info_position', 'place', 'state', 'level', 'experience', 'accommodation', 'salary',
+        fields = ['positions', 'info_position', 'place', 'state', 'level', 'experience', 'accommodation', 'work_type', 'salary',
                   'diet']
 
     def clean(self):

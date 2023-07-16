@@ -101,6 +101,11 @@ class PostJob(models.Model):
         ("active", "Aktivní"),
         ("archived", "Archivovaný"),
     ]
+    WORK_TYPE_CHOICES = [
+        ("plný", "Plný úvazek"),
+        ("částečný", "Částečný úvazek"),
+        ("brigáda", "Brigáda"),
+    ]
     author = models.ForeignKey("users.User", on_delete=models.CASCADE, default='')
     archived = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -111,6 +116,7 @@ class PostJob(models.Model):
     language = models.ManyToManyField(Language, related_name="language")
     accommodation = models.CharField(max_length=30, choices=ACCOMMODATION_CHOICES, default='')
     info_position = models.TextField()
+    work_type = models.CharField(max_length=10, choices=WORK_TYPE_CHOICES, default="")
     salary = models.IntegerField(choices=[(i, i) for i in range(100)], default=30)
     diet = models.IntegerField(choices=[(i, i) for i in range(31)], default=0)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default="active")
