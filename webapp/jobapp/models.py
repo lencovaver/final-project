@@ -99,7 +99,6 @@ class PostJob(models.Model):
     ]
     author = models.ForeignKey("users.User", on_delete=models.CASCADE, default='')
     created_at = models.DateTimeField(auto_now_add=True)
-    position_category = models.ForeignKey(PositionCategory, related_name="position_category", on_delete=models.CASCADE, default='')
     positions = models.ForeignKey(Position, related_name="position", on_delete=models.CASCADE)
     driving_licence = models.ManyToManyField(DrivingLicence, blank=True)
     experience = models.CharField(max_length=100, choices=EXPERIENCE_CHOICES, default='1-3')

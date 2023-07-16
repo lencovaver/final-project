@@ -5,7 +5,7 @@ from django.views import View
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin, PermissionRequiredMixin
 from .forms import PostJobForm
-from .models import PostJob, Place, Language
+from .models import PostJob, Place, Language, PositionCategory, Position
 
 from django.contrib import messages
 
@@ -26,7 +26,7 @@ class HomepageView(TemplateView):
 class AllJobsView(ListView):
     model = PostJob
     template_name = "all-jobs.html"
-    context_object_name = "all_jobs"
+    context_object_name = "jobs"
 
 
 class JobDetailView(LoginRequiredMixin, DetailView):
@@ -43,7 +43,6 @@ class JobCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = PostJob
     form_class = PostJobForm
     template_name = 'create.html'
-    success_url = reverse_lazy('job-success')
 
     def test_func(self):
         return self.request.user.is_useragent or self.request.user.is_superuser
@@ -53,14 +52,20 @@ class JobCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         return redirect('homepage')
 
     def form_valid(self, form):
+        print("Saving form...")
         form.instance.author = self.request.user
         instance = form.save(commit=False)
         instance.save()
         form.save_m2m()
+        print("Form saved.")
         return redirect('job-success')
 
+    def form_invalid(self, form):
+        print(form.errors)
+        return super().form_invalid(form)
 
-class JobUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+
+class JobUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = PostJob
     form_class = PostJobForm
     template_name = 'update.html'
@@ -76,8 +81,8 @@ class JobUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
         return redirect('homepage')
 
     def form_valid(self, form):
-        response = super().form_valid(form)
-        return response
+        print(form.cleaned_data)
+        return super().form_valid(form)
 
 
 class JobDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
