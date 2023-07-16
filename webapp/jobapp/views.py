@@ -126,6 +126,7 @@ class JobSearchView(ListView):
             return PostJob.objects.filter(status='active')
 
 
+
 class PlaceSearchView(ListView):
     model = PostJob
     template_name = "all-jobs.html"
@@ -165,3 +166,4 @@ def archive_job(request, pk):
     inzerat.archived = not inzerat.archived
     inzerat.save()
     return JsonResponse({"message": "Success"})
+
