@@ -2,7 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from jobapp.models import DrivingLicence
 
-from .models import PostJob, Language
+from .models import PostJob, Language, Position
 
 
 class PostJobForm(forms.ModelForm):
@@ -11,7 +11,7 @@ class PostJobForm(forms.ModelForm):
 
     class Meta:
         model = PostJob
-        fields = ['positions', 'place', 'info_position', 'state', 'level', 'experience', 'accommodation', 'salary',
+        fields = ['position_category', 'positions', 'info_position', 'place', 'state', 'level', 'experience', 'accommodation', 'salary',
                   'diet']
 
     def clean(self):
