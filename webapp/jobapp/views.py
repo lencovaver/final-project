@@ -1,4 +1,5 @@
-from django.http import request
+from django.http import request, JsonResponse, Http404
+from django.views.decorators.http import require_POST
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy
 from django.views import View
@@ -6,6 +7,7 @@ from django.views.generic import TemplateView, ListView, DetailView, CreateView,
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin, PermissionRequiredMixin
 from .forms import PostJobForm
 from .models import PostJob, Place, Language, PositionCategory, Position
+
 
 from django.contrib import messages
 
@@ -28,6 +30,9 @@ class AllJobsView(ListView):
     template_name = "all-jobs.html"
     context_object_name = "jobs"
 
+    def get_queryset(self):
+        return PostJob.objects.filter(status='active')
+
 
 class JobDetailView(LoginRequiredMixin, DetailView):
     model = PostJob
@@ -36,7 +41,10 @@ class JobDetailView(LoginRequiredMixin, DetailView):
 
     def get_object(self):
         job_id = self.kwargs.get("job_id")
-        return get_object_or_404(PostJob, id=job_id)
+        job = get_object_or_404(PostJob, id=job_id)
+        if job.status != 'active':
+            raise Http404
+        return job
 
 
 class JobCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
@@ -118,12 +126,10 @@ class JobSearchView(ListView):
         query = self.request.GET.get("title_contains")
         # print("Query:", query)
         if query:
-            jobs = PostJob.objects.filter(positions__name_position__icontains=query)
-            # print(jobs)  # Toto vypíše nalezené pracovní pozice do konzoly pro kontrolu
-            return jobs
-            # return PostJob.objects.filter(positions__contains=query)git
+            return PostJob.objects.filter(status='active', positions__name_position__icontains=query)
         else:
-            return PostJob.objects.all()
+            return PostJob.objects.filter(status='active')
+
 
 
 class PlaceSearchView(ListView):
@@ -148,3 +154,21 @@ class LanguageSearchView(ListView):
 
         jobs = PostJob.objects.filter(language__state=state_name)
         return jobs
+
+
+class JobArchiveView(ListView):
+    model = PostJob
+    template_name = "archiv.html"
+    context_object_name = "archived_jobs"
+
+    def get_queryset(self):
+        return PostJob.objects.filter(status="archived")
+
+
+@require_POST
+def archive_job(request, pk):
+    inzerat = get_object_or_404(PostJob, pk=pk)
+    inzerat.archived = not inzerat.archived
+    inzerat.save()
+    return JsonResponse({"message": "Success"})
+

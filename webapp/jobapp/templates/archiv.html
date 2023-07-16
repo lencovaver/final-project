@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Archiv inzerátů</title>
+</head>
+<body>
+{% if archived_jobs %}
+    <h1>Archiv inzerátů</h1>
+    <ul>
+        {% for inzerat in archived_jobs %}
+            <li>{{ inzerat.positions.name_position }} - {{ inzerat.created_at }}</li>
+            <form method="post" action="{% url 'archive-job' inzerat.pk %}">
+                {% csrf_token %}
+                <input type="submit" value="Vrátit zpět">
+            </form>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Žádné archivované inzeráty.</p>
+{% endif %}
+
+</body>
+</html>
