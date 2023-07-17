@@ -1,8 +1,12 @@
+from io import BytesIO
+
+from PIL import Image
 from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
+from django.core.files.base import ContentFile
 from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
 from django.views import View
@@ -13,6 +17,8 @@ from users.models import User
 
 
 class RegistrationView(CreateView):
+    # View for user registration.
+
     template_name = 'registration.html'
     form_class = RegistrationForm
     success_url = reverse_lazy("registration-success")
@@ -23,6 +29,8 @@ class RegistrationView(CreateView):
 
 
 class UserLoginView(LoginView):
+    # View for user login.
+
     template_name = 'login.html'
     form_class = AuthenticationForm
     redirect_authenticated_user = True
@@ -36,12 +44,16 @@ class UserLoginView(LoginView):
 
 
 class UserLogoutView(View):
+    # View for user logout.
+
     def get(self, request, *args, **kwargs):
         logout(request)
         return redirect('homepage')
 
 
 class UserProfileView(DetailView):
+    # View for showing user profile.
+
     model = User
     form_class = EditProfileForm
     template_name = "profile.html"
@@ -49,8 +61,24 @@ class UserProfileView(DetailView):
     def get_object(self):
         return self.request.user
 
+    def get_context_data(self, **kwargs):
+        # Adds profile picture to context.
+
+        context = super().get_context_data(**kwargs)
+        user = self.get_object()
+
+        if user.is_useragent:
+            pic = user.company_logo
+        else:
+            pic = user.profile_pic
+
+        context['profile_pic'] = pic
+        return context
+
 
 class EditProfileView(LoginRequiredMixin, UpdateView):
+    # View for editing user profile.
+
     model = User
     form_class = EditProfileForm
     template_name = "edit-profile.html"
@@ -60,15 +88,31 @@ class EditProfileView(LoginRequiredMixin, UpdateView):
         return self.request.user
 
     def form_valid(self, form):
-        form.save()
-        return redirect(self.success_url)
+        messages.success(self.request, 'Profile updated successfully!')
+        return super().form_valid(form)
 
-    def form_invalid(self, form):
-        print(form.errors)
-        return super().form_invalid(form)
+    def profile_pic_save(self, request, *args, **kwargs):
+        # Saves profile picture or company logo.
+
+        user = self.get_object()
+        form = self.form_class(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            image_field = 'company_logo' if user.is_useragent else 'profile_pic'
+            image = form.cleaned_data.get(image_field)
+            if image:
+                img = Image.open(image)
+                output = BytesIO()
+                img.save(output, format='PNG')
+                content_file = ContentFile(output.getvalue())
+                getattr(user, image_field).save(image.name, content_file)
+            user.save()
+            return redirect('profile')
+        else:
+            return render(request, self.template_name, {'form': form})
 
 
 class RegSuccessView(View):
+    # View for showing registration success page.
 
     def get(self, request, *args, **kwargs):
         return render(request, 'registration-success.html')

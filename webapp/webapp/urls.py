@@ -20,13 +20,12 @@ from django.contrib import admin
 from django.urls import path
 from jobapp.views import HomepageView, AllJobsView, JobDetailView, JobCreateView, JobUpdateView, JobDeleteView, \
     JobSearchView, JobSuccessView, PlaceSearchView, LanguageSearchView, JobArchiveView
+from jobapp.views import archive_job
 from users.views import RegSuccessView, RegistrationView, UserLoginView, UserLogoutView, EditProfileView, \
     UserProfileView
 
-from jobapp.views import archive_job
-
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path("admin", admin.site.urls),
     path("", HomepageView.as_view(), name="homepage"),
 
     path("registration/", RegistrationView.as_view(), name="registration"),

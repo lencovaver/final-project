@@ -45,6 +45,8 @@ class User(AbstractUser):
        ("🇨🇭 CH", "🇨🇭 +41")
     ])
     phone_number = models.IntegerField(blank=True, null=True)
+    profile_pic = models.ImageField(upload_to='profile_pics', blank=True)
+    company_logo = models.ImageField(upload_to='company_logos', blank=True)
 
 
 class UserAgent(models.Model):
