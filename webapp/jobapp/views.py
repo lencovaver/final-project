@@ -60,12 +60,10 @@ class JobCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         return redirect('homepage')
 
     def form_valid(self, form):
-        print("Saving form...")
         form.instance.author = self.request.user
         instance = form.save(commit=False)
         instance.save()
         form.save_m2m()
-        print("Form saved.")
         return redirect('job-success')
 
     def form_invalid(self, form):
@@ -129,7 +127,6 @@ class JobSearchView(ListView):
             return PostJob.objects.filter(status='active', positions__name_position__icontains=query)
         else:
             return PostJob.objects.filter(status='active')
-
 
 
 class PlaceSearchView(ListView):

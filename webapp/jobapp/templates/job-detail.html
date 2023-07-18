@@ -59,7 +59,7 @@
             justify-content: flex-end;
         }
 
-        h1,h5 {
+        h1, h5 {
             color: #FFFFFF;
             font-family: 'Montserrat', Arial, sans-serif;
             font-weight: bold;
@@ -120,71 +120,91 @@
     </style>
 </head>
 <body>
-    <meta charset="UTF-8">
-    <title>Homepage</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<meta charset="UTF-8">
+<title>Homepage</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="logo">
-                    <img src="https://www.wyssenseilbahnen.com/wp-content/uploads/2014/07/ch.jpeg" alt="Swissapp logo">
-                    <h1 class="display-4">Swissapp</h1>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <ul class="nav justify-content-end">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'all-jobs' %}">View All Available Jobs</a>
-                    </li>
-                    {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'profile' %}">Your profile</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-                        </li>
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'registration' %}">Registration</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'login' %}">Login</a>
-                        </li>
-                    {% endif %}
-                </ul>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="logo">
+                <img src="https://www.wyssenseilbahnen.com/wp-content/uploads/2014/07/ch.jpeg" alt="Swissapp logo">
+                <h1 class="display-4">Swissapp</h1>
             </div>
         </div>
+        <div class="col-md-6">
+            <ul class="nav justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'all-jobs' %}">View All Available Jobs</a>
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'profile' %}">Your profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'registration' %}">Registration</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
     <h2 class="text-justify">{{ job.positions }}</h2>
     <div class="job-details">
-        <div class="job-label">Category:</div>
-        <div>{{ job.category }}</div>
+        <div class="job-label">Job title:</div>
+        <div>{{ job.position.name_position }}</div>
     </div>
+    <br>
     <div class="job-details">
-        <div class="job-label">Experience:</div>
-        <div>{{ job.experience }}</div>
+        <div class="job-label">Information about the position:</div>
+        <div>{{ job.info_position }}</div>
     </div>
+
     <div class="job-details">
         <div class="job-label">Place:</div>
         <div>{{ job.place }}</div>
     </div>
     <div class="job-details">
-        <div class="job-label">Language:</div>
-        <div>
-
-        </div>
+        <div class="job-label">Experience:</div>
+        <div>{{ job.postjob.experience }}</div>
+    </div>
+    <div class="job-details">
+        <div class="job-label">Language requirements:</div>
+        {% for language in job.language.all %}
+            <div>{{ language }}</div>
+            {% empty %}
+            <div>No language requirements</div>
+        {% endfor %}
     </div>
     <div class="job-details">
         <div class="job-label">Accommodation:</div>
         <div>{{ job.accommodation }}</div>
     </div>
     <div class="job-details">
-        <div class="job-label">Information about the position:</div>
-        <div>{{ job.info_position }}</div>
+        <div class="job-label">Driving licence requirements:</div>
+        {% for licence in job.driving_licence.all %}
+            <div>{{ driving_licence }}</div>
+            {% empty %}
+            <div>No requirements</div>
+        {% endfor %}
+    </div>
+    <div class="job-details">
+        <div class="job-label">Type:</div>
+        <div>{{ job.work_type }}</div>
+    </div>
+    <div class="job-details">
+        <div class="job-label">Starting on:</div>
+        <div>{{ job.start_date }}</div>
     </div>
     <div class="job-details">
         <div class="job-label">Salary:</div>
@@ -194,7 +214,6 @@
         <div class="job-label">Diet:</div>
         <div>{{ job.diet }}</div>
     </div>
-
     <div class="text-justify">
         <a class="new-ad-link" href="{% url 'all-jobs' %}">Send my contact</a>
     </div>
