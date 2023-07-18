@@ -120,6 +120,7 @@ class PostJob(models.Model):
     salary = models.IntegerField(choices=[(i, i) for i in range(100)], default=30)
     diet = models.IntegerField(choices=[(i, i) for i in range(31)], default=0)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default="active")
+    start_date = models.DateField()
 
     def __str__(self):
         return self.positions.name_position
