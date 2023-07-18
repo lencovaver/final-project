@@ -1,11 +1,10 @@
 from django.contrib import admin
 
-from jobapp.forms import PostJobForm
 from .models import Place, PostJob, Position, Language, DrivingLicence, PositionCategory
 
 
 class PostJobAdmin(admin.ModelAdmin):
-    list_display = ['positions', 'work_type', 'status']      # Zobrazovaná pole v seznamu
+    list_display = ['position', 'work_type', 'status']      # Zobrazovaná pole v seznamu
     list_filter = ['status']                    # Filtr pro archivaci
     actions = ['archive_selected_jobs']         # Přidání akce pro archivaci více inzerátů najednou
 

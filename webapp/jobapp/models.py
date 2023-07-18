@@ -13,8 +13,7 @@ class PositionCategory(models.Model):
 
 class Position(models.Model):
     name_position = models.CharField(max_length=100)
-    category = models.ForeignKey(PositionCategory, on_delete=models.CASCADE,
-                                 null=True, blank=True)
+    category = models.ForeignKey(PositionCategory, on_delete=models.CASCADE, blank=False)
 
     def __str__(self):
         return self.name_position
@@ -60,30 +59,32 @@ class Language(models.Model):
 
 
 class DrivingLicence(models.Model):
-    CATEGORY_CHOICES = [
-        ('', '---------'),
-        ('AM', 'AM 🛵'),
-        ('A1', 'A1'),
-        ('A2', 'A2'),
-        ('A', 'A 🏍️'),
-        ('B1', 'B1 🚚'),
-        ('B', 'B 🚗'),
-        ('C1', 'C1 🚛'),
-        ('C', 'C'),
-        ('D1', 'D1 🚐'),
-        ('D', 'D 🚌'),
-        ('BE', 'BE '),
-        ('C1E', 'C1E'),
-        ('CE', 'CE'),
-        ('D1E', 'D1E'),
-        ('DE', 'DE'),
-        ('T', 'T 🚜')
-    ]
+    licence_category = models.CharField(max_length=6, default="")
+    short_name = models.CharField(max_length=3, default="")
 
-    licence = models.CharField(max_length=6, choices=CATEGORY_CHOICES, blank=True)
+    #CATEGORY_CHOICES = [
+    #    ('', '---------'),
+    #    ('AM', 'AM 🛵'),
+    #    ('A1', 'A1'),
+    #    ('A2', 'A2'),
+    #    ('A', 'A 🏍️'),
+    #    ('B1', 'B1 🚚'),
+    #    ('B', 'B 🚗'),
+    #    ('C1', 'C1 🚛'),
+    #    ('C', 'C'),
+    #    ('D1', 'D1 🚐'),
+    #    ('D', 'D 🚌'),
+    #    ('BE', 'BE '),
+    #    ('C1E', 'C1E'),
+    #    ('CE', 'CE'),
+    #    ('D1E', 'D1E'),
+    #    ('DE', 'DE'),
+    #    ('T', 'T 🚜')
+    #]
+#field = models.CharField(max_length=6, choices=CATEGORY_CHOICES, blank=True)
 
     def __str__(self):
-        return self.licence
+        return self.licence_category
 
 
 class PostJob(models.Model):
@@ -109,7 +110,7 @@ class PostJob(models.Model):
     author = models.ForeignKey("users.User", on_delete=models.CASCADE, default='')
     archived = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
-    positions = models.ForeignKey(Position, related_name="position", on_delete=models.CASCADE)
+    position = models.ForeignKey(Position, related_name="position", on_delete=models.CASCADE)
     driving_licence = models.ManyToManyField(DrivingLicence, blank=True)
     experience = models.CharField(max_length=100, choices=EXPERIENCE_CHOICES, default='1-3')
     place = models.ForeignKey(Place, related_name="postjobs", on_delete=models.CASCADE, null=True)
@@ -117,10 +118,10 @@ class PostJob(models.Model):
     accommodation = models.CharField(max_length=30, choices=ACCOMMODATION_CHOICES, default='')
     info_position = models.TextField()
     work_type = models.CharField(max_length=10, choices=WORK_TYPE_CHOICES, default="")
-    salary = models.IntegerField(choices=[(i, i) for i in range(100)], default=30)
-    diet = models.IntegerField(choices=[(i, i) for i in range(31)], default=0)
+    salary = models.IntegerField(default=30)
+    diet = models.IntegerField(default=0)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default="active")
     start_date = models.DateField()
 
     def __str__(self):
-        return self.positions.name_position
+        return self.position.name_position
