@@ -21,13 +21,9 @@ class PostJobForm(forms.ModelForm):
         queryset=Place.objects.all(),
         widget=forms.Select(attrs={'class': 'form-control'})
     )
-    state = forms.ChoiceField(
-        choices=Language.STATE_CHOICES,
-        widget=forms.Select(attrs={'class': 'form-control'})
-    )
-    level = forms.ChoiceField(
-        choices=Language.LEVEL_CHOICES,
-        widget=forms.Select(attrs={'class': 'form-control'})
+    language = forms.ModelMultipleChoiceField(
+        queryset=Language.objects.all(),
+        widget=forms.CheckboxSelectMultiple
     )
     experience = forms.ChoiceField(
         choices=PostJob.EXPERIENCE_CHOICES,
@@ -41,9 +37,9 @@ class PostJobForm(forms.ModelForm):
         choices=PostJob.WORK_TYPE_CHOICES,
         widget=forms.Select(attrs={'class': 'form-control'})
     )
-    driving_licence = forms.ChoiceField(
-        choices=lambda: [(licence.id, licence.short_name) for licence in DrivingLicence.objects.all()],
-        widget=forms.Select(attrs={'class': 'form-control'})
+    driving_licence = forms.ModelMultipleChoiceField(
+        queryset=DrivingLicence.objects.all(),
+        widget=forms.CheckboxSelectMultiple
     )
     salary = forms.ChoiceField(
         choices=[(i, str(i)) for i in range(100)],
@@ -59,7 +55,7 @@ class PostJobForm(forms.ModelForm):
 
     class Meta:
         model = PostJob
-        fields = ['category', 'position', "info_position", 'place', 'state', 'level',
+        fields = ['category', 'position', "info_position", 'place', 'language',
                   'experience', 'accommodation', 'work_type', "driving_licence", 'salary',
                   'diet', "start_date"]
 

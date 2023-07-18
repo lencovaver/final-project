@@ -182,7 +182,7 @@
         <div class="job-label">Language requirements:</div>
         {% for language in job.language.all %}
             <div>{{ language }}</div>
-            {% empty %}
+        {% empty %}
             <div>No language requirements</div>
         {% endfor %}
     </div>
@@ -193,8 +193,8 @@
     <div class="job-details">
         <div class="job-label">Driving licence requirements:</div>
         {% for licence in job.driving_licence.all %}
-            <div>{{ driving_licence }}</div>
-            {% empty %}
+            <div>{{ licence }}</div>
+        {% empty %}
             <div>No requirements</div>
         {% endfor %}
     </div>
