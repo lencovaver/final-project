@@ -59,7 +59,7 @@
             justify-content: flex-end;
         }
 
-        h1,h5 {
+        h1, h5 {
             color: #FFFFFF;
             font-family: 'Montserrat', Arial, sans-serif;
             font-weight: bold;
@@ -120,74 +120,84 @@
     </style>
 </head>
 <body>
-    <meta charset="UTF-8">
-    <title>Homepage</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<meta charset="UTF-8">
+<title>Homepage</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="logo">
-                    <img src="https://www.wyssenseilbahnen.com/wp-content/uploads/2014/07/ch.jpeg" alt="Swissapp logo">
-                    <h1 class="display-4">Swissapp</h1>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <ul class="nav justify-content-end">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'profile' %}">Back</a>
-                    </li>
-                </ul>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="logo">
+                <img src="https://www.wyssenseilbahnen.com/wp-content/uploads/2014/07/ch.jpeg" alt="Swissapp logo">
+                <h1 class="display-4">Swissapp</h1>
             </div>
         </div>
-<body>
-<h2>Edit Profile</h2>
-<form method="post">
-    {% csrf_token %}
+        <div class="col-md-6">
+            <ul class="nav justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'profile' %}">Back</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <body>
+    <h2>Edit Profile</h2>
+    <form method="post" enctype="multipart/form-data" id="editProfileForm">
+        {% csrf_token %}
 
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" value="{{ user.username }}" required>
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" value="{{ user.email }}" required>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" value="{{ user.username }}" required>
+        <br>
 
-    {% if user.is_useragent %}
-    <label for="firstName">Contact person's first name:</label>
-    <input type="text" id="firstName" name="firstName" value="{{ user.first_name }}">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="{{ user.email }}" required>
+        <br>
 
-    <label for="lastName">Contact person's last name:</label>
-    <input type="text" id="lastName" name="lastName" value="{{ user.last_name }}">
+        {% if user.is_useragent %}
+            <label for="firstName">Contact person's first name:</label>
+            <input type="text" id="firstName" name="firstName" value="{{ user.first_name }}">
 
-    <label for="company">Company:</label>
-    <input type="text" id="company" name="company" value="{{ user.company }}" required>
+            <label for="lastName">Last name:</label>
+            <input type="text" id="lastName" name="lastName" value="{{ user.last_name }}">
+            <br>
+            <label for="company">Company:</label>
+            <input type="text" id="company" name="company" value="{{ user.company }}" required>
+            <br>
+            <label for="bio">Company description:</label>
+            <input type="text" id="bio" name="bio" value="{{ user.bio }}">
+            <br>
+            <div id="imagePreview">
+                <label>Company Logo:</label>
+                <input type="file" id="imageUpload" name="company_logo">
+            </div>
+        {% else %}
+            <label for="first_name">First name:</label>
+            <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}">
 
-    <label for="bio">Company description:</label>
-    <input type="text" id="bio" name="bio" value="{{ user.bio }}">
+            <label for="last_name">Last name:</label>
+            <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}">
+            <br>
+            <label for="bio">Biography:</label>
+            <input type="text" id="bio" name="bio" value="{{ user.bio }}">
+            <br><br>
+            <label>Profile Picture:</label>
+            <input type="file" id="imageUpload" name="profile_pic">
 
-    {% else %}
-    <label for="first_name">First name:</label>
-    <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}">
+        {% endif %}
+        <br>
+        <label for="area_code">Area code:</label>
+        <input type="text" id="area_code" name="area_code" value="{{ user.area_code }}">
 
-    <label for="last_name">Last name:</label>
-    <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}">
+        <label for="phone">Phone number:</label>
+        <input type="text" id="phone" name="phone" value="{{ user.phone_number }}">
+        <br>
+        <button type="submit">Update Profile</button>
+    </form>
 
-    <label for="bio">Biography:</label>
-    <input type="text" id="bio" name="bio" value="{{ user.bio }}">
-
-    {% endif %}
-
-    <label for="area_code">Area code:</label>
-    <input type="text" id="area_code" name="area_code" value="{{ user.area_code }}">
-
-    <label for="phone">Phone number:</label>
-    <input type="text" id="phone" name="phone" value="{{ user.phone_number }}">
-
-    <button type="submit">Update Profile</button>
-</form>
-
-</body>
+    </body>
 </html>
