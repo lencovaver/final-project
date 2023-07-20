@@ -25,7 +25,7 @@ from users.views import RegSuccessView, RegistrationView, UserLoginView, UserLog
     UserProfileView
 
 urlpatterns = [
-    path("admin", admin.site.urls),
+    path("admingit status", admin.site.urls),
     path("", HomepageView.as_view(), name="homepage"),
 
     path("registration/", RegistrationView.as_view(), name="registration"),
