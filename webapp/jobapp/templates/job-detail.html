@@ -223,9 +223,32 @@
             <a class="new-ad-link" href="{% url 'update' pk=job.pk %}">Update</a>
         </div>
         <div class="text-justify">
-            {% csrf_token %}
-            <a class="new-ad-link" href="{% url 'delete' pk=job.pk %}">Delete</a>
+            <form method="post" action="{% url 'archive-job' pk=job.pk %}">
+                {% csrf_token %}
+                <button type="submit" class="new-ad-link">Archivovat</button>
+            </form>
         </div>
+        <script>
+            // Přidání JavaScriptu pro aktualizaci stavu archivace po kliknutí na tlačítko
+            document.querySelector("form").addEventListener("submit", function(event) {
+                event.preventDefault();
+                fetch(event.target.action, {
+                    method: "POST",
+                    headers: { "X-CSRFToken": "{{ csrf_token }}" },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.archived) {
+                        alert("Inzerát byl úspěšně archivován.");
+                    } else {
+                        alert("Inzerát byl úspěšně obnoven.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Chyba při požadavku na server:", error);
+                });
+            });
+        </script>
     {% endif %}
 </div>
 

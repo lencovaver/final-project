@@ -165,7 +165,6 @@ class JobArchiveView(ListView):
 @require_POST
 def archive_job(request, pk):
     inzerat = get_object_or_404(PostJob, pk=pk)
-    inzerat.archived = not inzerat.archived
+    inzerat.archived = True
     inzerat.save()
-    return JsonResponse({"message": "Success"})
-
+    return JsonResponse({"message": "Inzerát je archivován.", "archived": inzerat.archived})
