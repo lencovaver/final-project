@@ -107,6 +107,7 @@ class PostJob(models.Model):
         ("částečný", "Částečný úvazek"),
         ("brigáda", "Brigáda"),
     ]
+    id = models.AutoField(primary_key=True)
     author = models.ForeignKey("users.User", on_delete=models.CASCADE, default='')
     archived = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
