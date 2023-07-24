@@ -6,6 +6,7 @@ class PositionCategory(models.Model):
 
     class Meta:
         ordering = ['name']
+        verbose_name_plural = 'Position Categories'
 
     def __str__(self):
         return self.name
@@ -60,7 +61,7 @@ class Language(models.Model):
 
 class DrivingLicence(models.Model):
     licence_category = models.CharField(max_length=6, default="")
-    short_name = models.CharField(max_length=3, default="")
+    #short_name = models.CharField(max_length=3, default="")
 
     #CATEGORY_CHOICES = [
     #    ('', '---------'),
