@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='position',
             name='category',
-            field=models.ForeignKey(default=django.utils.timezone.now, on_delete=django.db.models.deletion.CASCADE, to='jobapp.positioncategory'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='jobapp.positioncategory'),
             preserve_default=False,
         ),
     ]
