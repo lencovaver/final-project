@@ -167,5 +167,7 @@ def archive_job(request, pk):
     inzerat = get_object_or_404(PostJob, pk=pk)
     inzerat.archived = not inzerat.archived
     inzerat.save()
-    return JsonResponse({"message": "Success"})
-
+    inzerat_admin = PostJob.objects.get(pk=pk)
+    inzerat_admin.status = "archived" if inzerat.archived else "active"
+    inzerat_admin.save()
+    return JsonResponse({"message": "Inzerát je archivován.", "archived": inzerat.archived})
