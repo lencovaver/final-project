@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Homepage</title>
     <meta charset="UTF-8">
+    <title>Homepage</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
     <style>
 
         body {
@@ -120,14 +118,6 @@
     </style>
 </head>
 <body>
-    <meta charset="UTF-8">
-    <title>Homepage</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-</head>
-<body>
     <div class="container">
         <div class="row">
             <div class="col-md-6">
@@ -159,32 +149,35 @@
                 </ul>
             </div>
         </div>
-<body>
-<div class="container">
-    {% if user.is_authenticated %}
-        <h1>Hello {{ user.username }}</h1>
-    {% else %}
-        <p>Welcome!</p>
-    {% endif %}<br>
-    <h3 class="text-justify">Na Vámi zvolenou pozici jsme našli tyto nabídky:</h3>
-    <ul class="job-list">
-        {% for job in jobs %}
-            <li>
-                <div class="job-title">{{ job.positions }}</div>
-                <div class="job-details">
-                    <span class="job-label">Kanton:</span> {{ job.place }}<br>
-                    <span class="job-label">Požadovaná praxe:</span> {{ job.experience }}<br>
-                    <span class="job-label">Požadovaná úroveň jazyka:</span><br>
-                    <a href="{% url 'job-detail' job.id %}">Job Detail</a>
-                </div>
-            </li>
-        {% endfor %}
-    </ul>
-    <div class="text-justify">
-        <a class="new-ad-link" href="{% url 'create' %}">Create a New Ad</a>
     </div>
-</div>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+
+    <div class="container">
+        {% if user.is_authenticated %}
+            <h1>Hello {{ user.username }}</h1>
+        {% else %}
+            <p>Welcome!</p>
+        {% endif %}<br>
+        <h3 class="text-justify">Na Vámi zvolenou pozici jsme našli tyto nabídky:</h3>
+        <ul class="job-list">
+            {% for job in jobs %}
+                <li>
+                    <div class="job-title">{{ job.positions }}</div>
+                    <div class="job-details">
+                        <span class="job-label">Kanton:</span> {{ job.place }}<br>
+                        <span class="job-label">Požadovaná praxe:</span> {{ job.experience }}<br>
+                        <span class="job-label">Požadovaná úroveň jazyka:</span><br>
+                        <a href="{% url 'job-detail' job.id %}">Job Detail</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="text-justify">
+            <a class="new-ad-link" href="{% url 'create' %}">Create a New Ad</a>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>
