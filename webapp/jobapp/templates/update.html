@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>update</title>
     <meta charset="UTF-8">
+    <title>update</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
     <style>
 
         body {
@@ -120,36 +118,30 @@
     </style>
 </head>
 <body>
-<ul class="nav">
-        <ul class="nav justify-content-end"> <!-- Upraveno z "nav" na "nav justify-content-end" -->
-            <li class=" nav-item">
-                <a class="nav-link" href="{% url 'all-jobs' %}">View All Available Jobs</a>
-            </li>
-            {% if user.is_authenticated %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'profile' %}">Your profile</a>
-            </li>
-        {% else %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}">Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'registration' %}">Registration</a>
-            </li>
-        {% endif %}
+    <ul class="nav">
+            <ul class="nav justify-content-end"> <!-- Upraveno z "nav" na "nav justify-content-end" -->
+                <li class=" nav-item">
+                    <a class="nav-link" href="{% url 'all-jobs' %}">View All Available Jobs</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'profile' %}">Your profile</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'registration' %}">Registration</a>
+                </li>
+            {% endif %}
 
+        </ul>
     </ul>
-    <meta charset="UTF-8">
-    <title>update</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-</head>
-<body>
+
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -159,7 +151,8 @@
                 </div>
             </div>
         </div>
-<body>
+    </div>
+
     <h2>Update Job</h2>
     <form method="POST">
         {% csrf_token %}
@@ -167,5 +160,9 @@
         <button type="submit">Update</button>
     </form>
     <a href="{% url 'homepage' %}">Back to homepage</a>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>

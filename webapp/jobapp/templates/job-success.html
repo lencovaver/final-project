@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>job-succes</title>
     <meta charset="UTF-8">
+    <title>job-success</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
     <style>
 
         body {
@@ -120,36 +118,29 @@
     </style>
 </head>
 <body>
-<ul class="nav">
+    <ul class="nav">
         <ul class="nav justify-content-end"> <!-- Upraveno z "nav" na "nav justify-content-end" -->
             <li class=" nav-item">
                 <a class="nav-link" href="{% url 'all-jobs' %}">View All Available Jobs</a>
             </li>
             {% if user.is_authenticated %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'profile' %}">Your profile</a>
-            </li>
-        {% else %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}">Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'registration' %}">Registration</a>
-            </li>
-        {% endif %}
-
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'profile' %}">Your profile</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'registration' %}">Registration</a>
+                </li>
+            {% endif %}
+        </ul>
     </ul>
-    <meta charset="UTF-8">
-    <title>job-succes</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-</head>
-<body>
+
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -159,22 +150,27 @@
                 </div>
             </div>
         </div>
-<body>
-<h2>Gratulujeme!!!</h2>
-<br>
-<p>🎉🎉🎉</p>
-<h4>Váš inzerát byl vložen na zeď! 🎉🎉🎉</h4>
-<br>
-<p>Redirecting in a moment... ️</p>
-<script>
-    function redirectToNewPage() {
-        setTimeout(function() {
-            window.location.href = "{% url 'homepage' %}";
-        }, 600);
-    }
 
-    window.onload = redirectToNewPage;
-</script>
-</body>
+
+    <h2>Gratulujeme!!!</h2>
+    <br>
+    <p>🎉🎉🎉</p>
+    <h4>Váš inzerát byl vložen na zeď! 🎉🎉🎉</h4>
+    <br>
+    <p>Redirecting in a moment... ️</p>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+        function redirectToNewPage() {
+            setTimeout(function() {
+                window.location.href = "{% url 'homepage' %}";
+            }, 600);
+        }
+
+        window.onload = redirectToNewPage;
+    </script>
+
 </body>
 </html>

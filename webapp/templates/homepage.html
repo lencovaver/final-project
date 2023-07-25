@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Homepage</title>
     <meta charset="UTF-8">
+    <title>Homepage</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
     <style>
 
         body {
@@ -120,14 +118,6 @@
     </style>
 </head>
 <body>
-    <meta charset="UTF-8">
-    <title>Homepage</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-</head>
-<body>
     <div class="container">
         <div class="row">
             <div class="col-md-6">
@@ -212,26 +202,6 @@
                     <div class="card-body">
                         <table class="table">
                             <tbody>
-                            <!--
-                                <tr>
-                                    <td><a href="{% url 'job-search' %}?location=Argau">📍 Argau</a></td>
-                                </tr>
-                                <tr>
-                                    <td><a href="{% url 'job-search' %}?location=Basilej">📍 Basilej</a></td>
-                                </tr>
-                                <tr>
-                                    <td><a href="{% url 'job-search' %}?location=Bern">📍 Bern</a></td>
-                                </tr>
-                                <tr>
-                                    <td><a href="{% url 'job-search' %}?location=Luzern">📍 Luzern</a></td>
-                                </tr>
-                                <tr>
-                                    <td><a href="{% url 'job-search' %}?location=Zug">📍 Zug</a></td>
-                                </tr>
-                                <tr>
-                                    <td><a href="{% url 'job-search' %}?location=Zürich">📍 Zürich</a></td>
-                                </tr>
-                            -->
                                 {% for place in places %}
                                 <tr>
                                     <td><a href="{% url 'place-search' place_id=place.id %}">📍 {{ place.name_place }}</a></td>
@@ -276,8 +246,10 @@
                 </div>
             </div>
         </div>
+        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
+</html>
