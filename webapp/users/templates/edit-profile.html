@@ -1,203 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Homepage</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swissapp Dashboard</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <!-- Custom CSS -->
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-        body {
-            background-color: #EDF2F4;
-            color: #FFFFFF;
-            padding: 20px;
-            font-family: Roboto, sans-serif;
-        }
+    .logo {
+      display: flex;
+      align-items: center;
+      color: #FFFFFF;
+    }
 
-        .container {
-            background-color: #2B2D42;
-            border-radius: 5px;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            color: #FFFFFF;
+    .logo img {
+      margin-right: 10px;
+      width: 80px;
+      height: 50px;
+    }
 
-        }
+    .sidebar {
+      height: 99vh;
+      background: #2B2D42; /* Gradientová pozadí */
+      color: #fff;
+      padding-top: 20px;
+      border-radius: 15px; /* Kulaté rohy */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Stín pro dojem hloubky */
+    }
 
-        .nav-link {
-            color: #FFFFFF;
-            font-weight: bold;
-            background-color: #D80032;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s;
-            font-weight: bold;
-            margin-top: 10px;
-            margin-right: 3px; /* Přidá mezeru mezi tlačítky vlevo */
-        }
+    .sidebar h2 {
+      font-size: 24px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
 
-        .new-ad-link {
-            display: inline-block;
-            color: #FFFFFF;
-            background-color: #D80032;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s;
-        }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
 
-        .new-ad-link:hover {
-            background-color: #2B2D42;
-        }
+    .sidebar ul li {
+      margin-bottom: 10px;
+    }
 
-        .nav {
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: flex-end;
-        }
+    .sidebar ul li a {
+      color: #fff;
+      text-decoration: none;
+      display: block;
+      padding: 10px;
+    }
 
-        h1, h5 {
-            color: #FFFFFF;
-            font-family: 'Montserrat', Arial, sans-serif;
-            font-weight: bold;
-        }
+    .sidebar ul li a:hover {
+      background: linear-gradient(45deg, #D80032, #2B2D42); /* Tmavší gradient při najetí myši */
+    }
 
-        .table th {
-            background-color: #cecece;
-            color: #FFFFFF;
-            font-weight: bold;
-            text-align: left;
-            border-radius: 10px;
-        }
+    .content {
+      padding: 20px;
+    }
 
-        .table td {
-            background-color: #FFFFFF;
-            color: #2B2D42;
-        }
+    /* Nový styl pro kulaté rozhraní profilového obrázku */
+    .profile-pic {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 50%; /* Kulaté rozhraní */
+      border: 5px solid #fff; /* Bílý okraj */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Stín pro dojem hloubky */
+      margin: 20px auto;
+      display: block;
+    }
 
-        .button {
-            background-color: #FFFFFF;
-            color: #2B2D42;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            color: #FFFFFF;
-        }
-
-        .logo img {
-            margin-right: 10px;
-            width: 100px;
-            height: 60px;
-        }
-
-        .card-container {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        .card {
-            width: calc(33% - 20px);
-            margin-bottom: 20px;
-            transition: all 0.3s;
-        }
-
-        .card:hover {
-            transform: scale(1.1);
-            z-index: 1;
-        }
-
-        .card-title {
-            font-size: 2em;
-            color: #2B2D42;
-        }
-
-    </style>
+  </style>
 </head>
 <body>
-<meta charset="UTF-8">
-<title>Homepage</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-</head>
-<body>
-<div class="container">
+  <div class="container-fluid">
     <div class="row">
-        <div class="col-md-6">
-            <div class="logo">
-                <img src="https://www.wyssenseilbahnen.com/wp-content/uploads/2014/07/ch.jpeg" alt="Swissapp logo">
-                <h1 class="display-4">Swissapp</h1>
+      <!-- Dashboard sidebar -->
+      <div class="col-md-3">
+        <div class="sidebar">
+          <div class="logo">
+            <img src="https://www.wyssenseilbahnen.com/wp-content/uploads/2014/07/ch.jpeg" alt="Swissapp logo">
+            <h1 class="display-4">SwissApp</h1>
+          </div>
+          <ul>
+            <li><a class="nav-link" href="{% url 'homepage' %}"><i class="fas fa-home me-2"></i>Domů</a></li>
+            <li><a href="#"><i class="fas fa-envelope me-2"></i>Zprávy</a></li>
+            <li><a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-user me-2"></i>Profil</a></li>
+            <li><a class="nav-link" href="{% url 'edit-profile' %}"><i class="fas fa-cog me-2"></i>Nastavení</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- User profile content -->
+      <div class="col-md-9">
+        <div class="content">
+          <!-- Edit profile form -->
+          <form action="{% url 'edit-profile' %}" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="mb-3 d-flex justify-content-between">
+                <div class="flex-grow-1 me-2">
+                  <label for="first_name" class="form-label">Jméno</label>
+                  <input type="text" name="first_name" id="first_name" class="form-control" value="{{ user.first_name }}">
+                </div>
+                <div class="flex-grow-1 ms-2">
+                  <label for="last_name" class="form-label">Příjmení</label>
+                  <input type="text" name="last_name" id="last_name" class="form-control" value="{{ user.last_name }}">
+                </div>
+              </div>
+              {% if user.is_useragent %}
+              <div class="mb-3">
+                <label for="company_name" class="form-label">Firma</label>
+                <input type="text" name="company_name" id="company_name" class="form-control" value="{{ user.company }}">
+              </div>
+              <div class="mb-3">
+                <label for="company_street" class="form-label">Adresa - Ulice</label>
+                <input type="text" name="company_street" id="company_street" class="form-control" value="{{ user.company.street }}">
+              </div>
+              <div class="mb-3">
+                <label for="company_num" class="form-label">Adresa - Číslo popisné/orientační</label>
+                <input type="text" name="company_num" id="company_num" class="form-control" value="{{ user.company.num }}">
+              </div>
+              <div class="mb-3">
+                <label for="company_city" class="form-label">Adresa - Město</label>
+                <input type="text" name="company_city" id="company_city" class="form-control" value="{{ user.company.city }}">
+              </div>
+            {% else %}
+              <div class="mb-3">
+                <label for="bio" class="form-label">Životopis</label>
+                <textarea name="bio" id="bio" class="form-control">{{ user.bio }}</textarea>
+              </div>
+              <div class="mb-3 d-flex justify-content-between">
+                <div class="flex-grow-1 me-2">
+                  <label for="first_name" class="form-label">Jazyk</label>
+                  <input type="text" name="first_name" id="first_name" class="form-control" value="{{ user.language }}">
+                </div>
+                <div class="flex-grow-1 ms-2">
+                  <label for="last_name" class="form-label">Úroveň jazyka</label>
+                  <input type="text" name="last_name" id="last_name" class="form-control" value="{{ user.lang_level }}">
+                </div>
+              </div>
+            {% endif %}
+
+            <div class="mb-3">
+              <label for="area_code" class="form-label">Telefonní číslo - Kód země</label>
+              <input type="text" name="area_code" id="area_code" class="form-control" value="{{ user.area_code }}">
             </div>
+            <div class="mb-3">
+              <label for="phone_number" class="form-label">Telefonní číslo</label>
+              <input type="text" name="phone_number" id="phone_number" class="form-control" value="{{ user.phone_number }}">
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" name="email" id="email" class="form-control" value="{{ user.email }}">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Uložit změny</button>
+          </form>
         </div>
-        <div class="col-md-6">
-            <ul class="nav justify-content-end">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'profile' %}">Back</a>
-                </li>
-            </ul>
-        </div>
+      </div>
     </div>
-    <body>
-    <h2>Edit Profile</h2>
-    <form method="post" enctype="multipart/form-data" id="editProfileForm">
-        {% csrf_token %}
-
-
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" value="{{ user.username }}" required>
-        <br>
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" value="{{ user.email }}" required>
-        <br>
-
-        {% if user.is_useragent %}
-            <label for="firstName">Contact person's first name:</label>
-            <input type="text" id="firstName" name="firstName" value="{{ user.first_name }}">
-
-            <label for="lastName">Last name:</label>
-            <input type="text" id="lastName" name="lastName" value="{{ user.last_name }}">
-            <br>
-            <label for="company">Company:</label>
-            <input type="text" id="company" name="company" value="{{ user.company }}" required>
-            <br>
-            <label for="bio">Company description:</label>
-            <input type="text" id="bio" name="bio" value="{{ user.bio }}">
-            <br>
-            <div id="imagePreview">
-                <label>Company Logo:</label>
-                <input type="file" id="imageUpload" name="company_logo">
-            </div>
-        {% else %}
-            <label for="first_name">First name:</label>
-            <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}">
-
-            <label for="last_name">Last name:</label>
-            <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}">
-            <br>
-            <label for="bio">Biography:</label>
-            <input type="text" id="bio" name="bio" value="{{ user.bio }}">
-            <br><br>
-            <label>Profile Picture:</label>
-            <input type="file" id="imageUpload" name="profile_pic">
-
-        {% endif %}
-        <br>
-        <label for="area_code">Area code:</label>
-        <input type="text" id="area_code" name="area_code" value="{{ user.area_code }}">
-
-        <label for="phone">Phone number:</label>
-        <input type="text" id="phone" name="phone" value="{{ user.phone_number }}">
-        <br>
-        <button type="submit">Update Profile</button>
-    </form>
-
-    </body>
+  </div>
+</body>
 </html>
+
+
+
+
+
+

@@ -4,7 +4,7 @@ from .models import Place, PostJob, Position, Language, DrivingLicence, Position
 
 
 class PostJobAdmin(admin.ModelAdmin):
-    list_display = ["id", 'position', 'work_type', 'status']      # Zobrazovaná pole v seznamu
+    list_display = ["id", 'position', 'place', 'work_type', 'status', 'author']      # Zobrazovaná pole v seznamu
     list_filter = ['status']                    # Filtr pro archivaci
     actions = ['archive_selected_jobs']         # Přidání akce pro archivaci více inzerátů najednou
 
