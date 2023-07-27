@@ -95,38 +95,7 @@
             height: 60px;
         }
 
-        .card-container {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        .card {
-            width: calc(33% - 20px);
-            margin-bottom: 20px;
-            transition: all 0.3s;
-        }
-
-        .card:hover {
-            transform: scale(1.1);
-            z-index: 1;
-        }
-
-        .card-title {
-            font-size: 2em;
-            color: #2B2D42;
-        }
-
     </style>
-</head>
-<body>
-    <meta charset="UTF-8">
-    <title>Homepage</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-</head>
 <body>
     <div class="container">
         <div class="row">
@@ -168,7 +137,15 @@
     {% endif %}
     <p><b>Area code:</b> {{ user.area_code }}</p>
     <p><b>Phone number:</b> {{ user.phone_number }}</p>
-
+     {% if user.company_logo %}
+            <img src="{{ user.company_logo.url }}"
+                 alt="Company logo"
+                 style="width: 200px; height: 200px; object-fit: cover;">
+        {% elif user.profile_pic %}
+            <img src="{{ user.profile_pic.url }}"
+                 alt="Profile picture"
+                 style="width: 200px; height: 200px; object-fit: cover;">
+{% endif %}
     <a href="{% url 'homepage' %}">Back</a>
 </form>
 </body>

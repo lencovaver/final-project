@@ -1,255 +1,332 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 <head>
-    <meta charset="UTF-8">
-    <title>Homepage</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swissapp - Pracovní portál</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
 
-    <style>
+    header {
+      background-color: #D80032;
+      text-align: center;
+      padding: 20px;
+      color: white;
+      font-family: 'Times New Roman', Times, serif;
+    }
 
-        body {
-            background-color: #EDF2F4;
-            color: #FFFFFF;
-            padding: 20px;
-            font-family: Roboto, sans-serif;
-        }
+    header h1 {
+      font-size: 102px; /* Zde upravte velikost textu */
+    }
 
-        .container {
-            background-color: #2B2D42;
-            border-radius: 5px;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            color: #FFFFFF;
+    header h2 {
+      font-size: 36px; /* Zde upravte velikost textu */
+    }
 
-        }
+    header img {
+      width: 150px;
+    }
 
-        .nav-link {
-            color: #FFFFFF;
-            font-weight: bold;
-            background-color: #D80032;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s;
-            font-weight: bold;
-            margin-top: 10px;
-            margin-right: 3px; /* Přidá mezeru mezi tlačítky vlevo */
-        }
+    .login-form input[type="text"],
+    .login-form input[type="password"],
+    .login-form input[type="submit"] {
+      padding: 5px 10px;
+      border: none;
+    }
 
-        .new-ad-link {
-            display: inline-block;
-            color: #FFFFFF;
-            background-color: #D80032;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s;
-        }
+    .login-form input[type="submit"] {
+      background-color: #D80032;
+      color: white;
+      cursor: pointer;
+    }
 
-        .new-ad-link:hover {
-            background-color: #2B2D42;
-        }
+    nav {
+      background-color: #2B2D42;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
 
-        .nav {
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: flex-end;
-        }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+    }
 
-        h1,h5 {
-            color: #FFFFFF;
-            font-family: 'Montserrat', Arial, sans-serif;
-            font-weight: bold;
-        }
+    .hero-section {
+      background-color: #2B2D42;
+      color: white;
+      text-align: center;
+      padding: 50px 100px;
+    }
 
-        .table th {
-            background-color: #cecece;
-            color: #FFFFFF;
-            font-weight: bold;
-            text-align: left;
-            border-radius: 10px;
-        }
+    .hero-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
 
-        .table td {
-            background-color: #FFFFFF;
-            color: #2B2D42;
-        }
+    .hero-image {
+      flex: 1;
+      max-width: 300px;
+      margin-right: 30px;
+      margin-left: 30px;
+      border-radius: 25px; /* Zaoblení rohů obrázku */
+      overflow: hidden; /* Skryje obsah, který by mohl přetékat přes zaoblené rohy */
+    }
 
-        .button {
-            background-color: #FFFFFF;
-            color: #2B2D42;
-        }
+    .hero-image img {
+      width: 100%;
+    }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            color: #FFFFFF;
-        }
+    .hero-text {
+      flex: 1;
+      font-size: 20px;
+      margin-bottom: 30px;
+      font-family: 'Times New Roman', Times, serif;
+    }
 
-        .logo img {
-            margin-right: 10px;
-            width: 100px;
-            height: 60px;
-        }
+    .hero-content.reversed {
+      flex-direction: row-reverse;
+    }
 
-        .card-container {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
+    .job-offers {
+      background-color: #fff;
+      text-align: center;
+      padding: 30px;
+    }
 
-        .card {
-            width: calc(33% - 20px);
-            margin-bottom: 20px;
-            transition: all 0.3s;
-        }
+    .contact-form {
+      background-color: #D80032;
+      color: white;
+      text-align: center;
+      padding: 50px 0;
+    }
 
-        .card:hover {
-            transform: scale(1.1);
-            z-index: 1;
-        }
+    .gallery {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 50px auto;
+      max-width: 600px;
+    }
 
-        .card-title {
-            font-size: 2em;
-            color: #2B2D42;
-        }
+    .gallery img {
+      max-width: 250%;
+      border-radius: 25px;
+      margin: 5px;
+    }
 
-    </style>
+    .main-image {
+      flex: 1;
+      max-width: 400px;
+      margin-right: 210px;
+      margin-left: 10px;
+      border-radius: 25px;
+      overflow: 0;
+    }
+
+    .side-images {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .side-image {
+      flex: 1;
+      max-width: 400px;
+      margin-bottom: 10px;
+      margin-left: 10px;
+      border-radius: 25px;
+      overflow: hidden;
+    }
+
+    .side-image img {
+      width: 114%;
+    }
+
+    .job-offers {
+      text-align: center;
+      padding: 30px;
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    .faq {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    .faq h1 {
+      font-size: 40px;
+      font-weight: bold;
+    }
+
+    .faq h3 {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      color: #FFFFFF;
+    }
+
+    .logo img {
+      margin-right: 10px;
+      width: 100px;
+      height: 60px;
+    }
+
+    .center-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+    .nav-link {
+      color: #FFFFFF;
+      font-weight: bold;
+      background-color: #D80032;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+      font-weight: bold;
+      margin-top: 10px;
+      margin-right: 3px; /* Přidá mezeru mezi tlačítky vlevo */
+    }
+
+    .nav {
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .nav-link-button {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    text-decoration: underline;
+    color: #D80032;
+  }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="logo">
-                    <img src="https://www.wyssenseilbahnen.com/wp-content/uploads/2014/07/ch.jpeg" alt="Swissapp logo">
-                    <h1 class="display-4">Swissapp</h1>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <ul class="nav justify-content-end">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'all-jobs' %}">View All Available Jobs</a>
-                    </li>
-                    {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'profile' %}">Your profile</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-                        </li>
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'registration' %}">Registration</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'login' %}">Login</a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
-        <div class="container">
-    {% if user.is_authenticated %}
-        <h2>Hello {{ user.username }}</h2>
-    {% else %}
-        <p><h1>Welcome!</h1></p>
-    {% endif %}
-        <p class="lead mt-4">
-            Spojujeme lidi, kteří nabízí pracovní příležitosti s těmi, kdo hledají nové výzvy v zahraničí nebo si chtějí jenom zlepšit své jazykové dovednosti.
-        </p><br>
-        <b></b>
-        <h5>Najděte svoji vysněnou práci podle:</h5>
-        <div class="card-container">
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="mb-0 card-title">
-                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#skodaCollapse" aria-expanded="true" aria-controls="skodaCollapse">
-                            🏫 Oboru
-                        </button>
-                    </h2>
-                </div>
-                <div id="skodaCollapse" class="collapse show" aria-labelledby="skodaHeading" data-parent="#carModelsAccordion">
-                    <div class="card-body">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <td><a href="{% url 'job-search' %}?title_contains=zedník">zedník</a></td>
-                                </tr>
-                                <tr>
-                                    <td><a href="{% url 'job-search' %}?title_contains=kurýr">kurýr</a></td>
-                                </tr>
-                                <tr>
-                                    <td><a href="{% url 'job-search' %}?title_contains=šaler">šaler</a></td>
-                                </tr>
-                                <tr>
-                                    <td><a href="{% url 'job-search' %}?title_contains=kuchař">kuchař</a></td>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="mb-0 card-title">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#languageCollapse" aria-expanded="false" aria-controls="languageCollapse">
-                            🏔️ Kantonu
-                        </button>
-                    </h2>
-                </div>
-                <div id="languageCollapse" class="collapse" aria-labelledby="languageHeading" data-parent="#carModelsAccordion">
-                    <div class="card-body">
-                        <table class="table">
-                            <tbody>
-                                {% for place in places %}
-                                <tr>
-                                    <td><a href="{% url 'place-search' place_id=place.id %}">📍 {{ place.name_place }}</a></td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="mb-0 card-title">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#audiCollapse" aria-expanded="false" aria-controls="audiCollapse">
-                            📚 Jazyka
-                        </button>
-                    </h2>
-                </div>
-                <div id="audiCollapse" class="collapse" aria-labelledby="audiHeading" data-parent="#carModelsAccordion">
-                    <div class="card-body">
-                        <table class="table">
-                            <tbody>
-                                <tr>
-                                    <td><a href="{% url 'state-search' %}?state=ENG">📍 angličtina</a></td>
-                                </tr>
-                                <tr>
-                                    <td><a href="{% url 'state-search' %}?state=CHF">📍 švýcarská němčina</a></td>
-                                </tr>
-                                <tr>
-                                    <td><a href="{% url 'state-search' %}?state=DEU">📍 němčina</a></td>
-                                </tr>
-                                <tr>
-                                    <td><a href="{% url 'state-search' %}?state=FRA">📍 francouzština</a></td>
-                                </tr>
-                                <tr>
-                                    <td><a href="{% url 'state-search' %}?state=ITA">📍 italština</a></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+ <header>
+      <div class="col-md-6">
+          <ul class="nav justify-content-end">
+            {% if user.is_authenticated %}
+            <p class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </p>
+            <p class="nav-item">
+              <a class="nav-link" href="{% url 'profile' %}">⚙️ Your profile</a>
+            </p>
+            {% else %}
+            <p class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </p>
+            <p class="nav-item">
+              <a class="nav-link" href="{% url 'registration' %}">Sign up</a>
+            </p>
+            {% endif %}
+          </ul>
+      </div>
+        <div class="row">
+      <div class="col-md-6 center-logo"> <!-- Use the new center-logo class here -->
+        <div class="logo">
+          <img src="https://www.wyssenseilbahnen.com/wp-content/uploads/2014/07/ch.jpeg" alt="Swissapp logo">
+          <h1 class="display-4">Swissapp</h1>
         </div>
-        </div>
+        <p>
+          {% if user.is_authenticated %}
+          <h2>{{ user.first_name }} vítej znovu na svém profilu</h2>
+          <p class="nav-item">
+              <a class="nav-link" href="{% url 'all-jobs' %}">Ukaž mi nabídky práce</a>
+            </p>
+          {% else %}
+          <h2>Práce ve Švýcarsku na dosah ruky</h2>
+          {% endif %}
+        </p>
+      </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+ </header>
+
+  <div class="hero-section">
+    <div class="hero-content">
+      <div class="hero-image">
+        <img src="https://framerusercontent.com/images/gRPMyQ9VrQ0x081jhbGIqY3WKTY.jpg?scale-down-to=4096" alt="Obrázek pracovního portálu">
+      </div>
+      <div class="hero-text">
+        <h2>
+            Jednoduchá registrace pro uchazeče i firmy
+        </h2>
+        <p>
+            Uživatelé se zaregistrují pomocí jména, příjmení, telefonního čísla a e-mailu. Firmy vyplní jméno, příjmení, název společnosti a adresu firmy.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-section">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h2>
+            Hledání práce nikdy nebylo tak jednoduché!
+        </h2>
+        <p>
+            Nabídky práce obsahují pozici, popis pozice, hodinovou mzdu v CHF, příplatky a kanton, kde se nabídka nachází.
+        </p>
+      </div>
+      <div class="hero-image">
+        <img src="https://framerusercontent.com/images/fJiP5p1EYL7UOW84NnzssOKmBQ.jpg?scale-down-to=4096" alt="Obrázek pracovního portálu">
+      </div>
+    </div>
+  </div>
+
+  <div class="gallery">
+    <div class="main-image">
+      <img src="https://framerusercontent.com/images/zrZEKbcZSkRMmQbETwTj7h3rT4.jpg?scale-down-to=4096" alt="Fotka 1">
+    </div>
+    <div class="side-images">
+      <div class="side-image">
+        <img src="https://framerusercontent.com/images/zpXZs4a33DZqMpVtvjkpEcprvIs.jpg?scale-down-to=2048" alt="Fotka 2">
+      </div>
+      <div class="side-image">
+        <img src="https://framerusercontent.com/images/fo91x70xaOOlyIIoPnRWrh20.jpg?scale-down-to=2048" alt="Fotka 3">
+      </div>
+    </div>
+</div>
+
+<div class="job-offers">
+    <h1>Často kladené otázky</h1>
+    <div class="faq">
+      <div>
+        <h3>Jaký je proces zveřejnění nabídky?</h3>
+        <p>Registrované firmy mohou snadno přidávat nabídky práce prostřednictvím našeho webového formuláře</p>
+      </div>
+      <div>
+        <h3>Mají uživatelé možnost filtrování nabídek?</h3>
+        <p>Ano, uživatelé mají možnost filtrovat nabídky podle různých kritérií, jako jsou kategorie, hodinová mzda nebo lokalita.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-form">
+    <h2>Kontaktujte nás</h2>
+    <!-- Zde může být kontaktní formulář -->
+  </div>
+
 </body>
 </html>

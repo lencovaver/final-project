@@ -129,7 +129,7 @@
             <div class="col-md-6">
                 <ul class="nav justify-content-end">
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'all-jobs' %}">View All Available Jobs</a>
+                        <a class="nav-link" href="{% url 'job-search' %}">Back</a>
                     </li>
                     {% if user.is_authenticated %}
                         <li class="nav-item">
@@ -159,7 +159,6 @@
             <div class="job-label">Information about the position:</div>
             <div>{{ job.info_position }}</div>
         </div>
-
         <div class="job-details">
             <div class="job-label">Place:</div>
             <div>{{ job.place }}</div>

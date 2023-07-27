@@ -125,5 +125,6 @@ class PostJob(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default="active")
     start_date = models.DateField()
 
+
     def __str__(self):
         return self.position.name_position
