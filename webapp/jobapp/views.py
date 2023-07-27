@@ -128,6 +128,11 @@ class JobSearchView(ListView):
         else:
             return PostJob.objects.filter(status='active')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['postjobs'] = PostJob.objects.filter(status='active')
+        return context
+
 
 class PlaceSearchView(ListView):
     model = PostJob
