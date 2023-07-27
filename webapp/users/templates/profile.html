@@ -1,170 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Swissapp Dashboard</title>
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  <!-- Custom CSS -->
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+    <title>Homepage</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <style>
 
-    .logo {
-      display: flex;
-      align-items: center;
-      color: #FFFFFF;
-    }
+        body {
+            background-color: #EDF2F4;
+            color: #FFFFFF;
+            padding: 20px;
+            font-family: Roboto, sans-serif;
+        }
 
-    .logo img {
-      margin-right: 10px;
-      width: 80px;
-      height: 50px;
-    }
+        .container {
+            background-color: #2B2D42;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            color: #FFFFFF;
 
-    .sidebar {
-      height: 99vh;
-      background: #2B2D42; /* Gradientová pozadí */
-      color: #fff;
-      padding-top: 20px;
-      border-radius: 15px; /* Kulaté rohy */
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Stín pro dojem hloubky */
-    }
+        }
 
-    .sidebar h2 {
-      font-size: 24px;
-      text-align: center;
-      margin-bottom: 30px;
-    }
+        .nav-link {
+            color: #FFFFFF;
+            font-weight: bold;
+            background-color: #D80032;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            font-weight: bold;
+            margin-top: 10px;
+            margin-right: 3px; /* Přidá mezeru mezi tlačítky vlevo */
+        }
 
-    .sidebar ul {
-      list-style: none;
-      padding: 0;
-    }
+        .new-ad-link {
+            display: inline-block;
+            color: #FFFFFF;
+            background-color: #D80032;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
 
-    .sidebar ul li {
-      margin-bottom: 10px;
-    }
+        .new-ad-link:hover {
+            background-color: #2B2D42;
+        }
 
-    .sidebar ul li a {
-      color: #fff;
-      text-decoration: none;
-      display: block;
-      padding: 10px;
-    }
+        .nav {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: flex-end;
+        }
 
-    .sidebar ul li a:hover {
-      background: linear-gradient(45deg, #D80032, #2B2D42); /* Tmavší gradient při najetí myši */
-    }
+        h1,h5 {
+            color: #FFFFFF;
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: bold;
+        }
 
-    .content {
-      padding: 20px;
-    }
+        .table th {
+            background-color: #cecece;
+            color: #FFFFFF;
+            font-weight: bold;
+            text-align: left;
+            border-radius: 10px;
+        }
 
-    /* Přidáme třídu pro kontejner karet */
-    .card-container {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
+        .table td {
+            background-color: #FFFFFF;
+            color: #2B2D42;
+        }
 
-    /* Přidáme styly pro jednotlivé karty */
-    .card {
-      width: calc(32% - 10px); /* Každá karta zabere 32% šířky kontejneru s odstupem 10px */
-      margin-bottom: 10px;
-      transition: all 0.3s;
-      border: 1px solid #ddd; /* Přidáme jemný okraj kolem karty */
-      border-radius: 10px; /* Kulaté rohy karty */
-      overflow: hidden; /* Zabráníme obřezání obsahu mimo kartu */
-      background-color: #f8f8f8;
-    }
+        .button {
+            background-color: #FFFFFF;
+            color: #2B2D42;
+        }
 
-    /* Styly pro nadpis karty */
-    .card-title {
-      font-size: 1.5em; /* Zmenšíme velikost nadpisu karty */
-      color: #2B2D42;
-      margin-bottom: 10px;
-    }
+        .logo {
+            display: flex;
+            align-items: center;
+            color: #FFFFFF;
+        }
 
-    /* Styly pro obsah karty */
-    .card-text {
-      color: #7e7d7d;
-    }
+        .logo img {
+            margin-right: 10px;
+            width: 100px;
+            height: 60px;
+        }
 
-    /* Efekt pro zvětšení karty při najetí myši */
-    .card:hover {
-      transform: scale(1.1);
-      z-index: 1;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Přidáme stín pro dojem hloubky */
-    }
+        .card-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
 
-    /* Nový styl pro kulaté rozhraní profilového obrázku */
-    .profile-pic {
-      width: 200px;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 50%; /* Kulaté rozhraní */
-      border: 5px solid #fff; /* Bílý okraj */
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Stín pro dojem hloubky */
-      margin: 20px auto;
-      display: block;
-    }
-  </style>
+        .card {
+            width: calc(33% - 20px);
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.1);
+            z-index: 1;
+        }
+
+        .card-title {
+            font-size: 2em;
+            color: #2B2D42;
+        }
+
+    </style>
 </head>
 <body>
-  <div class="container-fluid">
-    <div class="row">
-      <!-- Dashboard sidebar -->
-      <div class="col-md-3">
-        <div class="sidebar">
-          <div class="logo">
-            <img src="https://www.wyssenseilbahnen.com/wp-content/uploads/2014/07/ch.jpeg" alt="Swissapp logo">
-            <h1 class="display-4">SwissApp</h1>
-          </div>
-          <ul>
-            <li><a href="#"><i class="fas fa-home me-2"></i>Domů</a></li>
-            <li><a href="#"><i class="fas fa-cog me-2"></i>Nastavení</a></li>
-            <li><a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-user me-2"></i>Profil</a></li>
-            <li><a href="#"><i class="fas fa-envelope me-2"></i>Zprávy</a></li>
-          </ul>
+    <meta charset="UTF-8">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="logo">
+                    <img src="https://www.wyssenseilbahnen.com/wp-content/uploads/2014/07/ch.jpeg" alt="Swissapp logo">
+                    <h1 class="display-4">Swissapp</h1>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <ul class="nav justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'edit-profile' %}">Edit profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'homepage' %}">Back</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-      </div>
+        <br>
+        <br>
+<form method="post">
+    <h2>Your Profile</h2>
+    <br>
+    <p><b>Username:</b> {{ user.username }}</p>
+    <p><b>Email:</b> {{ user.email }}</p>
+    <p><b>Password</b> - TBD - </p>
+    {% if user.is_useragent %}
+    <p><b>Contact Person First name:</b> {{ user.first_name }}</p>
+    <p><b>Contact Person Last name:</b> {{ user.last_name }}</p>
+    <p><b>Company name:</b> {{ user.company }}</p>
+    {% else %}
+    <p><b>First name:</b> {{ user.first_name }}</p>
+    <p><b>Last name:</b> {{ user.last_name }}</p>
+    <p><b>Biography:</b> {{ user.bio }}</p>
+    <p><b>Language:</b> {{ user.language }}</p>
+    <p><b>Language level:</b> {{ user.lang_level }}</p>
+    {% endif %}
+    <p><b>Area code:</b> {{ user.area_code }}</p>
+    <p><b>Phone number:</b> {{ user.phone_number }}</p>
 
-      <!-- User profile content -->
-      <div class="col-md-9">
-        <div class="content">
-            <!-- Zobrazení profilového obrázku jako první v kulatém rozhraní -->
-          {% if user.profile_pic %}
-            <img src="{{ user.profile_pic.url }}" alt="Profile picture" class="profile-pic">
-          {% elif user.company_logo %}
-            <img src="{{ user.company_logo.url }}" alt="Company logo" class="profile-pic">
-          {% endif %}
-          <h2>Your Profile</h2>
-          <br>
-          <p><b>Username:</b> {{ user.username }}</p>
-          <p><b>Email:</b> {{ user.email }}</p>
-          <p><b>Password</b> - TBD - </p>
-          {% if user.is_useragent %}
-          <p><b>First name:</b> {{ user.first_name }}</p>
-          <p><b>Last name:</b> {{ user.last_name }}</p>
-          <p><b>Company name:</b> {{ user.company }}</p>
-          {% else %}
-          <p><b>First name:</b> {{ user.first_name }}</p>
-          <p><b>Last name:</b> {{ user.last_name }}</p>
-          <p><b>Biography:</b> {{ user.bio }}</p>
-          <p><b>Language:</b> {{ user.language }}</p>
-          <p><b>Language level:</b> {{ user.lang_level }}</p>
-          {% endif %}
-          <p><b>Area code:</b> {{ user.area_code }}</p>
-          <p><b>Phone number:</b> {{ user.phone_number }}</p>
-
-        </div>
-      </div>
-    </div>
-  </div>
+    <a href="{% url 'homepage' %}">Back</a>
+</form>
 </body>
 </html>
