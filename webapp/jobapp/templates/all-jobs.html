@@ -125,41 +125,41 @@
       <!-- Main content area -->
       <div class="col-md-9">
         <div class="content">
-          <h2>Volné pracovní pozice</h2>
+            <h2>Volné pracovní pozice</h2>
 
-        <!-- Job search form -->
-        <form method="get" action="{% url 'job-search' %}">
-          <div class="mb-3">
-            <label for="searchJob" class="form-label">Vyhledat pracovní pozici:</label>
-            <input type="text" name="title_contains" class="form-control" id="searchJob" placeholder="Zadejte název pozice">
-          </div>
-          <button type="submit" class="btn btn-primary">Vyhledat</button>
-        </form>
+            <!-- Job search form -->
+            <form method="get" action="{% url 'job-search' %}">
+              <div class="mb-3">
+                <label for="searchJob" class="form-label">Vyhledat pracovní pozici:</label>
+                <input type="text" name="title_contains" class="form-control" id="searchJob" placeholder="Zadejte název pozice">
+              </div>
+              <button type="submit" class="btn btn-primary">Vyhledat</button>
+            </form>
 
-        <!-- Filters for canton and language -->
-        <form method="get" action="{% url 'job-search' %}">
-          <div class="mb-3">
-            <label for="selectCanton" class="form-label">Vyberte kanton:</label>
-            <select name="place_id" class="form-control" id="selectCanton">
-              <option value="">-- Všechny kantony --</option>
-              {% for place in places %}
-                <option value="{{ place.id }}" {% if request.GET.place_id == place.id %}selected{% endif %}>{{ place.name }}</option>
-              {% endfor %}
-            </select>
-          </div>
+            <!-- Filters for canton and language -->
+            <form method="get" action="{% url 'job-search' %}">
+              <div class="mb-3">
+                <label for="selectCanton" class="form-label">Vyberte kanton:</label>
+                <select name="place_id" class="form-control" id="selectCanton">
+                  <option value="">-- Všechny kantony --</option>
+                  {% for place in places %}
+                    <option value="{{ place.pk }}">{{ place.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
 
-          <div class="mb-3">
-            <label for="selectLanguage" class="form-label">Vyberte jazyk:</label>
-            <select name="state" class="form-control" id="selectLanguage">
-              <option value="">-- Všechny jazyky --</option>
-              {% for language in languages %}
-                <option value="{{ language.state }}" {% if request.GET.state == language.state %}selected{% endif %}>{{ language.name }}</option>
-              {% endfor %}
-            </select>
-          </div>
+              <div class="mb-3">
+                <label for="selectLanguage" class="form-label">Vyberte jazyk:</label>
+                <select name="state" class="form-control" id="selectLanguage">
+                  <option value="">-- Všechny jazyky --</option>
+                  {% for language in languages %}
+                    <option value="{{ language.state }}">{{ language.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
 
-          <button type="submit" class="btn btn-primary">Filtrovat</button>
-        </form>
+              <button type="submit" class="btn btn-primary">Filtrovat</button>
+            </form>
 
           <!-- Karty (Cards) -->
           <div class="card-container">
