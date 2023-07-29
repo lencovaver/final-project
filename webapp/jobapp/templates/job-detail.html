@@ -129,21 +129,21 @@
             <div class="col-md-6">
                 <ul class="nav justify-content-end">
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'job-search' %}">Back</a>
+                        <a class="nav-link" href="{% url 'job-search' %}">Zpět</a>
                     </li>
                     {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'profile' %}">Your profile</a>
+                            <a class="nav-link" href="{% url 'profile' %}">Váš profil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                            <a class="nav-link" href="{% url 'logout' %}">Odhlášení</a>
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'registration' %}">Registration</a>
+                            <a class="nav-link" href="{% url 'registration' %}">Registrace</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                            <a class="nav-link" href="{% url 'login' %}">Přihlášení</a>
                         </li>
                     {% endif %}
                 </ul>
@@ -152,23 +152,23 @@
         <table class="table table-bordered table-striped mt-4">
             <tbody>
                 <tr>
-                    <td class="job-label">Job title:</td>
+                    <td class="job-label">Název pozice:</td>
                     <td>{{ job.position.name_position }}</td>
                 </tr>
                 <tr>
-                    <td class="job-label">Information about the position:</td>
+                    <td class="job-label">Podrobný popis pozice:</td>
                     <td>{{ job.info_position }}</td>
                 </tr>
                 <tr>
-                    <td class="job-label">Place:</td>
+                    <td class="job-label">Místo výkonu práce:</td>
                     <td>{{ job.place }}</td>
                 </tr>
                 <tr>
-                    <td class="job-label">Experience:</td>
+                    <td class="job-label">Zkušenosti:</td>
                     <td>{{ job.postjob.experience }}</td>
                 </tr>
                 <tr>
-                    <td class="job-label">Language requirements:</td>
+                    <td class="job-label">Požadovaná úroveň jazyka:</td>
                     <td>
                         {% for language in job.language.all %}
                             {{ language }}
@@ -178,11 +178,11 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="job-label">Accommodation:</td>
+                    <td class="job-label">Ubytování:</td>
                     <td>{{ job.accommodation }}</td>
                 </tr>
                 <tr>
-                    <td class="job-label">Driving licence requirements:</td>
+                    <td class="job-label">Požadavek na řidičské oprávnění:</td>
                     <td>
                         {% for licence in job.driving_licence.all %}
                             {{ licence }}
@@ -192,31 +192,31 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="job-label">Type:</td>
+                    <td class="job-label">Typ úvazku:</td>
                     <td>{{ job.work_type }}</td>
                 </tr>
                 <tr>
-                    <td class="job-label">Starting on:</td>
+                    <td class="job-label">Nástup od:</td>
                     <td>{{ job.start_date }}</td>
                 </tr>
                 <tr>
-                    <td class="job-label">Salary:</td>
+                    <td class="job-label">Hodinová mzda:</td>
                     <td>{{ job.salary }}</td>
                 </tr>
                 <tr>
-                    <td class="job-label">Diet:</td>
+                    <td class="job-label">Diety:</td>
                     <td>{{ job.diet }}</td>
                 </tr>
             </tbody>
         </table>
     
         <div class="text-justify">
-            <a class="new-ad-link" href="{% url 'all-jobs' %}">Send my contact</a>
+            <a class="new-ad-link" href="{% url 'all-jobs' %}">Poslat žádost</a>
         </div>
         {% if job.author == request.user or is_superuser %}
             <div class="text-justify">
                 {% csrf_token %}
-                <a class="new-ad-link" href="{% url 'update' pk=job.pk %}">Update</a>
+                <a class="new-ad-link" href="{% url 'update' pk=job.pk %}">Upravit pozici</a>
             </div>
             <div class="text-justify">
                 <form method="post" action="{% url 'archive-job' pk=job.pk %}">

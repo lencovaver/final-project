@@ -101,8 +101,8 @@ class PostJob(models.Model):
         ('10 a více let', '10 a více'),
     ]
     ACCOMMODATION_CHOICES = [
-        ('vlastní ubytování', 'vlastní'),
-        ('zajištěné ubytování', 'zajištěné'),
+        ('vlastní ubytování', 'mám zajištěné'),
+        ('zajištěné ubytování', 'chci zajistit'),
     ]
     STATUS_CHOICES = [
         ("active", "Aktivní"),
