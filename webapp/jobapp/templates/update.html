@@ -1,168 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>update</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swissapp Dashboard</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <!-- Custom CSS -->
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-    <style>
+    .logo {
+      display: flex;
+      align-items: center;
+      color: #FFFFFF;
+    }
 
-        body {
-            background-color: #EDF2F4;
-            color: #FFFFFF;
-            padding: 20px;
-            font-family: Roboto, sans-serif;
-        }
+    .logo img {
+      margin-right: 10px;
+      width: 80px;
+      height: 50px;
+    }
 
-        .container {
-            background-color: #2B2D42;
-            border-radius: 5px;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            color: #FFFFFF;
+    .sidebar {
+      height: 99vh;
+      background: #2B2D42;
+      color: #fff;
+      padding-top: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-        }
+    .sidebar h2 {
+      font-size: 24px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
 
-        .nav-link {
-            color: #FFFFFF;
-            font-weight: bold;
-            background-color: #D80032;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s;
-            font-weight: bold;
-            margin-top: 25px;
-            margin-right: 20px; /* Přidá mezeru mezi tlačítky vlevo */
-        }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
 
-        .new-ad-link {
-            display: inline-block;
-            color: #FFFFFF;
-            background-color: #D80032;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s;
-        }
+    .sidebar ul li {
+      margin-bottom: 10px;
+    }
 
-        .new-ad-link:hover {
-            background-color: #2B2D42;
-        }
+    .sidebar ul li a {
+      color: #fff;
+      text-decoration: none;
+      display: block;
+      padding: 10px;
+    }
 
-        .nav {
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: flex-end;
-        }
+    .sidebar ul li a:hover {
+      background: linear-gradient(45deg, #D80032, #2B2D42);
+    }
 
-        h1,h5 {
-            color: #FFFFFF;
-            font-family: 'Montserrat', Arial, sans-serif;
-            font-weight: bold;
-        }
+    .content {
+      padding: 20px;
+    }
 
-        .table th {
-            background-color: #cecece;
-            color: #FFFFFF;
-            font-weight: bold;
-            text-align: left;
-            border-radius: 10px;
-        }
+    .profile-pic {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 5px solid #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      margin: 20px auto;
+      display: block;
+    }
 
-        .table td {
-            background-color: #FFFFFF;
-            color: #2B2D42;
-        }
-
-        .button {
-            background-color: #FFFFFF;
-            color: #2B2D42;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            color: #FFFFFF;
-        }
-
-        .logo img {
-            margin-right: 10px;
-            width: 100px;
-            height: 60px;
-        }
-
-        .card-container {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        .card {
-            width: calc(33% - 20px);
-            margin-bottom: 20px;
-            transition: all 0.3s;
-        }
-
-        .card:hover {
-            transform: scale(1.1);
-            z-index: 1;
-        }
-
-        .card-title {
-            font-size: 2em;
-            color: #2B2D42;
-        }
-
-    </style>
+  </style>
 </head>
 <body>
-    <ul class="nav">
-            <ul class="nav justify-content-end"> <!-- Upraveno z "nav" na "nav justify-content-end" -->
-                <li class=" nav-item">
-                    <a class="nav-link" href="{% url 'all-jobs' %}">View All Available Jobs</a>
-                </li>
-                {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'profile' %}">Your profile</a>
-                </li>
-            {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'registration' %}">Registration</a>
-                </li>
-            {% endif %}
-
-        </ul>
-    </ul>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="logo">
-                    <img src="https://www.wyssenseilbahnen.com/wp-content/uploads/2014/07/ch.jpeg" alt="Swissapp logo">
-                    <h1 class="display-4">Swissapp</h1>
-                </div>
-            </div>
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Dashboard sidebar -->
+      <div class="col-md-3">
+        <div class="sidebar">
+          <div class="logo">
+            <img src="https://www.wyssenseilbahnen.com/wp-content/uploads/2014/07/ch.jpeg" alt="Swissapp logo">
+            <h1 class="display-4">SwissApp</h1>
+          </div>
+          <ul>
+            <li><a class="nav-link" href="{% url 'all-jobs' %}"><i class="fas fa-home me-2"></i>Home</a></li>
+            <li><a href="#"><i class="fas fa-envelope me-2"></i>Message</a></li>
+            <li><a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-user me-2"></i>Profil</a></li>
+          </ul>
         </div>
+      </div>
+
+      <!-- Dashboard content -->
+      <div class="col-md-9">
+        <div class="content">
+          <h2>Update Job</h2>
+          <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <br>
+            <button type="submit" class="btn btn-primary">Update</button>
+          </form>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <h2>Update Job</h2>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Update</button>
-    </form>
-    <a href="{% url 'homepage' %}">Back to homepage</a>
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>

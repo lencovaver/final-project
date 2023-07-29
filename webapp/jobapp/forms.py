@@ -6,20 +6,20 @@ from .models import PostJob, Language, Position, PositionCategory, Place
 
 
 class PostJobForm(forms.ModelForm):
-    category = forms.ModelChoiceField(
-        queryset=PositionCategory.objects.all(),
-        widget=forms.Select(attrs={'class': 'form-control'})
-    )
     position = forms.ModelChoiceField(
         queryset=Position.objects.all(),
         widget=forms.Select(attrs={'class': 'form-control'})
     )
-    info_position = forms.CharField(
-        widget=forms.Textarea(attrs={'class': 'form-control'})
+    category = forms.ModelChoiceField(
+        queryset=PositionCategory.objects.all(),
+        widget=forms.Select(attrs={'class': 'form-control'})
     )
     place = forms.ModelChoiceField(
         queryset=Place.objects.all(),
         widget=forms.Select(attrs={'class': 'form-control'})
+    )
+    info_position = forms.CharField(
+        widget=forms.Textarea(attrs={'class': 'form-control'})
     )
     language = forms.ModelMultipleChoiceField(
         queryset=Language.objects.all(),
@@ -55,9 +55,8 @@ class PostJobForm(forms.ModelForm):
 
     class Meta:
         model = PostJob
-        fields = ['category', 'position', "info_position", 'place', 'language',
-                  'experience', 'accommodation', 'work_type', "driving_licence", 'salary',
-                  'diet', "start_date"]
+        fields = ["start_date", 'category', 'position', 'experience', 'work_type', 'place', 'accommodation', "info_position", 'language', "driving_licence", 'salary',
+                  'diet']
 
     def clean(self):
         cleaned_data = super().clean()
