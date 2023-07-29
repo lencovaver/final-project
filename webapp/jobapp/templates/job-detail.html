@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Homepage</title>
+    <title>Job Detail - Swissapp</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
@@ -63,17 +63,17 @@
             font-weight: bold;
         }
 
-        .table th {
+        .container table.table-bordered.table-striped {
+        background-color: #2B2D42;
+        color: #FFFFFF;
+        }
+
+        .container table.table-bordered.table-striped thead tr th {
             background-color: #cecece;
-            color: #FFFFFF;
+            color: #2B2D42;
             font-weight: bold;
             text-align: left;
             border-radius: 10px;
-        }
-
-        .table td {
-            background-color: #FFFFFF;
-            color: #2B2D42;
         }
 
         .button {
@@ -149,60 +149,67 @@
                 </ul>
             </div>
         </div>
-        <h2 class="text-justify">{{ job.positions }}</h2>
-        <div class="job-details">
-            <div class="job-label">Job title:</div>
-            <div>{{ job.position.name_position }}</div>
-        </div>
-        <br>
-        <div class="job-details">
-            <div class="job-label">Information about the position:</div>
-            <div>{{ job.info_position }}</div>
-        </div>
-        <div class="job-details">
-            <div class="job-label">Place:</div>
-            <div>{{ job.place }}</div>
-        </div>
-        <div class="job-details">
-            <div class="job-label">Experience:</div>
-            <div>{{ job.postjob.experience }}</div>
-        </div>
-        <div class="job-details">
-            <div class="job-label">Language requirements:</div>
-            {% for language in job.language.all %}
-                <div>{{ language }}</div>
-            {% empty %}
-                <div>No language requirements</div>
-            {% endfor %}
-        </div>
-        <div class="job-details">
-            <div class="job-label">Accommodation:</div>
-            <div>{{ job.accommodation }}</div>
-        </div>
-        <div class="job-details">
-            <div class="job-label">Driving licence requirements:</div>
-            {% for licence in job.driving_licence.all %}
-                <div>{{ licence }}</div>
-            {% empty %}
-                <div>No requirements</div>
-            {% endfor %}
-        </div>
-        <div class="job-details">
-            <div class="job-label">Type:</div>
-            <div>{{ job.work_type }}</div>
-        </div>
-        <div class="job-details">
-            <div class="job-label">Starting on:</div>
-            <div>{{ job.start_date }}</div>
-        </div>
-        <div class="job-details">
-            <div class="job-label">Salary:</div>
-            <div>{{ job.salary }}</div>
-        </div>
-        <div class="job-details">
-            <div class="job-label">Diet:</div>
-            <div>{{ job.diet }}</div>
-        </div>
+        <table class="table table-bordered table-striped mt-4">
+            <tbody>
+                <tr>
+                    <td class="job-label">Job title:</td>
+                    <td>{{ job.position.name_position }}</td>
+                </tr>
+                <tr>
+                    <td class="job-label">Information about the position:</td>
+                    <td>{{ job.info_position }}</td>
+                </tr>
+                <tr>
+                    <td class="job-label">Place:</td>
+                    <td>{{ job.place }}</td>
+                </tr>
+                <tr>
+                    <td class="job-label">Experience:</td>
+                    <td>{{ job.postjob.experience }}</td>
+                </tr>
+                <tr>
+                    <td class="job-label">Language requirements:</td>
+                    <td>
+                        {% for language in job.language.all %}
+                            {{ language }}
+                        {% empty %}
+                            No language requirements
+                        {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="job-label">Accommodation:</td>
+                    <td>{{ job.accommodation }}</td>
+                </tr>
+                <tr>
+                    <td class="job-label">Driving licence requirements:</td>
+                    <td>
+                        {% for licence in job.driving_licence.all %}
+                            {{ licence }}
+                        {% empty %}
+                            No requirements
+                        {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="job-label">Type:</td>
+                    <td>{{ job.work_type }}</td>
+                </tr>
+                <tr>
+                    <td class="job-label">Starting on:</td>
+                    <td>{{ job.start_date }}</td>
+                </tr>
+                <tr>
+                    <td class="job-label">Salary:</td>
+                    <td>{{ job.salary }}</td>
+                </tr>
+                <tr>
+                    <td class="job-label">Diet:</td>
+                    <td>{{ job.diet }}</td>
+                </tr>
+            </tbody>
+        </table>
+    
         <div class="text-justify">
             <a class="new-ad-link" href="{% url 'all-jobs' %}">Send my contact</a>
         </div>
