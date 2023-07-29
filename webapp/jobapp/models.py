@@ -53,7 +53,7 @@ class Language(models.Model):
     def get_level_name(self):
         for level in self.LEVEL_CHOICES:
             if level[0] == self.level:
-                return level[1]
+                return level[1].split(" - ")[0]
 
     def get_full_name(self):
         for state in self.STATE_CHOICES:

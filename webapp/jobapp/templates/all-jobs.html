@@ -153,13 +153,14 @@
                 <select name="state" class="form-control" id="selectLanguage">
                   <option value="">-- Všechny jazyky --</option>
                   {% for language in languages %}
-                    <option value="{{ language.state }}">{{ language.get_level_name }}</option>
+                    <option value="{{ language.state }}">{{ language.get_full_name }}</option>
                   {% endfor %}
                 </select>
               </div>
 
               <button type="submit" class="btn btn-primary">Filtrovat</button>
             </form>
+            <br><br>
 
           <!-- Karty (Cards) -->
           <div class="card-container">
