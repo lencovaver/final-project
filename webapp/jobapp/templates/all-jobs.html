@@ -153,13 +153,15 @@
                 <select name="state" class="form-control" id="selectLanguage">
                   <option value="">-- Všechny jazyky --</option>
                   {% for language in languages %}
-                    <option value="{{ language.state }}">{{ language.get_level_name }}</option>
+                    <option value="{{ language.state }}">{{ language.get_full_name }}</option>
                   {% endfor %}
                 </select>
               </div>
 
               <button type="submit" class="btn btn-primary">Filtrovat</button>
-            </form><br>
+
+            </form>
+            <br><br>
 
           <!-- Karty (Cards) -->
           <div class="card-container">
@@ -168,12 +170,12 @@
               <div class="card-body">
                 <h5 class="card-title">{{ job.position.name_position }}</h5>
                 <div class="job-details">
-                  <span class="job-label">Category:</span> {{ job.position.category }}<br>
+                  <span class="job-label">Kategorie:</span> {{ job.position.category }}<br>
                   <span class="job-label">Kanton:</span> {{ job.place }}<br>
                   <span class="job-label">Požadovaná praxe:</span> {{ job.experience }}<br>
                   <span class="job-label">Hodinová mzda:</span> {{ job.salary }} CHF<br>
-                  <span class="job-label">Spessen:</span> {{ job.diet }} CHF<br>
-                  <a href="{% url 'job-detail' job.id %}">Job Detail</a>
+                  <span class="job-label">Diety:</span> {{ job.diet }} CHF<br>
+                  <a href="{% url 'job-detail' job.id %}">Detail</a>
                 </div>
               </div>
             </div>

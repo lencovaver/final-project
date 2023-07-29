@@ -118,7 +118,19 @@
             <p class="text-center"><b>Životopis:</b> {{ user.bio }}</p>
             <p class="text-center"><b>Jazyk:</b> {{ user.language }} {{ user.lang_level }}</p>
           {% endif %}
-          <p class="text-center"><b>Telefonní číslo:</b> {{ user.area_code }} {{ user.phone_number }}</p>
+          {% if user.area_code and user.phone_number %}
+            {% if user.area_code == "🇨🇿 CZ" %}
+                <p class="text-center"><b>Telefonní číslo:</b> +420 {{ user.phone_number }}</p>
+            {% elif user.area_code == "🇸🇰 SK" %}
+                <p class="text-center"><b>Telefonní číslo:</b> +421 {{ user.phone_number }}</p>
+            {% elif user.area_code == "🇨🇭 CH" %}
+                <p class="text-center"><b>Telefonní číslo:</b> +41 {{ user.phone_number }}</p>
+            {% else %}
+                <p class="text-center"><b>Telefonní číslo:</b> {{ user.phone_number }}</p>
+            {% endif %}
+            {% else %}
+            <p class="text-center"><b>Telefonní číslo:</b> Není k dispozici</p>
+            {% endif %}
           <p class="text-center"><b>Email:</b> {{ user.email }}</p>
         </div>
       </div>
