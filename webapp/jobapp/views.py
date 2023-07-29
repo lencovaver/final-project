@@ -121,10 +121,38 @@ class JobSearchView(ListView):
     context_object_name = "jobs"
 
     def get_queryset(self):
+        queryset = PostJob.objects.filter(status='active')
         query = self.request.GET.get("title_contains")
-        # print("Query:", query)
         if query:
-            return PostJob.objects.filter(status='active', positions__name_position__icontains=query)
+            queryset = queryset.filter(position__name_position__icontains=query)
+
+        place_id = self.request.GET.get("place_id")
+        if place_id:
+            queryset = queryset.filter(place__pk=place_id)
+
+        state_name = self.request.GET.get("state")
+        if state_name:
+            queryset = queryset.filter(language__state=state_name)
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Přidejme dostupné kantony a jazyky do kontextu
+        context['places'] = Place.objects.all()
+        context['languages'] = Language.objects.all()
+        return context
+
+
+class PlaceSearchView(ListView):
+    model = PostJob
+    template_name = "all-jobs.html"
+    context_object_name = "jobs"
+
+    def get_queryset(self):
+        place_id = self.request.GET.get("place_id")
+        if place_id:
+            return PostJob.objects.filter(place__pk=place_id, status='active')
         else:
             return PostJob.objects.filter(status='active')
 
@@ -134,28 +162,17 @@ class JobSearchView(ListView):
         return context
 
 
-class PlaceSearchView(ListView):
-    model = PostJob
-    template_name = "all-jobs.html"
-    context_object_name = "jobs"
-
-    def get_queryset(self, *args, **kwargs):
-        place_id = self.kwargs.get("place_id")
-
-        jobs = PostJob.objects.filter(place__pk=place_id)
-        return jobs
-
-
 class LanguageSearchView(ListView):
     model = PostJob
     template_name = "all-jobs.html"
     context_object_name = "jobs"
 
-    def get_queryset(self, *args, **kwargs):
+    def get_queryset(self):
         state_name = self.request.GET.get("state")
-
-        jobs = PostJob.objects.filter(language__state=state_name)
-        return jobs
+        if state_name:
+            return PostJob.objects.filter(language__state=state_name, status='active')
+        else:
+            return PostJob.objects.filter(status='active')
 
 
 class JobArchiveView(ListView):

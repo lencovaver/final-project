@@ -55,6 +55,11 @@ class Language(models.Model):
             if level[0] == self.level:
                 return level[1]
 
+    def get_full_name(self):
+        for state in self.STATE_CHOICES:
+            if state[0] == self.state:
+                return f"{state[1]} - {self.get_level_name()}"
+
     def __str__(self):
         return f"{self.state} - {self.get_level_name()}"
 
