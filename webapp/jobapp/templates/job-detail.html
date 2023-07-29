@@ -1,229 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Job Detail - Swissapp</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swissapp Dashboard</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <!-- Custom CSS -->
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-    <style>
+    .logo {
+      display: flex;
+      align-items: center;
+      color: #FFFFFF;
+    }
 
-        body {
-            background-color: #EDF2F4;
-            color: #FFFFFF;
-            padding: 20px;
-            font-family: Roboto, sans-serif;
-        }
+    .logo img {
+      margin-right: 10px;
+      width: 80px;
+      height: 50px;
+    }
 
-        .container {
-            background-color: #2B2D42;
-            border-radius: 5px;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            color: #FFFFFF;
+    .sidebar {
+      height: 99vh;
+      background: #2B2D42; /* Gradientová pozadí */
+      color: #fff;
+      padding-top: 20px;
+      border-radius: 15px; /* Kulaté rohy */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Stín pro dojem hloubky */
+    }
 
-        }
+    .sidebar h2 {
+      font-size: 24px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
 
-        .nav-link {
-            color: #FFFFFF;
-            font-weight: bold;
-            background-color: #D80032;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s;
-            font-weight: bold;
-            margin-top: 10px;
-            margin-right: 3px; /* Přidá mezeru mezi tlačítky vlevo */
-        }
+    .button {
+      font-size: 24px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
 
-        .new-ad-link {
-            display: inline-block;
-            color: #FFFFFF;
-            background-color: #D80032;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s;
-        }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
 
-        .new-ad-link:hover {
-            background-color: #2B2D42;
-        }
+    .sidebar ul li {
+      margin-bottom: 10px;
+    }
 
-        .nav {
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: flex-end;
-        }
+    .sidebar ul li a {
+      color: #fff;
+      text-decoration: none;
+      display: block;
+      padding: 10px;
+    }
 
-        h1, h5 {
-            color: #FFFFFF;
-            font-family: 'Montserrat', Arial, sans-serif;
-            font-weight: bold;
-        }
+    .sidebar ul li a:hover {
+      background: linear-gradient(45deg, #D80032, #2B2D42); /* Tmavší gradient při najetí myši */
+    }
 
-        .container table.table-bordered.table-striped {
-        background-color: #2B2D42;
-        color: #FFFFFF;
-        }
+    .content {
+      padding: 20px;
+    }
 
-        .container table.table-bordered.table-striped thead tr th {
-            background-color: #cecece;
-            color: #2B2D42;
-            font-weight: bold;
-            text-align: left;
-            border-radius: 10px;
-        }
+    /* Nový styl pro kulaté rozhraní profilového obrázku */
+    .profile-pic {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 50%; /* Kulaté rozhraní */
+      border: 5px solid #fff; /* Bílý okraj */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Stín pro dojem hloubky */
+      margin: 20px auto;
+      display: block;
+    }
 
-        .button {
-            background-color: #FFFFFF;
-            color: #2B2D42;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            color: #FFFFFF;
-        }
-
-        .logo img {
-            margin-right: 10px;
-            width: 100px;
-            height: 60px;
-        }
-
-        .card-container {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        .card {
-            width: calc(33% - 20px);
-            margin-bottom: 20px;
-            transition: all 0.3s;
-        }
-
-        .card:hover {
-            transform: scale(1.1);
-            z-index: 1;
-        }
-
-        .card-title {
-            font-size: 2em;
-            color: #2B2D42;
-        }
-
-    </style>
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="logo">
-                    <img src="https://www.wyssenseilbahnen.com/wp-content/uploads/2014/07/ch.jpeg" alt="Swissapp logo">
-                    <h1 class="display-4">Swissapp</h1>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <ul class="nav justify-content-end">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'job-search' %}">Zpět</a>
-                    </li>
-                    {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'profile' %}">Váš profil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'logout' %}">Odhlášení</a>
-                        </li>
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'registration' %}">Registrace</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'login' %}">Přihlášení</a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </div>
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Dashboard sidebar -->
+      <div class="col-md-3">
+        <div class="sidebar">
+          <div class="logo">
+            <img src="https://www.wyssenseilbahnen.com/wp-content/uploads/2014/07/ch.jpeg" alt="Swissapp logo">
+            <h1 class="display-4">SwissApp</h1>
+          </div>
+          <ul>
+            <li><a class="nav-link" href="{% url 'all-jobs' %}"><i class="fas fa-home me-2"></i>Home</a></li>
+            <li><a href="#"><i class="fas fa-envelope me-2"></i>Message</a></li>
+            <li><a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-user me-2"></i>Profil</a></li>
+            {% if user.is_useragent %}
+            <li><a class="nav-link" href="{% url 'update' pk=job.pk %}"><i class="fas fa-cog me-2"></i>Edit</a></li>
+            {% endif %}
+          </ul>
         </div>
-        <table class="table table-bordered table-striped mt-4">
-            <tbody>
-                <tr>
-                    <td class="job-label">Název pozice:</td>
-                    <td>{{ job.position.name_position }}</td>
-                </tr>
-                <tr>
-                    <td class="job-label">Podrobný popis pozice:</td>
-                    <td>{{ job.info_position }}</td>
-                </tr>
-                <tr>
-                    <td class="job-label">Místo výkonu práce:</td>
-                    <td>{{ job.place }}</td>
-                </tr>
-                <tr>
-                    <td class="job-label">Zkušenosti:</td>
-                    <td>{{ job.postjob.experience }}</td>
-                </tr>
-                <tr>
-                    <td class="job-label">Požadovaná úroveň jazyka:</td>
-                    <td>
-                        {% for language in job.language.all %}
-                            {{ language }}
-                        {% empty %}
-                            No language requirements
-                        {% endfor %}
-                    </td>
-                </tr>
-                <tr>
-                    <td class="job-label">Ubytování:</td>
-                    <td>{{ job.accommodation }}</td>
-                </tr>
-                <tr>
-                    <td class="job-label">Požadavek na řidičské oprávnění:</td>
-                    <td>
-                        {% for licence in job.driving_licence.all %}
-                            {{ licence }}
-                        {% empty %}
-                            No requirements
-                        {% endfor %}
-                    </td>
-                </tr>
-                <tr>
-                    <td class="job-label">Typ úvazku:</td>
-                    <td>{{ job.work_type }}</td>
-                </tr>
-                <tr>
-                    <td class="job-label">Nástup od:</td>
-                    <td>{{ job.start_date }}</td>
-                </tr>
-                <tr>
-                    <td class="job-label">Hodinová mzda:</td>
-                    <td>{{ job.salary }}</td>
-                </tr>
-                <tr>
-                    <td class="job-label">Diety:</td>
-                    <td>{{ job.diet }}</td>
-                </tr>
-            </tbody>
-        </table>
-    
-        <div class="text-justify">
-            <a class="new-ad-link" href="{% url 'all-jobs' %}">Poslat žádost</a>
-        </div>
-        {% if job.author == request.user or is_superuser %}
-            <div class="text-justify">
-                {% csrf_token %}
-                <a class="new-ad-link" href="{% url 'update' pk=job.pk %}">Upravit pozici</a>
-            </div>
-            <div class="text-justify">
-                <form method="post" action="{% url 'archive-job' pk=job.pk %}">
-                    {% csrf_token %}
-                    <button type="submit" class="new-ad-link">Archivovat</button>
-                </form>
-            </div>
+      </div>
+
+      <!-- User profile content -->
+      <div class="col-md-9">
+        <div class="content">
+          <!-- Zobrazení profilového obrázku jako první v kulatém rozhraní -->
+          <h2 class="text-center"> {{ job.position.name_position }}</h2>
+          <br><br><br>
+            <p class="text-center"><b>Place:</b> {{ job.place }}</p>
+            <p class="text-center"><b>Experience:</b> {{ job.postjob.experience }}</p>
+            <p class="text-center"><b>Language requirements:</b> {% for language in job.language.all %}
+                {{ language }}
+            {% empty %}
+                No language requirements
+            {% endfor %}</p>
+            <p class="text-center"><b>Information about the position:</b> {{ job.info_position }}</p>
+            <p class="text-center"><b>Accommodation:</b> {{ job.accommodation }}</p>
+            <p class="text-center"><b>Driving licence requirements:</b> {% for licence in job.driving_licence.all %}
+                {{ licence }}
+            {% empty %}
+                No requirements
+            {% endfor %}</p>
+          <p class="text-center"><b>Type:</b> {{ job.work_type }}</p>
+          <p class="text-center"><b>Starting on:</b> {{ job.start_date }}</p>
+          <p class="text-center"><b>Salary:</b> {{ job.salary }}  <b>Diet:</b> {{ job.diet }}</p></p>
+            {% if user.is_useragent %}
+            {% csrf_token %}
+            <button type="submit" href="{% url 'archive-job' pk=job.pk %}" class="btn btn-primary">Archivovat</button>
+            {% else %}
+            <button type="submit" href="{% url 'all-jobs' %}" class="btn btn-primary">Send my contact</button>
+            <br>
+            {% endif %}
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
             <script>
                 // Přidání JavaScriptu pro aktualizaci stavu archivace po kliknutí na tlačítko
                 document.querySelector("form").addEventListener("submit", function(event) {
@@ -245,7 +163,6 @@
                     });
                 });
             </script>
-        {% endif %}
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

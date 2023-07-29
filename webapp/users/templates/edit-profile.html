@@ -90,10 +90,10 @@
             <h1 class="display-4">SwissApp</h1>
           </div>
           <ul>
-            <li><a class="nav-link" href="{% url 'homepage' %}"><i class="fas fa-home me-2"></i>Domů</a></li>
-            <li><a href="#"><i class="fas fa-envelope me-2"></i>Zprávy</a></li>
+            <li><a class="nav-link" href="{% url 'all-jobs' %}"><i class="fas fa-home me-2"></i>Home</a></li>
+            <li><a href="#"><i class="fas fa-envelope me-2"></i>Message</a></li>
             <li><a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-user me-2"></i>Profil</a></li>
-            <li><a class="nav-link" href="{% url 'edit-profile' %}"><i class="fas fa-cog me-2"></i>Nastavení</a></li>
+            <li><a class="nav-link" href="{% url 'edit-profile' %}"><i class="fas fa-cog me-2"></i>Save edit</a></li>
           </ul>
         </div>
       </div>
@@ -119,17 +119,19 @@
                 <label for="company_name" class="form-label">Firma</label>
                 <input type="text" name="company_name" id="company_name" class="form-control" value="{{ user.company }}">
               </div>
-              <div class="mb-3">
-                <label for="company_street" class="form-label">Adresa - Ulice</label>
-                <input type="text" name="company_street" id="company_street" class="form-control" value="{{ user.company.street }}">
-              </div>
-              <div class="mb-3">
-                <label for="company_num" class="form-label">Adresa - Číslo popisné/orientační</label>
-                <input type="text" name="company_num" id="company_num" class="form-control" value="{{ user.company.num }}">
-              </div>
-              <div class="mb-3">
-                <label for="company_city" class="form-label">Adresa - Město</label>
-                <input type="text" name="company_city" id="company_city" class="form-control" value="{{ user.company.city }}">
+              <div class="mb-3 d-flex justify-content-between">
+                <div class="flex-grow-1 me-2">
+                  <label for="first_name" class="form-label">Ulice</label>
+                  <input type="text" name="first_name" id="company_street" class="form-control" value="{{ user.company.street }}">
+                </div>
+                <div class="flex-grow-1 ms-2">
+                  <label for="last_name" class="form-label">Číslo popisné/orientační</label>
+                  <input type="text" name="last_name" id="company_num" class="form-control" value="{{ user.company.num }}">
+                </div>
+                <div class="flex-grow-1 ms-2">
+                  <label for="last_name" class="form-label">Město</label>
+                  <input type="text" name="last_name" id="company_city" class="form-control" value="{{ user.company.city }}">
+                </div>
               </div>
             {% else %}
               <div class="mb-3">
@@ -148,20 +150,20 @@
               </div>
             {% endif %}
 
-            <div class="mb-3">
-              <label for="area_code" class="form-label">Telefonní číslo - Kód země</label>
-              <input type="text" name="area_code" id="area_code" class="form-control" value="{{ user.area_code }}">
-            </div>
-            <div class="mb-3">
-              <label for="phone_number" class="form-label">Telefonní číslo</label>
-              <input type="text" name="phone_number" id="phone_number" class="form-control" value="{{ user.phone_number }}">
-            </div>
+            <div class="mb-3 d-flex justify-content-between">
+                <div class="flex-grow-1 me-2">
+                  <label for="first_name" class="form-label">Telefonní číslo - Kód země</label>
+                  <input type="text" name="area_code" id="area_code" class="form-control" value="{{ user.area_code }}">
+                </div>
+                <div class="flex-grow-1 ms-2">
+                  <label for="last_name" class="form-label">Telefonní číslo</label>
+                  <input type="text" name="phone_number" id="phone_number" class="form-control" value="{{ user.phone_number }}">
+                </div>
+              </div>
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
               <input type="email" name="email" id="email" class="form-control" value="{{ user.email }}">
             </div>
-
-            <button type="submit" class="btn btn-primary">Uložit změny</button>
           </form>
         </div>
       </div>
