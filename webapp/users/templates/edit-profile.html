@@ -93,7 +93,7 @@
                     <li><a class="nav-link" href="{% url 'all-jobs' %}"><i class="fas fa-home me-2"></i>Home</a></li>
                     <li><a href="#"><i class="fas fa-envelope me-2"></i>Message</a></li>
                     <li><a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-user me-2"></i>Profil</a></li>
-                    <li><a class="nav-link" href="{% url 'edit-profile' %}"><i class="fas fa-cog me-2"></i>Save edit</a>
+                    <li><a class="nav-link" href="{% url 'edit-profile' %}"><i class="fas fa-cog me-2"></i>Save</a>
                     </li>
                 </ul>
             </div>
@@ -103,7 +103,7 @@
         <div class="col-md-9">
             <div class="content">
                 <!-- Edit profile form -->
-                <form action="{% url 'edit-profile' %}" method="post" enctype="multipart/form-data">
+                <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="mb-3 d-flex justify-content-between">
                         <div class="flex-grow-1 me-2">
@@ -119,6 +119,10 @@
                     </div>
                     {% if user.is_useragent %}
                         <div class="mb-3">
+                            <label for="id_profile_pic">Profile Picture:</label>
+                            <input type="file" name="company_logo" id="id_profile_pic">
+                        </div>
+                        <div class="mb-3">
                             <label for="company_name" class="form-label">Firma</label>
                             <input type="text" name="company_name" id="company_name" class="form-control"
                                    value="{{ user.company }}">
@@ -126,12 +130,12 @@
                         <div class="mb-3 d-flex justify-content-between">
                             <div class="flex-grow-1 me-2">
                                 <label for="first_name" class="form-label">Ulice</label>
-                                <input type="text" name="first_name" id="company_street" class="form-control"
+                                <input type="text" name="first_name" id="first_name" class="form-control"
                                        value="{{ user.company.street }}">
                             </div>
                             <div class="flex-grow-1 ms-2">
                                 <label for="last_name" class="form-label">Číslo popisné/orientační</label>
-                                <input type="text" name="last_name" id="company_num" class="form-control"
+                                <input type="text" name="last_name" id="last_name" class="form-control"
                                        value="{{ user.company.num }}">
                             </div>
                             <div class="flex-grow-1 ms-2">
@@ -141,6 +145,10 @@
                             </div>
                         </div>
                     {% else %}
+                        <div class="mb-3">
+                            <label for="id_profile_pic">Profile Picture:</label>
+                            <input type="file" name="profile_pic" id="id_profile_pic">
+                        </div>
                         <div class="mb-3">
                             <label for="bio" class="form-label">Životopis</label>
                             <textarea name="bio" id="bio" class="form-control">{{ user.bio }}</textarea>
@@ -170,6 +178,8 @@
                         <label for="email" class="form-label">Email</label>
                         <input type="email" name="email" id="email" class="form-control" value="{{ user.email }}">
                     </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+
                 </form>
             </div>
         </div>

@@ -107,7 +107,7 @@
                 {% elif user.profile_pic %}
                     <img src="{{ user.profile_pic.url }}" alt="Profile picture" class="profile-pic">
                 {% endif %}
-                <h2 class="text-center">Profil {{ user.username }}</h2>
+                <h2 class="text-center">{{ user.username }}</h2>
                 <br><br><br>
                 {% if user.is_useragent %}
                     <p class="text-center"><b>Jméno:</b> {{ user.first_name }} {{ user.last_name }}</p>
@@ -115,7 +115,7 @@
                     <p class="text-center">
                         <b>Adresa:</b> {{ user.company.street }} {{ user.company.num }}, {{ user.company.city }}</p>
                 {% else %}
-                    <p class="text-center"><b>Křestní jméno:</b> {{ user.first_name }} {{ user.last_name }}</p>
+                    <p class="text-center"><b>Jméno:</b> {{ user.first_name }} {{ user.last_name }}</p>
                     <p class="text-center"><b>Životopis:</b> {{ user.bio }}</p>
                     <p class="text-center"><b>Jazykové znalosti:</b> {{ user.language }} {{ user.lang_level }}</p>
                 {% endif %}

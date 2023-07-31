@@ -1,13 +1,13 @@
-from io import BytesIO
-
 from PIL import Image
+import io
+from django.core.files.base import ContentFile
 from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.core.files.base import ContentFile
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.views import View
 from django.views.generic import DetailView
@@ -76,9 +76,14 @@ class UserProfileView(DetailView):
         return context
 
 
-class EditProfileView(LoginRequiredMixin, UpdateView):
-    # View for editing user profile.
+from django.shortcuts import redirect
+from django.views import View
 
+
+# Your imports...
+
+
+class EditProfileView(LoginRequiredMixin, UpdateView):
     model = User
     form_class = EditProfileForm
     template_name = "edit-profile.html"
@@ -92,23 +97,33 @@ class EditProfileView(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
 
     def profile_pic_save(self, request, *args, **kwargs):
-        # Saves profile picture or company logo.
-
         user = self.get_object()
-        form = self.form_class(request.POST, request.FILES, instance=user)
+        form = EditProfileForm(request.POST, request.FILES, instance=user)
+
         if form.is_valid():
             image_field = 'company_logo' if user.is_useragent else 'profile_pic'
             image = form.cleaned_data.get(image_field)
+
             if image:
                 img = Image.open(image)
-                output = BytesIO()
-                img.save(output, format='PNG')
-                content_file = ContentFile(output.getvalue())
-                getattr(user, image_field).save(image.name, content_file)
-            user.save()
+                output = io.BytesIO()
+
+                resized_img = img.resize((300, 300))
+                resized_img.save(output, format='PNG', quality=85)  # Adjust quality according to your needs
+                output.seek(0)  # move back to the beginning of the file stream
+
+                django_file = ContentFile(output.read())
+                django_file.name = image.name  # make sure to keep the same name as the original file
+
+                form.cleaned_data[image_field] = django_file
+
+            form.save()
             return redirect('profile')
         else:
             return render(request, self.template_name, {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        return self.profile_pic_save(request, *args, **kwargs)
 
 
 class RegSuccessView(View):
