@@ -1,140 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Swissapp Dashboard</title>
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  <!-- Custom CSS -->
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swissapp Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      color: #FFFFFF;
-    }
+        .logo {
+            display: flex;
+            align-items: center;
+            color: #FFFFFF;
+        }
 
-    .logo img {
-      margin-right: 10px;
-      width: 80px;
-      height: 50px;
-    }
+        .logo img {
+            margin-right: 10px;
+            width: 80px;
+            height: 50px;
+        }
 
-    .sidebar {
-      height: 99vh;
-      background: #2B2D42; /* Gradientová pozadí */
-      color: #fff;
-      padding-top: 20px;
-      border-radius: 15px; /* Kulaté rohy */
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Stín pro dojem hloubky */
-    }
+        .sidebar {
+            height: 99vh;
+            background: #2B2D42; /* Gradientová pozadí */
+            color: #fff;
+            padding-top: 20px;
+            border-radius: 15px; /* Kulaté rohy */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Stín pro dojem hloubky */
+        }
 
-    .sidebar h2 {
-      font-size: 24px;
-      text-align: center;
-      margin-bottom: 30px;
-    }
+        .sidebar h2 {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
 
-    .sidebar ul {
-      list-style: none;
-      padding: 0;
-    }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
 
-    .sidebar ul li {
-      margin-bottom: 10px;
-    }
+        .sidebar ul li {
+            margin-bottom: 10px;
+        }
 
-    .sidebar ul li a {
-      color: #fff;
-      text-decoration: none;
-      display: block;
-      padding: 10px;
-    }
+        .sidebar ul li a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+        }
 
-    .sidebar ul li a:hover {
-      background: linear-gradient(45deg, #D80032, #2B2D42); /* Tmavší gradient při najetí myši */
-    }
+        .sidebar ul li a:hover {
+            background: linear-gradient(45deg, #D80032, #2B2D42); /* Tmavší gradient při najetí myši */
+        }
 
-    .content {
-      padding: 20px;
-    }
+        .content {
+            padding: 20px;
+        }
 
-    /* Nový styl pro kulaté rozhraní profilového obrázku */
-    .profile-pic {
-      width: 200px;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 50%; /* Kulaté rozhraní */
-      border: 5px solid #fff; /* Bílý okraj */
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Stín pro dojem hloubky */
-      margin: 20px auto;
-      display: block;
-    }
+        /* Nový styl pro kulaté rozhraní profilového obrázku */
+        .profile-pic {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%; /* Kulaté rozhraní */
+            border: 5px solid #fff; /* Bílý okraj */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Stín pro dojem hloubky */
+            margin: 20px auto;
+            display: block;
+        }
 
-  </style>
+    </style>
 </head>
 <body>
-  <div class="container-fluid">
+<div class="container-fluid">
     <div class="row">
-      <!-- Dashboard sidebar -->
-      <div class="col-md-3">
-        <div class="sidebar">
-          <div class="logo">
-            <img src="https://www.wyssenseilbahnen.com/wp-content/uploads/2014/07/ch.jpeg" alt="Swissapp logo">
-            <h1 class="display-4">SwissApp</h1>
-          </div>
-          <ul>
-            <li><a class="nav-link" href="{% url 'all-jobs' %}"><i class="fas fa-home me-2"></i>Home</a></li>
-            <li><a href="#"><i class="fas fa-envelope me-2"></i>Message</a></li>
-            <li><a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-user me-2"></i>Profil</a></li>
-            <li><a class="nav-link" href="{% url 'edit-profile' %}"><i class="fas fa-cog me-2"></i>Edit</a></li>
-          </ul>
+        <!-- Dashboard sidebar -->
+        <div class="col-md-3">
+            <div class="sidebar">
+                <div class="logo">
+                    <img src="https://www.wyssenseilbahnen.com/wp-content/uploads/2014/07/ch.jpeg" alt="Swissapp logo">
+                    <h1 class="display-4">SwissApp</h1>
+                </div>
+                <ul>
+                    <li><a class="nav-link" href="{% url 'all-jobs' %}"><i class="fas fa-home me-2"></i>Home</a></li>
+                    <li><a href="#"><i class="fas fa-envelope me-2"></i>Message</a></li>
+                    <li><a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-user me-2"></i>Profil</a></li>
+                    <li><a class="nav-link" href="{% url 'edit-profile' %}"><i class="fas fa-cog me-2"></i>Edit</a></li>
+                </ul>
+            </div>
         </div>
-      </div>
 
-      <!-- User profile content -->
-      <div class="col-md-9">
-        <div class="content">
-          <!-- Zobrazení profilového obrázku jako první v kulatém rozhraní -->
-          {% if user.company_logo %}
-            <img src="{{ user.company_logo.url }}" alt="Company logo" class="profile-pic">
-          {% elif user.profile_pic %}
-            <img src="{{ user.profile_pic.url }}" alt="Profile picture" class="profile-pic">
-          {% endif %}
-          <h2 class="text-center">Profil {{ user.username }}</h2>
-          <br><br><br>
-          {% if user.is_useragent %}
-            <p class="text-center"><b>Jméno:</b> {{ user.first_name }} {{ user.last_name }}</p>
-            <p class="text-center"><b>Firma:</b> {{ user.company }}</p>
-            <p class="text-center"><b>Adresa:</b> {{ user.company.street }} {{ user.company.num }}, {{ user.company.city }}</p>
-          {% else %}
-            <p class="text-center"><b>Křestní jméno:</b> {{ user.first_name }} {{ user.last_name }}</p>
-            <p class="text-center"><b>Životopis:</b> {{ user.bio }}</p>
-            <p class="text-center"><b>Jazyk:</b> {{ user.language }} {{ user.lang_level }}</p>
-          {% endif %}
-          {% if user.area_code and user.phone_number %}
-            {% if user.area_code == "🇨🇿 CZ" %}
-                <p class="text-center"><b>Telefonní číslo:</b> +420 {{ user.phone_number }}</p>
-            {% elif user.area_code == "🇸🇰 SK" %}
-                <p class="text-center"><b>Telefonní číslo:</b> +421 {{ user.phone_number }}</p>
-            {% elif user.area_code == "🇨🇭 CH" %}
-                <p class="text-center"><b>Telefonní číslo:</b> +41 {{ user.phone_number }}</p>
-            {% else %}
-                <p class="text-center"><b>Telefonní číslo:</b> {{ user.phone_number }}</p>
-            {% endif %}
-            {% else %}
-            <p class="text-center"><b>Telefonní číslo:</b> Není k dispozici</p>
-            {% endif %}
-          <p class="text-center"><b>Email:</b> {{ user.email }}</p>
+        <!-- User profile content -->
+        <div class="col-md-9">
+            <div class="content">
+                <!-- Zobrazení profilového obrázku jako první v kulatém rozhraní -->
+                {% if user.company_logo %}
+                    <img src="{{ user.company_logo.url }}" alt="Company logo" class="profile-pic">
+                {% elif user.profile_pic %}
+                    <img src="{{ user.profile_pic.url }}" alt="Profile picture" class="profile-pic">
+                {% endif %}
+                <h2 class="text-center">Profil {{ user.username }}</h2>
+                <br><br><br>
+                {% if user.is_useragent %}
+                    <p class="text-center"><b>Jméno:</b> {{ user.first_name }} {{ user.last_name }}</p>
+                    <p class="text-center"><b>Firma:</b> {{ user.company }}</p>
+                    <p class="text-center">
+                        <b>Adresa:</b> {{ user.company.street }} {{ user.company.num }}, {{ user.company.city }}</p>
+                {% else %}
+                    <p class="text-center"><b>Křestní jméno:</b> {{ user.first_name }} {{ user.last_name }}</p>
+                    <p class="text-center"><b>Životopis:</b> {{ user.bio }}</p>
+                    <p class="text-center"><b>Jazykové znalosti:</b> {{ user.language }} {{ user.lang_level }}</p>
+                {% endif %}
+                {% if user.phone_number %}
+                    <p class="text-center"><b>Telefonní číslo:</b> {{ user.phone_number }}</p>
+                {% else %}
+                    <p class="text-center"><b>Telefonní číslo:</b> Neuvedeno</p>
+                {% endif %}
+                <p class="text-center"><b>Email:</b> {{ user.email }}</p>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
 </body>
 </html>

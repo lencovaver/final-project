@@ -1,174 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Swissapp Dashboard</title>
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  <!-- Custom CSS -->
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swissapp Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      color: #FFFFFF;
-    }
+        .logo {
+            display: flex;
+            align-items: center;
+            color: #FFFFFF;
+        }
 
-    .logo img {
-      margin-right: 10px;
-      width: 80px;
-      height: 50px;
-    }
+        .logo img {
+            margin-right: 10px;
+            width: 80px;
+            height: 50px;
+        }
 
-    .sidebar {
-      height: 99vh;
-      background: #2B2D42; /* Gradientová pozadí */
-      color: #fff;
-      padding-top: 20px;
-      border-radius: 15px; /* Kulaté rohy */
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Stín pro dojem hloubky */
-    }
+        .sidebar {
+            height: 99vh;
+            background: #2B2D42; /* Gradientová pozadí */
+            color: #fff;
+            padding-top: 20px;
+            border-radius: 15px; /* Kulaté rohy */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Stín pro dojem hloubky */
+        }
 
-    .sidebar h2 {
-      font-size: 24px;
-      text-align: center;
-      margin-bottom: 30px;
-    }
+        .sidebar h2 {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
 
-    .sidebar ul {
-      list-style: none;
-      padding: 0;
-    }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
 
-    .sidebar ul li {
-      margin-bottom: 10px;
-    }
+        .sidebar ul li {
+            margin-bottom: 10px;
+        }
 
-    .sidebar ul li a {
-      color: #fff;
-      text-decoration: none;
-      display: block;
-      padding: 10px;
-    }
+        .sidebar ul li a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+        }
 
-    .sidebar ul li a:hover {
-      background: linear-gradient(45deg, #D80032, #2B2D42); /* Tmavší gradient při najetí myši */
-    }
+        .sidebar ul li a:hover {
+            background: linear-gradient(45deg, #D80032, #2B2D42); /* Tmavší gradient při najetí myši */
+        }
 
-    .content {
-      padding: 20px;
-    }
+        .content {
+            padding: 20px;
+        }
 
-    /* Nový styl pro kulaté rozhraní profilového obrázku */
-    .profile-pic {
-      width: 200px;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 50%; /* Kulaté rozhraní */
-      border: 5px solid #fff; /* Bílý okraj */
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Stín pro dojem hloubky */
-      margin: 20px auto;
-      display: block;
-    }
+        /* Nový styl pro kulaté rozhraní profilového obrázku */
+        .profile-pic {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%; /* Kulaté rozhraní */
+            border: 5px solid #fff; /* Bílý okraj */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Stín pro dojem hloubky */
+            margin: 20px auto;
+            display: block;
+        }
 
-  </style>
+    </style>
 </head>
 <body>
-  <div class="container-fluid">
+<div class="container-fluid">
     <div class="row">
-      <!-- Dashboard sidebar -->
-      <div class="col-md-3">
-        <div class="sidebar">
-          <div class="logo">
-            <img src="https://www.wyssenseilbahnen.com/wp-content/uploads/2014/07/ch.jpeg" alt="Swissapp logo">
-            <h1 class="display-4">SwissApp</h1>
-          </div>
-          <ul>
-            <li><a class="nav-link" href="{% url 'all-jobs' %}"><i class="fas fa-home me-2"></i>Home</a></li>
-            <li><a href="#"><i class="fas fa-envelope me-2"></i>Message</a></li>
-            <li><a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-user me-2"></i>Profil</a></li>
-            <li><a class="nav-link" href="{% url 'edit-profile' %}"><i class="fas fa-cog me-2"></i>Save edit</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- User profile content -->
-      <div class="col-md-9">
-        <div class="content">
-          <!-- Edit profile form -->
-          <form action="{% url 'edit-profile' %}" method="post" enctype="multipart/form-data">
-              {% csrf_token %}
-              <div class="mb-3 d-flex justify-content-between">
-                <div class="flex-grow-1 me-2">
-                  <label for="first_name" class="form-label">Jméno</label>
-                  <input type="text" name="first_name" id="first_name" class="form-control" value="{{ user.first_name }}">
+        <!-- Dashboard sidebar -->
+        <div class="col-md-3">
+            <div class="sidebar">
+                <div class="logo">
+                    <img src="https://www.wyssenseilbahnen.com/wp-content/uploads/2014/07/ch.jpeg" alt="Swissapp logo">
+                    <h1 class="display-4">SwissApp</h1>
                 </div>
-                <div class="flex-grow-1 ms-2">
-                  <label for="last_name" class="form-label">Příjmení</label>
-                  <input type="text" name="last_name" id="last_name" class="form-control" value="{{ user.last_name }}">
-                </div>
-              </div>
-              {% if user.is_useragent %}
-              <div class="mb-3">
-                <label for="company_name" class="form-label">Firma</label>
-                <input type="text" name="company_name" id="company_name" class="form-control" value="{{ user.company }}">
-              </div>
-              <div class="mb-3 d-flex justify-content-between">
-                <div class="flex-grow-1 me-2">
-                  <label for="first_name" class="form-label">Ulice</label>
-                  <input type="text" name="first_name" id="company_street" class="form-control" value="{{ user.company.street }}">
-                </div>
-                <div class="flex-grow-1 ms-2">
-                  <label for="last_name" class="form-label">Číslo popisné/orientační</label>
-                  <input type="text" name="last_name" id="company_num" class="form-control" value="{{ user.company.num }}">
-                </div>
-                <div class="flex-grow-1 ms-2">
-                  <label for="last_name" class="form-label">Město</label>
-                  <input type="text" name="last_name" id="company_city" class="form-control" value="{{ user.company.city }}">
-                </div>
-              </div>
-            {% else %}
-              <div class="mb-3">
-                <label for="bio" class="form-label">Životopis</label>
-                <textarea name="bio" id="bio" class="form-control">{{ user.bio }}</textarea>
-              </div>
-              <div class="mb-3 d-flex justify-content-between">
-                <div class="flex-grow-1 me-2">
-                  <label for="first_name" class="form-label">Jazyk</label>
-                  <input type="text" name="first_name" id="first_name" class="form-control" value="{{ user.language }}">
-                </div>
-                <div class="flex-grow-1 ms-2">
-                  <label for="last_name" class="form-label">Úroveň jazyka</label>
-                  <input type="text" name="last_name" id="last_name" class="form-control" value="{{ user.lang_level }}">
-                </div>
-              </div>
-            {% endif %}
-
-            <div class="mb-3 d-flex justify-content-between">
-                <div class="flex-grow-1 me-2">
-                  <label for="first_name" class="form-label">Telefonní číslo - Kód země</label>
-                  <input type="text" name="area_code" id="area_code" class="form-control" value="{{ user.area_code }}">
-                </div>
-                <div class="flex-grow-1 ms-2">
-                  <label for="last_name" class="form-label">Telefonní číslo</label>
-                  <input type="text" name="phone_number" id="phone_number" class="form-control" value="{{ user.phone_number }}">
-                </div>
-              </div>
-            <div class="mb-3">
-              <label for="email" class="form-label">Email</label>
-              <input type="email" name="email" id="email" class="form-control" value="{{ user.email }}">
+                <ul>
+                    <li><a class="nav-link" href="{% url 'all-jobs' %}"><i class="fas fa-home me-2"></i>Home</a></li>
+                    <li><a href="#"><i class="fas fa-envelope me-2"></i>Message</a></li>
+                    <li><a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-user me-2"></i>Profil</a></li>
+                    <li><a class="nav-link" href="{% url 'edit-profile' %}"><i class="fas fa-cog me-2"></i>Save edit</a>
+                    </li>
+                </ul>
             </div>
-          </form>
         </div>
-      </div>
+
+        <!-- User profile content -->
+        <div class="col-md-9">
+            <div class="content">
+                <!-- Edit profile form -->
+                <form action="{% url 'edit-profile' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3 d-flex justify-content-between">
+                        <div class="flex-grow-1 me-2">
+                            <label for="first_name" class="form-label">Jméno</label>
+                            <input type="text" name="first_name" id="first_name" class="form-control"
+                                   value="{{ user.first_name }}">
+                        </div>
+                        <div class="flex-grow-1 ms-2">
+                            <label for="last_name" class="form-label">Příjmení</label>
+                            <input type="text" name="last_name" id="last_name" class="form-control"
+                                   value="{{ user.last_name }}">
+                        </div>
+                    </div>
+                    {% if user.is_useragent %}
+                        <div class="mb-3">
+                            <label for="company_name" class="form-label">Firma</label>
+                            <input type="text" name="company_name" id="company_name" class="form-control"
+                                   value="{{ user.company }}">
+                        </div>
+                        <div class="mb-3 d-flex justify-content-between">
+                            <div class="flex-grow-1 me-2">
+                                <label for="first_name" class="form-label">Ulice</label>
+                                <input type="text" name="first_name" id="company_street" class="form-control"
+                                       value="{{ user.company.street }}">
+                            </div>
+                            <div class="flex-grow-1 ms-2">
+                                <label for="last_name" class="form-label">Číslo popisné/orientační</label>
+                                <input type="text" name="last_name" id="company_num" class="form-control"
+                                       value="{{ user.company.num }}">
+                            </div>
+                            <div class="flex-grow-1 ms-2">
+                                <label for="last_name" class="form-label">Město</label>
+                                <input type="text" name="last_name" id="company_city" class="form-control"
+                                       value="{{ user.company.city }}">
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="mb-3">
+                            <label for="bio" class="form-label">Životopis</label>
+                            <textarea name="bio" id="bio" class="form-control">{{ user.bio }}</textarea>
+                        </div>
+                        <div class="mb-3 d-flex justify-content-between">
+                            <div class="flex-grow-1 me-2">
+                                <label for="first_name" class="form-label">Jazyk</label>
+                                <input type="text" name="first_name" id="first_name" class="form-control"
+                                       value="{{ user.language }}">
+                            </div>
+                            <div class="flex-grow-1 ms-2">
+                                <label for="last_name" class="form-label">Úroveň jazyka</label>
+                                <input type="text" name="last_name" id="last_name" class="form-control"
+                                       value="{{ user.lang_level }}">
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    <div class="mb-3 d-flex justify-content-between">
+                        <div class="flex-grow-1 ms-2">
+                            <label for="last_name" class="form-label">Telefonní číslo</label>
+                            <input type="text" name="phone_number" id="phone_number" class="form-control"
+                                   value="{{ user.phone_number }}">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" name="email" id="email" class="form-control" value="{{ user.email }}">
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-  </div>
+</div>
 </body>
 </html>
 
