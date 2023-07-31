@@ -39,12 +39,7 @@ class User(AbstractUser):
     lang_level = models.CharField(max_length=30, choices=Language.LEVEL_CHOICES, blank=True, null=True)
     address = models.CharField(max_length=200, blank=True, default="")
 
-    area_code = models.CharField(max_length=6, blank=True, choices=[
-       ("🇨🇿 CZ", "🇨🇿 +420"),
-       ("🇸🇰 SK", "🇸🇰 +421"),
-       ("🇨🇭 CH", "🇨🇭 +41")
-    ])
-    phone_number = models.IntegerField(blank=True, null=True)
+    phone_number = models.CharField(max_length=13, blank=True, null=True)
     profile_pic = models.ImageField(upload_to='profile_pics', blank=True)
     company_logo = models.ImageField(upload_to='company_logos', blank=True)
 

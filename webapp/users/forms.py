@@ -44,7 +44,6 @@ class EditProfileForm(UserChangeForm):
             'last_name',
             "address",
             "bio",
-            "area_code",
             "phone_number",
             "company_name"
         ]
