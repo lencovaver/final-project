@@ -119,6 +119,10 @@
                     </div>
                     {% if user.is_useragent %}
                         <div class="mb-3">
+                            <label for="id_profile_pic">Profile Picture:</label>
+                            <input type="file" name="company_logo" id="id_profile_pic">
+                        </div>
+                        <div class="mb-3">
                             <label for="company_name" class="form-label">Firma</label>
                             <input type="text" name="company_name" id="company_name" class="form-control"
                                    value="{{ user.company }}">
@@ -141,6 +145,10 @@
                             </div>
                         </div>
                     {% else %}
+                        <div class="mb-3">
+                            <label for="id_profile_pic">Profile Picture:</label>
+                            <input type="file" name="profile_pic" id="id_profile_pic">
+                        </div>
                         <div class="mb-3">
                             <label for="bio" class="form-label">Životopis</label>
                             <textarea name="bio" id="bio" class="form-control">{{ user.bio }}</textarea>
@@ -170,6 +178,9 @@
                         <label for="email" class="form-label">Email</label>
                         <input type="email" name="email" id="email" class="form-control" value="{{ user.email }}">
                     </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+
                 </form>
             </div>
         </div>

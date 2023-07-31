@@ -107,7 +107,9 @@
                 {% elif user.profile_pic %}
                     <img src="{{ user.profile_pic.url }}" alt="Profile picture" class="profile-pic">
                 {% endif %}
-                <h2 class="text-center">Profil {{ user.username }}</h2>
+
+                <h2 class="text-center">{{ user.username }}</h2>
+
                 <br><br><br>
                 {% if user.is_useragent %}
                     <p class="text-center"><b>Jméno:</b> {{ user.first_name }} {{ user.last_name }}</p>
