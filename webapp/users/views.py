@@ -14,12 +14,13 @@ from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from users.forms import RegistrationForm, EditProfileForm
 from users.models import User
+from django.shortcuts import redirect
 
 
 class RegistrationView(CreateView):
     # View for user registration.
 
-    template_name = 'registration.html'
+    template_name = "registration.html"
     form_class = RegistrationForm
     success_url = reverse_lazy("registration-success")
 
@@ -31,12 +32,12 @@ class RegistrationView(CreateView):
 class UserLoginView(LoginView):
     # View for user login.
 
-    template_name = 'login.html'
+    template_name = "login.html"
     form_class = AuthenticationForm
     redirect_authenticated_user = True
 
     def get_success_url(self):
-        return reverse('homepage')
+        return reverse("homepage")
 
     def form_invalid(self, form):
         print(form.errors)
@@ -48,12 +49,10 @@ class UserLogoutView(View):
 
     def get(self, request, *args, **kwargs):
         logout(request)
-        return redirect('homepage')
+        return redirect("homepage")
 
 
 class UserProfileView(DetailView):
-    # View for showing user profile.
-
     model = User
     form_class = EditProfileForm
     template_name = "profile.html"
@@ -62,25 +61,16 @@ class UserProfileView(DetailView):
         return self.request.user
 
     def get_context_data(self, **kwargs):
-        # Adds profile picture to context.
-
         context = super().get_context_data(**kwargs)
         user = self.get_object()
 
         if user.is_useragent:
+            context["company"] = user.company
             pic = user.company_logo
         else:
             pic = user.profile_pic
-
-        context['profile_pic'] = pic
+            context["profile_pic"] = pic
         return context
-
-
-from django.shortcuts import redirect
-from django.views import View
-
-
-# Your imports...
 
 
 class EditProfileView(LoginRequiredMixin, UpdateView):
@@ -93,7 +83,7 @@ class EditProfileView(LoginRequiredMixin, UpdateView):
         return self.request.user
 
     def form_valid(self, form):
-        messages.success(self.request, 'Profile updated successfully!')
+        messages.success(self.request, "Profile updated successfully!")
         return super().form_valid(form)
 
     def profile_pic_save(self, request, *args, **kwargs):
@@ -101,7 +91,7 @@ class EditProfileView(LoginRequiredMixin, UpdateView):
         form = EditProfileForm(request.POST, request.FILES, instance=user)
 
         if form.is_valid():
-            image_field = 'company_logo' if user.is_useragent else 'profile_pic'
+            image_field = "company_logo" if user.is_useragent else "profile_pic"
             image = form.cleaned_data.get(image_field)
 
             if image:
@@ -109,18 +99,22 @@ class EditProfileView(LoginRequiredMixin, UpdateView):
                 output = io.BytesIO()
 
                 resized_img = img.resize((300, 300))
-                resized_img.save(output, format='PNG', quality=85)  # Adjust quality according to your needs
+                resized_img.save(
+                    output, format="PNG", quality=85
+                )  # Adjust quality according to your needs
                 output.seek(0)  # move back to the beginning of the file stream
 
                 django_file = ContentFile(output.read())
-                django_file.name = image.name  # make sure to keep the same name as the original file
+                django_file.name = (
+                    image.name
+                )  # make sure to keep the same name as the original file
 
                 form.cleaned_data[image_field] = django_file
 
             form.save()
-            return redirect('profile')
+            return redirect("profile")
         else:
-            return render(request, self.template_name, {'form': form})
+            return render(request, self.template_name, {"form": form})
 
     def post(self, request, *args, **kwargs):
         return self.profile_pic_save(request, *args, **kwargs)
@@ -130,4 +124,4 @@ class RegSuccessView(View):
     # View for showing registration success page.
 
     def get(self, request, *args, **kwargs):
-        return render(request, 'registration-success.html')
+        return render(request, "registration-success.html")
