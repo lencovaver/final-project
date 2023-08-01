@@ -11,10 +11,10 @@ class RegistrationForm(UserCreationForm):
         model = User
         fields = ("username", "email", "password1", "password2", "is_useragent")
         widgets = {
-            'username': forms.TextInput(attrs={'class': 'form-control'}),
-            'email': forms.TextInput(attrs={'class': 'form-control'}),
-            'password1': forms.PasswordInput(attrs={'class': 'form-control'}),
-            'password2': forms.PasswordInput(attrs={'class': 'form-control'}),
+            "username": forms.TextInput(attrs={"class": "form-control"}),
+            "email": forms.TextInput(attrs={"class": "form-control"}),
+            "password1": forms.PasswordInput(attrs={"class": "form-control"}),
+            "password2": forms.PasswordInput(attrs={"class": "form-control"}),
         }
 
     def clean_email(self):
@@ -23,36 +23,33 @@ class RegistrationForm(UserCreationForm):
         #FIX ERROR MESSAGE!
         """
 
-        email = self.cleaned_data.get('email')
+        email = self.cleaned_data.get("email")
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError("Email is already in use.")
         return email
 
 
 class EditProfileForm(UserChangeForm):
-    # Form for editing user profile.
-
-    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
-    company_name = forms.CharField(max_length=200, required=False)
+    email = forms.EmailField(widget=forms.EmailInput(attrs={"class": "form-control"}))
 
     class Meta:
         model = User
         fields = [
             "profile_pic",
             "company_logo",
-            'first_name',
-            'last_name',
+            "first_name",
+            "last_name",
             "address",
             "bio",
             "phone_number",
-            "company_name"
+            "company",
         ]
-        exclude = ['password', "company"]
+        exclude = ["password"]
 
     def clean_profile_pic(self):
         # Checks if profile picture is too large.
 
-        image = self.cleaned_data.get('profile_pic', False)
+        image = self.cleaned_data.get("profile_pic", False)
         if image and image.size > 1 * 1024 * 1024:
             raise ValidationError("Image file too large - must be no more than 1MB")
         return image
@@ -60,7 +57,7 @@ class EditProfileForm(UserChangeForm):
     def clean_company_logo(self):
         # Checks if company logo is too large.
 
-        image = self.cleaned_data.get('company_logo', False)
+        image = self.cleaned_data.get("company_logo", False)
         if image and image.size > 1 * 1024 * 1024:
             raise ValidationError("Image file too large - must be no more than 1MB")
         return image

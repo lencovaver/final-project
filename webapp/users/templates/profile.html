@@ -115,7 +115,7 @@
                     <p class="text-center"><b>Jméno:</b> {{ user.first_name }} {{ user.last_name }}</p>
                     <p class="text-center"><b>Firma:</b> {{ user.company }}</p>
                     <p class="text-center">
-                        <b>Adresa:</b> {{ user.company.street }} {{ user.company.num }}, {{ user.company.city }}</p>
+                        <b>Adresa:</b> {{ user.address }} </p>
                 {% else %}
                     <p class="text-center"><b>Křestní jméno:</b> {{ user.first_name }} {{ user.last_name }}</p>
                     <p class="text-center"><b>Životopis:</b> {{ user.bio }}</p>
@@ -126,7 +126,7 @@
                 {% else %}
                     <p class="text-center"><b>Telefonní číslo:</b> Neuvedeno</p>
                 {% endif %}
-                <p class="text-center"><b>Email:</b> {{ user.email }}</p>
+                <p class="text-center"><b>E-mail:</b> {{ user.email }}</p>
             </div>
         </div>
     </div>
