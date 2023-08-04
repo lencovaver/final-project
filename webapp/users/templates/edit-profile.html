@@ -127,7 +127,7 @@
                         </div>
                         <div class="mb-3 d-flex justify-content-between">
                             <div class="flex-grow-1 me-2">
-                                <label for="company_address" class="form-label">Ulice</label>
+                                <label for="company_address" class="form-label">Adresa společnosti</label>
                                 <input type="text" name="company_address" id="company_address" class="form-control"
                                        value="{{ user.address }}">
                             </div>
@@ -138,23 +138,19 @@
                             <input type="file" name="profile_pic" id="id_profile_pic">
                         </div>
                         <div class="mb-3">
-                            <label for="bio" class="form-label">Životopis</label>
+                            <label for="bio" class="form-label">O mně:</label>
                             <textarea name="bio" id="bio" class="form-control">{{ user.bio }}</textarea>
                         </div>
-                        <div class="mb-3 d-flex justify-content-between">
-                            <div class="flex-grow-1 me-2">
-                                <label for="language" class="form-label">Jazyk</label>
-                                <input type="text" name="language" id="language" class="form-control"
-                                       value="{{ user.language }}">
-                            </div>
-                            <div class="flex-grow-1 ms-2">
-                                <label for="lang_level" class="form-label">Úroveň jazyka</label>
-                                <input type="text" name="lang_level" id="lang_level" class="form-control"
-                                       value="{{ user.lang_level }}">
-                            </div>
+                        <div class="mb-3">
+                            <label for="{{ form.language.id_for_label }}">Jazykové znalosti:</label>
+                            {{ form.language }}
+                        </div>
+                        <div class="flex-grow-1 ms-2">
+                            <label for="{{ form.lang_level.id_for_label }}">Úroveň:</label>
+                            {{ form.lang_level }}
                         </div>
                     {% endif %}
-
+                    <br>
                     <div class="mb-3 d-flex justify-content-between">
                         <div class="flex-grow-1 ms-2">
                             <label for="phone_number" class="form-label">Telefonní číslo</label>
