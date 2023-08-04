@@ -89,8 +89,8 @@
             <h1 class="display-4">SwissApp</h1>
           </div>
           <ul>
-            <li><a class="nav-link" href="{% url 'all-jobs' %}"><i class="fas fa-home me-2"></i>Home</a></li>
-            <li><a href="#"><i class="fas fa-envelope me-2"></i>Message</a></li>
+            <li><a class="nav-link" href="{% url 'dashboard' %}"><i class="fas fa-home me-2"></i>Domů</a></li>
+            <li><a href="#"><i class="fas fa-envelope me-2"></i>Zprávy</a></li>
             <li><a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-user me-2"></i>Profil</a></li>
           </ul>
         </div>
@@ -99,12 +99,12 @@
       <!-- Dashboard content -->
       <div class="col-md-9">
         <div class="content">
-          <h2>Update Job</h2>
+          <h2>Aktualizovat nabídku</h2>
           <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
             <br>
-            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="submit" class="btn btn-primary">Aktualizovat</button>
           </form>
         </div>
       </div>

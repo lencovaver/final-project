@@ -37,10 +37,12 @@ class UserLoginView(LoginView):
     redirect_authenticated_user = True
 
     def get_success_url(self):
-        return reverse("homepage")
+        if self.request.user.is_useragent:
+            return reverse("dashboard")
+        else:
+            return reverse("homepage")
 
     def form_invalid(self, form):
-        print(form.errors)
         return super().form_invalid(form)
 
 

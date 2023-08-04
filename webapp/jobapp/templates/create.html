@@ -118,21 +118,21 @@
     <ul class="nav">
         <ul class="nav justify-content-end"> <!-- Upraveno z "nav" na "nav justify-content-end" -->
             <li class=" nav-item">
-                <a class="nav-link" href="{% url 'all-jobs' %}">View All Available Jobs</a>
+                <a class="nav-link" href="{% url 'dashboard' %}">Domů</a>
             </li>
             {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'profile' %}">Your profile</a>
+                    <a class="nav-link" href="{% url 'profile' %}">Profil</a>
                 </li>
             {% else %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'login' %}">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'registration' %}">Registration</a>
+                    <a class="nav-link" href="{% url 'registration' %}">Registrace</a>
                 </li>
             {% endif %}
         </ul>
@@ -154,65 +154,65 @@
                 {% csrf_token %}
 
                 <div class="form-group">
-                    <label for="{{ form.category.id_for_label }}">Category:</label>
+                    <label for="{{ form.category.id_for_label }}">Kategorie:</label>
                     {{ form.category }}
                 </div>
 
                 <div class="form-group">
-                    <label for="{{ form.position.id_for_label }}">Position:</label>
+                    <label for="{{ form.position.id_for_label }}">Obor:</label>
                     {{ form.position }}
                 </div>
 
                 <div class="form-group">
-                    <label for="{{ form.info_position.id_for_label }}">Description:</label>
+                    <label for="{{ form.info_position.id_for_label }}">Popis pozice:</label>
                     {{ form.info_position }}
                 </div>
 
                 <div class="form-group">
-                    <label for="{{ form.place.id_for_label }}">Place:</label>
-                    {{ form.place }}
-                </div>
-                                <div class="form-group">
-                    <label for="{{ form.language.id_for_label }}">Language:</label>
-                    {{ form.language }}
-                </div>
-
-                <div class="form-group">
-                    <label for="{{ form.experience.id_for_label }}">Experience:</label>
-                    {{ form.experience }}
-                </div>
-
-                <div class="form-group">
-                    <label for="{{ form.driving_licence.id_for_label }}">Driving Licence:</label>
-                    {{ form.driving_licence }}
-                </div>
-
-                <div class="form-group">
-                    <label for="{{ form.accommodation.id_for_label }}">Accommodation:</label>
-                    {{ form.accommodation }}
-                </div>
-
-                <div class="form-group">
-                    <label for="{{ form.work_type.id_for_label }}">Work Type:</label>
+                    <label for="{{ form.work_type.id_for_label }}">Typ úvazku:</label>
                     {{ form.work_type }}
                 </div>
 
                 <div class="form-group">
-                    <label for="{{ form.salary.id_for_label }}">Salary:</label>
+                    <label for="{{ form.place.id_for_label }}">Oblast:</label>
+                    {{ form.place }}
+                </div>
+                                <div class="form-group">
+                    <label for="{{ form.language.id_for_label }}">Jazykové požadavky:</label>
+                    {{ form.language }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.experience.id_for_label }}">Zkušenosti:</label>
+                    {{ form.experience }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.driving_licence.id_for_label }}">Požadavky na řidičák:</label>
+                    {{ form.driving_licence }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.accommodation.id_for_label }}">Požadavky na ubytování:</label>
+                    {{ form.accommodation }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.salary.id_for_label }}">Mzda:</label>
                     {{ form.salary }}
                 </div>
 
                 <div class="form-group">
-                    <label for="{{ form.diet.id_for_label }}">Diet:</label>
+                    <label for="{{ form.diet.id_for_label }}">Diety:</label>
                     {{ form.diet }}
                 </div>
 
                 <div class="form-group">
-                    <label for="{{ form.start_date.id_for_label }}">Starting:</label>
+                    <label for="{{ form.start_date.id_for_label }}">Termín nástupu:</label>
                     {{ form.start_date }}
                 </div>
 
-                <button type="submit" class="btn btn-primary">Create New Ad</button>
+                <button type="submit" class="btn btn-primary">Vytvořit</button>
             </form>
 
         </div>

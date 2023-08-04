@@ -45,6 +45,18 @@ class AllJobsView(ListView):
         return PostJob.objects.filter(status="active")
 
 
+class MyJobView(LoginRequiredMixin, ListView):
+    model = PostJob
+    template_name = "companydashboard.html"
+    context_object_name = "dashboard"
+
+    def get_queryset(self):
+        print(f"Current user: {self.request.user}")
+        jobs = PostJob.objects.filter(author=self.request.user)
+        print(f"Jobs for user: {jobs}")
+        return jobs
+
+
 class JobDetailView(LoginRequiredMixin, DetailView):
     model = PostJob
     template_name = "job-detail.html"

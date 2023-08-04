@@ -9,6 +9,7 @@ class PostJobAdmin(admin.ModelAdmin):
     actions = ['archive_selected_jobs']         # Přidání akce pro archivaci více inzerátů najednou
 
     def archive_selected_jobs(self, request, queryset):
+        queryset.update(status="archived")
         for inzerat in queryset:
             inzerat.archived = not inzerat.archived
             inzerat.save()
