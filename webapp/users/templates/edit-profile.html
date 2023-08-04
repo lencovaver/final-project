@@ -90,8 +90,14 @@
                     <h1 class="display-4">SwissApp</h1>
                 </div>
                 <ul>
-                    <li><a class="nav-link" href="{% url 'all-jobs' %}"><i class="fas fa-home me-2"></i>Home</a></li>
-                    <li><a href="#"><i class="fas fa-envelope me-2"></i>Message</a></li>
+                    {% if user.is_useragent %}
+                        <li><a class="nav-link" href="{% url 'dashboard' %}"><i class="fas fa-home me-2"></i>Domů</a>
+                        </li>
+                    {% else %}
+                        <li><a class="nav-link" href="{% url 'all-jobs' %}"><i class="fas fa-home me-2"></i>Všechny
+                            inzeráty</a></li>
+                    {% endif %}
+                    <li><a href="#"><i class="fas fa-envelope me-2"></i>Zprávy</a></li>
                     <li><a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-user me-2"></i>Profil</a></li>
                 </ul>
             </div>
@@ -117,24 +123,24 @@
                     </div>
                     {% if user.is_useragent %}
                         <div class="mb-3">
-                            <label for="id_profile_pic">Profile Picture:</label>
+                            <label for="id_profile_pic">Profilový obrázek:</label>
                             <input type="file" name="company_logo" id="id_profile_pic">
                         </div>
                         <div class="mb-3">
-                            <label for="company_name" class="form-label">Firma</label>
+                            <label for="company_name" class="form-label">Společnost:</label>
                             <input type="text" name="company" id="company_name" class="form-control"
                                    value="{{ user.company }}">
                         </div>
                         <div class="mb-3 d-flex justify-content-between">
                             <div class="flex-grow-1 me-2">
-                                <label for="company_address" class="form-label">Adresa společnosti</label>
+                                <label for="company_address" class="form-label">Adresa společnosti:</label>
                                 <input type="text" name="company_address" id="company_address" class="form-control"
                                        value="{{ user.address }}">
                             </div>
                         </div>
                     {% else %}
                         <div class="mb-3">
-                            <label for="id_profile_pic">Profile Picture:</label>
+                            <label for="id_profile_pic">Profilový obrázek:</label>
                             <input type="file" name="profile_pic" id="id_profile_pic">
                         </div>
                         <div class="mb-3">
@@ -142,7 +148,7 @@
                             <textarea name="bio" id="bio" class="form-control">{{ user.bio }}</textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="{{ form.language.id_for_label }}">Jazykové znalosti:</label>
+                            <label for="{{ form.language.id_for_label }}">Jazykové schopnosti:</label>
                             {{ form.language }}
                         </div>
                         <div class="flex-grow-1 ms-2">

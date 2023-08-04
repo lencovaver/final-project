@@ -90,10 +90,15 @@
                     <h1 class="display-4">SwissApp</h1>
                 </div>
                 <ul>
-                    <li><a class="nav-link" href="{% url 'all-jobs' %}"><i class="fas fa-home me-2"></i>Home</a></li>
-                    <li><a href="#"><i class="fas fa-envelope me-2"></i>Message</a></li>
-                    <li><a class="nav-link" href="{% url 'edit-profile' %}"><i class="fas fa-cog me-2"></i>Edit profile</a></li>
-                </ul>
+                    {% if user.is_useragent %}
+                        <li><a class="nav-link" href="{% url 'dashboard' %}"><i class="fas fa-home me-2"></i>Domů</a>
+                        </li>
+                    {% else %}
+                        <li><a class="nav-link" href="{% url 'all-jobs' %}"><i class="fas fa-home me-2"></i>Všechny
+                            inzeráty</a></li>
+                    {% endif %}
+                    <li><a href="#"><i class="fas fa-envelope me-2"></i>Zprávy</a></li>
+                    <li><a class="nav-link" href="{% url 'edit-profile' %}"><i class="fas fa-cog me-2"></i>Upravit profil
             </div>
         </div>
 
@@ -112,9 +117,9 @@
                 <br><br><br>
                 {% if user.is_useragent %}
                     <p class="text-center"><b>Jméno:</b> {{ user.first_name }} {{ user.last_name }}</p>
-                    <p class="text-center"><b>Firma:</b> {{ user.company }}</p>
+                    <p class="text-center"><b>Společnost:</b> {{ user.company }}</p>
                     <p class="text-center">
-                        <b>Adresa:</b> {{ user.address }} </p>
+                        <b>Adresa společnosti:</b> {{ user.address }} </p>
                 {% else %}
                     <p class="text-center"><b>Jméno:</b> {{ user.first_name }} {{ user.last_name }}</p>
                     <p class="text-center"><b>Životopis:</b> {{ user.bio }}</p>

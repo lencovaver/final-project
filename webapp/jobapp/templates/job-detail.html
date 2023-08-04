@@ -96,11 +96,17 @@
                     <h1 class="display-4">SwissApp</h1>
                 </div>
                 <ul>
-                    <li><a class="nav-link" href="{% url 'all-jobs' %}"><i class="fas fa-home me-2"></i>Home</a></li>
-                    <li><a href="#"><i class="fas fa-envelope me-2"></i>Message</a></li>
-                    <li><a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-user me-2"></i>Profil</a></li>
                     {% if user.is_useragent %}
-                        <li><a class="nav-link" href="{% url 'update' pk=job.pk %}"><i class="fas fa-cog me-2"></i>Edit</a>
+                        <li><a class="nav-link" href="{% url 'dashboard' %}"><i class="fas fa-home me-2"></i>Domů</a>
+                        </li>
+                    {% else %}
+                        <li><a class="nav-link" href="{% url 'all-jobs' %}"><i class="fas fa-home me-2"></i>Všechny
+                            inzeráty</a></li>
+                    {% endif %}
+                    <li><a href="#"><i class="fas fa-envelope me-2"></i>Zprávy</a></li>
+                    <li><a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-user me-2"></i>Profil</a></li>
+                    {% if request.user.is_authenticated %}
+                        <li><a class="nav-link" href="{% url 'update' pk=job.pk %}"><i class="fas fa-cog me-2"></i>Upravit inzerát</a>
                         </li>
                     {% endif %}
                 </ul>
@@ -113,29 +119,29 @@
                 <!-- Zobrazení profilového obrázku jako první v kulatém rozhraní -->
                 <h2 class="text-center"> {{ job.position.name_position }}</h2>
                 <br><br><br>
-                <p class="text-center"><b>Place:</b> {{ job.place }}</p>
-                <p class="text-center"><b>Experience:</b> {{ job.experience }}</p>
-                <p class="text-center"><b>Language requirements:</b> {% for language in job.language.all %}
+                <p class="text-center"><b>Oblast:</b> {{ job.place }}</p>
+                <p class="text-center"><b>Požadované zkušenosti:</b> {{ job.experience }}</p>
+                <p class="text-center"><b>Jazykové požadavky:</b> {% for language in job.language.all %}
                     {{ language }}
                     {% empty %}
-                    No language requirements
+                    Neuvedeno
                 {% endfor %}</p>
-                <p class="text-center"><b>Information about the position:</b> {{ job.info_position }}</p>
-                <p class="text-center"><b>Accommodation:</b> {{ job.accommodation }}</p>
-                <p class="text-center"><b>Driving licence requirements:</b> {% for licence in job.driving_licence.all %}
+                <p class="text-center"><b>Popis práce:</b> {{ job.info_position }}</p>
+                <p class="text-center"><b>Požadavky na ubytování:</b> {{ job.accommodation }}</p>
+                <p class="text-center"><b>Požadavky na řidičák:</b> {% for licence in job.driving_licence.all %}
                     {{ licence }}
                     {% empty %}
-                    No requirements
+                    Bez opžadavků
                 {% endfor %}</p>
-                <p class="text-center"><b>Type:</b> {{ job.work_type }}</p>
-                <p class="text-center"><b>Starting on:</b> {{ job.start_date }}</p>
-                <p class="text-center"><b>Salary:</b> {{ job.salary }} <b>Diet:</b> {{ job.diet }}</p></p>
+                <p class="text-center"><b>Typ úvazku:</b> {{ job.work_type }}</p>
+                <p class="text-center"><b>Termín nástupu:</b> {{ job.start_date }}</p>
+                <p class="text-center"><b>Plat:</b> {{ job.salary }} CHF / hodinu <b>Diety:</b> {{ job.diet }} CHF</p></p>
                 {% if user.is_useragent %}
                     {% csrf_token %}
                     <button type="submit" href="{% url 'archive-job' pk=job.pk %}" class="btn btn-primary">Archivovat
                     </button>
                 {% else %}
-                    <button type="submit" href="{% url 'all-jobs' %}" class="btn btn-primary">Send my contact</button>
+                    <button type="submit" href="{% url 'all-jobs' %}" class="btn btn-primary">Mám zájem!</button>
                     <br>
                 {% endif %}
             </div>
