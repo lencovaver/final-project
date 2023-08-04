@@ -86,96 +86,87 @@
     </style>
 </head>
 <body>
-<div class="container-fluid">
-    <div class="row">
-        <!-- Dashboard sidebar -->
-        <div class="col-md-3">
-            <div class="sidebar">
-                <div class="logo">
-                    <img src="https://www.wyssenseilbahnen.com/wp-content/uploads/2014/07/ch.jpeg" alt="Swissapp logo">
-                    <h1 class="display-4">SwissApp</h1>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Dashboard sidebar -->
+            <div class="col-md-3">
+                <div class="sidebar">
+                    <div class="logo">
+                        <img src="https://www.wyssenseilbahnen.com/wp-content/uploads/2014/07/ch.jpeg" alt="Swissapp logo">
+                        <h1 class="display-4">SwissApp</h1>
+                    </div>
+                    <ul>
+                        <li><a class="nav-link" href="{% url 'all-jobs' %}"><i class="fas fa-home me-2"></i>Home</a></li>
+                        <li><a href="#"><i class="fas fa-envelope me-2"></i>Message</a></li>
+                        <li><a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-user me-2"></i>Profil</a></li>
+                        {% if user.is_useragent %}
+                            <li><a class="nav-link" href="{% url 'update' pk=job.pk %}"><i class="fas fa-cog me-2"></i>Edit</a>
+                            </li>
+                        {% endif %}
+                    </ul>
                 </div>
-                <ul>
-                    {% if user.is_useragent %}
-                        <li><a class="nav-link" href="{% url 'dashboard' %}"><i class="fas fa-home me-2"></i>Domů</a>
-                        </li>
-                    {% else %}
-                        <li><a class="nav-link" href="{% url 'all-jobs' %}"><i class="fas fa-home me-2"></i>Všechny
-                            inzeráty</a></li>
-                    {% endif %}
-                    <li><a href="#"><i class="fas fa-envelope me-2"></i>Zprávy</a></li>
-                    <li><a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-user me-2"></i>Profil</a></li>
-                    {% if request.user.is_authenticated %}
-                        <li><a class="nav-link" href="{% url 'update' pk=job.pk %}"><i class="fas fa-cog me-2"></i>Upravit inzerát</a>
-                        </li>
-                    {% endif %}
-                </ul>
             </div>
-        </div>
 
-        <!-- User profile content -->
-        <div class="col-md-9">
-            <div class="content">
-                <!-- Zobrazení profilového obrázku jako první v kulatém rozhraní -->
-                <h2 class="text-center"> {{ job.position.name_position }}</h2>
-                <br><br><br>
-                <p class="text-center"><b>Oblast:</b> {{ job.place }}</p>
-                <p class="text-center"><b>Požadované zkušenosti:</b> {{ job.experience }}</p>
-                <p class="text-center"><b>Jazykové požadavky:</b> {% for language in job.language.all %}
-                    {{ language }}
-                    {% empty %}
-                    Neuvedeno
-                {% endfor %}</p>
-                <p class="text-center"><b>Popis práce:</b> {{ job.info_position }}</p>
-                <p class="text-center"><b>Požadavky na ubytování:</b> {{ job.accommodation }}</p>
-                <p class="text-center"><b>Požadavky na řidičák:</b> {% for licence in job.driving_licence.all %}
-                    {{ licence }}
-                    {% empty %}
-                    Bez opžadavků
-                {% endfor %}</p>
-                <p class="text-center"><b>Typ úvazku:</b> {{ job.work_type }}</p>
-                <p class="text-center"><b>Termín nástupu:</b> {{ job.start_date }}</p>
-                <p class="text-center"><b>Plat:</b> {{ job.salary }} CHF / hodinu <b>Diety:</b> {{ job.diet }} CHF</p></p>
-                {% if user.is_useragent %}
-                    {% csrf_token %}
-                    <button type="submit" href="{% url 'archive-job' pk=job.pk %}" class="btn btn-primary">Archivovat
-                    </button>
-                {% else %}
-                    <button type="submit" href="{% url 'all-jobs' %}" class="btn btn-primary">Mám zájem!</button>
-                    <br>
-                {% endif %}
+            <!-- User profile content -->
+            <div class="col-md-9">
+                <div class="content">
+                    <!-- Zobrazení profilového obrázku jako první v kulatém rozhraní -->
+                    <h2 class="text-center"> {{ job.position.name_position }}</h2>
+                    <br><br><br>
+                    <p class="text-center"><b>Místo výkonu práce:</b> {{ job.place }}</p>
+                    <p class="text-center"><b>Zkušenosti:</b> {{ job.experience }}</p>
+                    <p class="text-center"><b>Požadovaná úroveň jazyka:</b> {% for language in job.language.all %}
+                        {{ language }}
+                        {% empty %}
+                        No language requirements
+                    {% endfor %}</p>
+                    <p class="text-center"><b>Podrobný popis pozice:</b> {{ job.info_position }}</p>
+                    <p class="text-center"><b>Ubytování:</b> {{ job.accommodation }}</p>
+                    <p class="text-center"><b>Požadavek na řidičské oprávnění:</b> {% for licence in job.driving_licence.all %}
+                        {{ licence }}
+                        {% empty %}
+                        No requirements
+                    {% endfor %}</p>
+                    <p class="text-center"><b>Typ úvazku:</b> {{ job.work_type }}</p>
+                    <p class="text-center"><b>Nástup od:</b> {{ job.start_date }}</p>
+                    <p class="text-center"><b>Hodinová mzda:</b> {{ job.salary }} <b>Diety:</b> {{ job.diet }}</p></p>
+                    {% if user.is_useragent %}
+                        <form method="post" action="{% url 'archive-job' pk=job.pk %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">Archivovat</button>
+                        </form>
+                    {% else %}
+                        <button type="submit" href="{% url 'all-jobs' %}" class="btn btn-primary">Mám zájem</button>
+                        <br>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
-</body>
-</html>
-
-<script>
-    // Přidání JavaScriptu pro aktualizaci stavu archivace po kliknutí na tlačítko
-    document.querySelector("form").addEventListener("submit", function (event) {
-        event.preventDefault();
-        fetch(event.target.action, {
-            method: "POST",
-            headers: {"X-CSRFToken": "{{ csrf_token }}"},
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.archived) {
-                    alert("Inzerát byl úspěšně archivován.");
-                } else {
-                    //alert("Inzerát byl úspěšně obnoven.");
-                }
+    <script>
+        // Přidání JavaScriptu pro aktualizaci stavu archivace po kliknutí na tlačítko
+        document.querySelector("form").addEventListener("submit", function (event) {
+            event.preventDefault();
+            fetch(event.target.action, {
+                method: "POST",
+                headers: {"X-CSRFToken": "{{ csrf_token }}"},
             })
-            .catch(error => {
-                console.error("Chyba při požadavku na server:", error);
-            });
-    });
-</script>
-</div>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+                .then(response => response.json())
+                .then(data => {
+                    if (data.archived) {
+                        alert("Inzerát byl úspěšně archivován.");
+                    } else {
+                        //alert("Inzerát byl úspěšně obnoven.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Chyba při požadavku na server:", error);
+                });
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>
