@@ -57,7 +57,6 @@ class MyJobView(LoginRequiredMixin, ListView):
         return jobs
 
 
-
 class JobDetailView(LoginRequiredMixin, DetailView):
     model = PostJob
     template_name = "job-detail.html"
