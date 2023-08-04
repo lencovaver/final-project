@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Delete Job</title>
+    <title>Smazat</title>
 </head>
 <body>
-    <h2>Are you sure?</h2>
+    <h2>Jste si jisti?</h2>
     <form method="POST">
         {% csrf_token %}
         <button type="submit">DELETE</button>
     </form>
-    <a href="{% url 'homepage' %}">No, back to homepage</a>
+    <a href="{% url 'dashboard' %}">Zpátky</a>
 </body>
 </html>
