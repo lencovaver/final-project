@@ -191,18 +191,6 @@
     justify-content: center;
     flex-direction: column;
   }
-    .nav-link {
-      color: #FFFFFF;
-      font-weight: bold;
-      background-color: #D80032;
-      padding: 10px 20px;
-      border-radius: 5px;
-      text-decoration: none;
-      transition: background-color 0.3s;
-      font-weight: bold;
-      margin-top: 10px;
-      margin-right: 3px; /* Přidá mezeru mezi tlačítky vlevo */
-    }
 
     .nav {
       margin-bottom: 20px;
@@ -210,35 +198,52 @@
       justify-content: flex-end;
     }
 
-    .nav-link-button {
-    background: none;
-    border: none;
-    padding: 0;
-    font: inherit;
-    cursor: pointer;
-    text-decoration: underline;
-    color: #D80032;
-  }
+    .custom-button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        color: #FFFFFF;
+        background-color: #2B2D42;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-top: 25px;
+        margin-right: 20px;
+    }
+
+    .custom-button:hover {
+        background-color: #D80032;
+        color: white;
+    }
+
   </style>
 </head>
 <body>
-
  <header>
       <div class="col-md-6">
           <ul class="nav justify-content-end">
             {% if user.is_authenticated %}
-            <p class="nav-item">
-              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            <p class="button">
+              <a class="custom-button" onclick="logout()" href="{% url 'logout' %}">Logout</a>
             </p>
-            <p class="nav-item">
-              <a class="nav-link" href="{% url 'profile' %}">⚙️ Your profile</a>
+              <script>
+                function logout() {
+                alert("Byl/a jste odhlášen/a.");
+                }
+              </script>
+            <p class="button">
+              <a class="custom-button" href="{% url 'profile' %}">⚙️ Your profile</a>
             </p>
             {% else %}
-            <p class="nav-item">
-              <a class="nav-link" href="{% url 'login' %}">Login</a>
+            <p class="button">
+              <a class="custom-button" href="{% url 'login' %}">Login</a>
             </p>
-            <p class="nav-item">
-              <a class="nav-link" href="{% url 'registration' %}">Sign up</a>
+            <p class="button">
+              <a class="custom-button" href="{% url 'registration' %}">Sign up</a>
             </p>
             {% endif %}
           </ul>
@@ -252,9 +257,9 @@
         <p>
           {% if user.is_authenticated %}
           <h2>{{ user.first_name }} vítej znovu na svém profilu</h2>
-          <p class="nav-item">
-              <a class="nav-link" href="{% url 'all-jobs' %}">Ukaž mi nabídky práce</a>
-            </p>
+          <p class="button">
+            <a class="custom-button" href="{% url 'all-jobs' %}">Ukaž mi nabídky práce</a>
+          </p>
           {% else %}
           <h2>Práce ve Švýcarsku na dosah ruky</h2>
           {% endif %}
