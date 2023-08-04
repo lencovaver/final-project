@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Swissapp Dashboard</title>
+    <title>Profile</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <!-- Font Awesome Icons -->
@@ -94,16 +94,16 @@
                         <li><a class="nav-link" href="{% url 'dashboard' %}"><i class="fas fa-home me-2"></i>Domů</a>
                         </li>
                     {% else %}
-                        <li><a class="nav-link" href="{% url 'all-jobs' %}"><i class="fas fa-home me-2"></i>Všechny
-                            inzeráty</a></li>
+                        <li><a class="nav-link" href="{% url 'all-jobs' %}"><i class="fas fa-home me-2"></i>Inzeráty</a></li>
                     {% endif %}
                     <li><a href="#"><i class="fas fa-envelope me-2"></i>Zprávy</a></li>
-                    <li><a class="nav-link" href="{% url 'edit-profile' %}"><i class="fas fa-cog me-2"></i>Upravit profil
+                    <li><a class="nav-link" href="{% url 'edit-profile' %}"><i class="fas fa-cog me-2"></i>Upravit profil</a></li>
+                </ul>
             </div>
         </div>
 
         <!-- User profile content -->
-        <div class="col-md-9">
+        <div class="col-md-9 d-flex align-items-center justify-content-center">
             <div class="content">
                 <!-- Zobrazení profilového obrázku jako první v kulatém rozhraní -->
                 {% if user.company_logo %}
