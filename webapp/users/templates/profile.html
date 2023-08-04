@@ -92,8 +92,7 @@
                 <ul>
                     <li><a class="nav-link" href="{% url 'all-jobs' %}"><i class="fas fa-home me-2"></i>Home</a></li>
                     <li><a href="#"><i class="fas fa-envelope me-2"></i>Message</a></li>
-                    <li><a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-user me-2"></i>Profil</a></li>
-                    <li><a class="nav-link" href="{% url 'edit-profile' %}"><i class="fas fa-cog me-2"></i>Edit</a></li>
+                    <li><a class="nav-link" href="{% url 'edit-profile' %}"><i class="fas fa-cog me-2"></i>Edit profile</a></li>
                 </ul>
             </div>
         </div>
@@ -117,9 +116,9 @@
                     <p class="text-center">
                         <b>Adresa:</b> {{ user.address }} </p>
                 {% else %}
-                    <p class="text-center"><b>Křestní jméno:</b> {{ user.first_name }} {{ user.last_name }}</p>
+                    <p class="text-center"><b>Jméno:</b> {{ user.first_name }} {{ user.last_name }}</p>
                     <p class="text-center"><b>Životopis:</b> {{ user.bio }}</p>
-                    <p class="text-center"><b>Jazykové znalosti:</b> {{ user.language }} {{ user.lang_level }}</p>
+                    <p class="text-center"><b>Jazykové znalosti:</b> {{ user.get_language_display }} - {{ user.get_lang_level_display }}</p>
                 {% endif %}
                 {% if user.phone_number %}
                     <p class="text-center"><b>Telefonní číslo:</b> {{ user.phone_number }}</p>

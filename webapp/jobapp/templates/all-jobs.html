@@ -1,192 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Swissapp Dashboard</title>
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  <!-- Custom CSS -->
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swissapp Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      color: #FFFFFF;
-    }
+        .logo {
+            display: flex;
+            align-items: center;
+            color: #FFFFFF;
+        }
 
-    .logo img {
-      margin-right: 10px;
-      width: 80px;
-      height: 50px;
-    }
+        .logo img {
+            margin-right: 10px;
+            width: 80px;
+            height: 50px;
+        }
 
-    .sidebar {
-      height: 99vh;
-      background: #2B2D42; /* Gradientová pozadí */
-      color: #fff;
-      padding-top: 20px;
-      border-radius: 15px; /* Kulaté rohy */
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Stín pro dojem hloubky */
-    }
+        .sidebar {
+            height: 99vh;
+            background: #2B2D42; /* Gradientová pozadí */
+            color: #fff;
+            padding-top: 20px;
+            border-radius: 15px; /* Kulaté rohy */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Stín pro dojem hloubky */
+        }
 
-    .sidebar h2 {
-      font-size: 24px;
-      text-align: center;
-      margin-bottom: 30px;
-    }
+        .sidebar h2 {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
 
-    .sidebar ul {
-      list-style: none;
-      padding: 0;
-    }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
 
-    .sidebar ul li {
-      margin-bottom: 10px;
-    }
+        .sidebar ul li {
+            margin-bottom: 10px;
+        }
 
-    .sidebar ul li a {
-      color: #fff;
-      text-decoration: none;
-      display: block;
-      padding: 10px;
-    }
+        .sidebar ul li a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+        }
 
-    .sidebar ul li a:hover {
-      background: linear-gradient(45deg, #D80032, #2B2D42); /* Tmavší gradient při najetí myši */
-    }
+        .sidebar ul li a:hover {
+            background: linear-gradient(45deg, #D80032, #2B2D42); /* Tmavší gradient při najetí myši */
+        }
 
-    .content {
-      padding: 20px;
-    }
+        .content {
+            padding: 20px;
+        }
 
-    /* Přidáme třídu pro kontejner karet */
-    .card-container {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
+        /* Přidáme třídu pro kontejner karet */
+        .card-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
 
-    /* Přidáme styly pro jednotlivé karty */
-    .card {
-      width: calc(32% - 10px); /* Každá karta zabere 32% šířky kontejneru s odstupem 10px */
-      margin-bottom: 10px;
-      transition: all 0.3s;
-      border: 1px solid #ddd; /* Přidáme jemný okraj kolem karty */
-      border-radius: 10px; /* Kulaté rohy karty */
-      overflow: hidden; /* Zabráníme obřezání obsahu mimo kartu */
-      background-color: #f8f8f8;
-    }
+        /* Přidáme styly pro jednotlivé karty */
+        .card {
+            width: calc(32% - 10px); /* Každá karta zabere 32% šířky kontejneru s odstupem 10px */
+            margin-bottom: 10px;
+            transition: all 0.3s;
+            border: 1px solid #ddd; /* Přidáme jemný okraj kolem karty */
+            border-radius: 10px; /* Kulaté rohy karty */
+            overflow: hidden; /* Zabráníme obřezání obsahu mimo kartu */
+            background-color: #f8f8f8;
+        }
 
-    /* Styly pro nadpis karty */
-    .card-title {
-      font-size: 1.5em; /* Zmenšíme velikost nadpisu karty */
-      color: #2B2D42;
-      margin-bottom: 10px;
-    }
+        /* Styly pro nadpis karty */
+        .card-title {
+            font-size: 1.5em; /* Zmenšíme velikost nadpisu karty */
+            color: #2B2D42;
+            margin-bottom: 10px;
+        }
 
-    /* Styly pro obsah karty */
-    .card-text {
-      color: #7e7d7d;
-    }
+        /* Styly pro obsah karty */
+        .card-text {
+            color: #7e7d7d;
+        }
 
-    /* Efekt pro zvětšení karty při najetí myši */
-    .card:hover {
-      transform: scale(1.1);
-      z-index: 1;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Přidáme stín pro dojem hloubky */
-    }
-  </style>
+        /* Efekt pro zvětšení karty při najetí myši */
+        .card:hover {
+            transform: scale(1.1);
+            z-index: 1;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Přidáme stín pro dojem hloubky */
+        }
+    </style>
 </head>
 <body>
-  <div class="container-fluid">
+<div class="container-fluid">
     <div class="row">
-      <!-- Dashboard sidebar -->
-      <div class="col-md-3">
-        <div class="sidebar">
-          <div class="logo">
-            <img src="https://www.wyssenseilbahnen.com/wp-content/uploads/2014/07/ch.jpeg" alt="Swissapp logo">
-            <h1 class="display-4">SwissApp</h1>
-          </div>
-          <ul>
-            <li><a class="nav-link" href="{% url 'all-jobs' %}"><i class="fas fa-home me-2"></i>Home</a></li>
-            <li><a href="#"><i class="fas fa-envelope me-2"></i>Message</a></li>
-            <li><a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-user me-2"></i>Profil</a></li>
-            <li><a class="nav-link" href="{% url 'edit-profile' %}"><i class="fas fa-cog me-2"></i>Edit</a></li>
-            <li><a class="nav-link" href="{% url 'create' %}"><i class="fas fa-cog me-2"></i>New Ad</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Main content area -->
-      <div class="col-md-9">
-        <div class="content">
-            <h2>Volné pracovní pozice</h2>
-
-            <!-- Job search form -->
-            <form method="get" action="{% url 'job-search' %}">
-              <div class="mb-3">
-                <label for="searchJob" class="form-label">Vyhledat pracovní pozici:</label>
-                <input type="text" name="title_contains" class="form-control" id="searchJob" placeholder="Zadejte název pozice">
-              </div>
-              <button type="submit" class="btn btn-primary">Vyhledat</button>
-            </form><br>
-
-            <!-- Filters for canton and language -->
-            <form method="get" action="{% url 'job-search' %}">
-              <div class="mb-3">
-                <label for="selectCanton" class="form-label">Vyberte kanton:</label>
-                <select name="place_id" class="form-control" id="selectCanton">
-                  <option value="">-- Všechny kantony --</option>
-                  {% for place in places %}
-                    <option value="{{ place.pk }}">{{ place.name_place }}</option>
-                  {% endfor %}
-                </select>
-              </div>
-
-              <div class="mb-3">
-                <label for="selectLanguage" class="form-label">Vyberte jazyk:</label>
-                <select name="state" class="form-control" id="selectLanguage">
-                  <option value="">-- Všechny jazyky --</option>
-                  {% for language in languages %}
-                    <option value="{{ language.state }}">{{ language.get_full_name }}</option>
-                  {% endfor %}
-                </select>
-              </div>
-
-              <button type="submit" class="btn btn-primary">Filtrovat</button>
-
-            </form>
-            <br><br>
-
-          <!-- Karty (Cards) -->
-          <div class="card-container">
-            {% for job in jobs %}
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">{{ job.position.name_position }}</h5>
-                <div class="job-details">
-                  <span class="job-label">Kategorie:</span> {{ job.position.category }}<br>
-                  <span class="job-label">Kanton:</span> {{ job.place }}<br>
-                  <span class="job-label">Požadovaná praxe:</span> {{ job.experience }}<br>
-                  <span class="job-label">Hodinová mzda:</span> {{ job.salary }} CHF<br>
-                  <span class="job-label">Diety:</span> {{ job.diet }} CHF<br>
-                  <a href="{% url 'job-detail' job.id %}">Detail</a>
+        <!-- Dashboard sidebar -->
+        <div class="col-md-3">
+            <div class="sidebar">
+                <div class="logo">
+                    <img src="https://www.wyssenseilbahnen.com/wp-content/uploads/2014/07/ch.jpeg" alt="Swissapp logo">
+                    <h1 class="display-4">SwissApp</h1>
                 </div>
-              </div>
+                <ul>
+                    <li><a class="nav-link" href="{% url 'all-jobs' %}"><i class="fas fa-home me-2"></i>Home</a></li>
+                    <li><a href="#"><i class="fas fa-envelope me-2"></i>Message</a></li>
+                    <li><a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-user me-2"></i>Profil</a></li>
+                    {% if user.is_useragent %}
+                        <li><a class="nav-link" href="{% url 'create' %}"><i class="fas fa-cog me-2"></i>New Ad</a></li>
+                    {% endif %}
+                </ul>
             </div>
-            {% endfor %}
-          </div>
         </div>
-      </div>
+
+        <!-- Main content area -->
+        <div class="col-md-9">
+            <div class="content">
+                <h2>Volné pracovní pozice</h2>
+
+                <!-- Job search form -->
+                <form method="get" action="{% url 'job-search' %}">
+                    <div class="mb-3">
+                        <label for="searchJob" class="form-label">Vyhledat pracovní pozici:</label>
+                        <input type="text" name="title_contains" class="form-control" id="searchJob"
+                               placeholder="Zadejte název pozice">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Vyhledat</button>
+                </form>
+                <br>
+
+                <!-- Filters for canton and language -->
+                <form method="get" action="{% url 'job-search' %}">
+                    <div class="mb-3">
+                        <label for="selectCanton" class="form-label">Vyberte kanton:</label>
+                        <select name="place_id" class="form-control" id="selectCanton">
+                            <option value="">-- Všechny kantony --</option>
+                            {% for place in places %}
+                                <option value="{{ place.pk }}">{{ place.name_place }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="selectLanguage" class="form-label">Vyberte jazyk:</label>
+                        <select name="state" class="form-control" id="selectLanguage">
+                            <option value="">-- Všechny jazyky --</option>
+                            {% for language in languages %}
+                                <option value="{{ language.state }}">{{ language.get_full_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Filtrovat</button>
+
+                </form>
+                <br><br>
+
+                <!-- Karty (Cards) -->
+                <div class="card-container">
+                    {% for job in jobs %}
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ job.position.name_position }}</h5>
+                                <div class="job-details">
+                                    <span class="job-label">Kategorie:</span> {{ job.position.category }}<br>
+                                    <span class="job-label">Kanton:</span> {{ job.place }}<br>
+                                    <span class="job-label">Požadovaná praxe:</span> {{ job.experience }}<br>
+                                    <span class="job-label">Hodinová mzda:</span> {{ job.salary }} CHF<br>
+                                    <span class="job-label">Diety:</span> {{ job.diet }} CHF<br>
+                                    <a href="{% url 'job-detail' job.id %}">Detail</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"></script>
 </body>
 </html>

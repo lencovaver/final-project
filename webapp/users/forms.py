@@ -1,8 +1,7 @@
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-
 from django import forms
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.core.exceptions import ValidationError
-
+from jobapp.models import Language
 from users.models import User
 
 
@@ -31,6 +30,14 @@ class RegistrationForm(UserCreationForm):
 
 class EditProfileForm(UserChangeForm):
     email = forms.EmailField(widget=forms.EmailInput(attrs={"class": "form-control"}))
+    language = forms.ChoiceField(
+        choices=Language.STATE_CHOICES,
+        widget=forms.Select(attrs={"class": "form-control"}),
+    )
+    lang_level = forms.ChoiceField(
+        choices=Language.LEVEL_CHOICES,
+        widget=forms.Select(attrs={"class": "form-control"}),
+    )
 
     class Meta:
         model = User
