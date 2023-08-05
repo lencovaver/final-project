@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Swissapp Dashboard</title>
+    <title>company dashboard</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <!-- Font Awesome Icons -->
@@ -74,7 +74,7 @@
 
         /* Přidáme styly pro jednotlivé karty */
         .card {
-            width: calc(32% - 10px); /* Každá karta zabere 32% šířky kontejneru s odstupem 10px */
+            width: calc(25% - 10px); /* Každá karta zabere 32% šířky kontejneru s odstupem 10px */
             margin-bottom: 10px;
             transition: all 0.3s;
             border: 1px solid #ddd; /* Přidáme jemný okraj kolem karty */
@@ -85,7 +85,7 @@
 
         /* Styly pro nadpis karty */
         .card-title {
-            font-size: 1.5em; /* Zmenšíme velikost nadpisu karty */
+            font-size: 1.4em; /* Zmenšíme velikost nadpisu karty */
             color: #2B2D42;
             margin-bottom: 10px;
         }
@@ -116,8 +116,14 @@
                 <ul>
                     <li><a class="nav-link" href="{% url 'dashboard' %}"><i class="fas fa-home me-2"></i>Domů</a></li>
                     <li><a href="#"><i class="fas fa-envelope me-2"></i>Zprávy</a></li>
-                    <li><a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-user me-2"></i>Váš profil</a></li>
+                    <li><a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-user me-2"></i>Profil</a></li>
                     <li><a class="nav-link" href="{% url 'create' %}"><i class="fas fa-cog me-2"></i>Nový inzerát</a></li>
+                    <li><a class="nav-link" onclick="logout()" href="{% url 'logout' %}"><i class="fas fa-backspace me-2"></i>Odhlásit</a></li>
+                    <script>
+                        function logout() {
+                        alert("Byl/a jste odhlášen/a.");
+                        }
+                    </script>
                 </ul>
             </div>
         </div>
@@ -143,7 +149,6 @@
                 {% endfor %}
             </div>
         </div>
-
     </div>
 </body>
 </html>

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Swissapp Dashboard</title>
+    <title>job-detail</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <!-- Font Awesome Icons -->
@@ -41,10 +41,22 @@
             margin-bottom: 30px;
         }
 
-        .button {
-            font-size: 24px;
+        .btn {
+            font-size: 16px;
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 24px;
+            background-color: #D80032;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            align-items: center;
+        }
+
+        .btn:hover {
+            background-color: #2B2D42;
+            color: #FFFFFF;
         }
 
         .sidebar ul {
@@ -97,52 +109,65 @@
                 </div>
                 <ul>
                     {% if user.is_useragent %}
-                    <li><a class="nav-link" href="{% url 'dashboard' %}"><i class="fas fa-home me-2"></i>Moje inzeráty</a>
+                    <li><a class="nav-link" href="{% url 'dashboard' %}"><i class="fas fa-home me-2"></i>Inzeráty</a>
                     </li>
                     {% else %}
                     <li><a class="nav-link" href="{% url 'all-jobs' %}"><i class="fas fa-home me-2"></i>Inzeráty</a></li>
                     {% endif %}
                     <li><a href="#"><i class="fas fa-envelope me-2"></i>Zprávy</a></li>
                     <li><a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-user me-2"></i>Profil</a></li>
-                    {% if request.user.is_authenticated %}
-                        <li><a class="nav-link" href="{% url 'update' pk=job.pk %}"><i class="fas fa-cog me-2"></i>Upravit inzerát</a>
-                        </li>
-                    {% endif %}
+                    <li><a class="nav-link" onclick="logout()" href="{% url 'logout' %}"><i class="fas fa-backspace me-2"></i>Odhlásit</a></li>
+                    <script>
+                        function logout() {
+                        alert("Byl/a jste odhlášen/a.");
+                        }
+                    </script>
                 </ul>
             </div>
         </div>
 
         <!-- User profile content -->
-        <div class="col-md-9">
+        <div class="col-md-9 d-flex align-items-center justify-content-center">
             <div class="content">
                 <!-- Zobrazení profilového obrázku jako první v kulatém rozhraní -->
                 <h2 class="text-center"> {{ job.position.name_position }}</h2>
                 <br><br><br>
                 <p class="text-center"><b>Místo výkonu práce:</b> {{ job.place }}</p>
                 <p class="text-center"><b>Požadované zkušenosti:</b> {{ job.experience }}</p>
-                <p class="text-center"><b>Požadovaná úroveň jazyka:</b> {% for language in job.language.all %}
-                    {{ language }}
+                <p class="text-center"><b>Požadovaná úroveň jazyka:</b>
+                    {% for language in job.language.all %}
+                        {{ language }}
                     {% empty %}
-                    Neuvedeno
-                {% endfor %}</p>
+                        Neuvedeno
+                    {% endfor %}
+                </p>
                 <p class="text-center"><b>Podrobný popis pozice:</b> {{ job.info_position }}</p>
                 <p class="text-center"><b>Požadavky na ubytování:</b> {{ job.accommodation }}</p>
                 <p class="text-center"><b>Požadavek na řidičák:</b>
                     {% for licence in job.driving_licence.all %}
                         {{ licence }}
-                        {% empty %}
+                    {% empty %}
                         No requirements
-                    {% endfor %}</p>
+                    {% endfor %}
+                </p>
                 <p class="text-center"><b>Typ úvazku:</b> {{ job.work_type }}</p>
                 <p class="text-center"><b>Nástup od:</b> {{ job.start_date }}</p>
-                <p class="text-center"><b>Hodinová mzda:</b> {{ job.salary }} CHF <b>Diety:</b> {{ job.diet }} CHF</p></p>
+                <p class="text-center"><b>Hodinová mzda:</b> {{ job.salary }} CHF <b>Diety:</b> {{ job.diet }} CHF</p><br><br>
                 {% if user.is_useragent %}
-                    <form method="post" action="{% url 'archive-job' pk=job.pk %}">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-primary">Smazat</button>
-                    </form>
+                    <div class="d-flex justify-content-between"> <!-- Buttons will be placed next to each other -->
+                <form method="post" action="{% url 'archive-job' pk=job.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">Smazat</button>
+                </form>
+                <form method="post" action="{% url 'update' pk=job.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">Upravit</button>
+                </form>
+            </div>
                 {% else %}
-                    <button type="submit" href="{% url 'all-jobs' %}" class="btn btn-primary">Mám zájem</button>
+                    <div class="d-flex justify-content-center"> <!-- Centered the button using Flexbox -->
+                        <button type="submit" class="btn">Mám zájem</button>
+                    </div>
                     <br>
                 {% endif %}
             </div>
