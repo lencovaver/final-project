@@ -117,6 +117,12 @@
                     <li><a class="nav-link" href="{% url 'all-jobs' %}"><i class="fas fa-home me-2"></i>Inzeráty</a></li>
                     <li><a href="#"><i class="fas fa-envelope me-2"></i>Zprávy</a></li>
                     <li><a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-user me-2"></i>Profil</a></li>
+                    <li><a class="nav-link" onclick="logout()" href="{% url 'logout' %}"><i class="fas fa-backspace me-2"></i>Odhlásit</a></li>
+                    <script>
+                        function logout() {
+                        alert("Byl/a jste odhlášen/a.");
+                        }
+                    </script>
                 </ul>
             </div>
         </div>
