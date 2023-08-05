@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,6 +55,24 @@
             text-decoration: none;
             display: block;
             padding: 10px;
+        }
+
+        .btn {
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 24px;
+            background-color: #D80032;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            align-items: center;
+        }
+
+        .btn:hover {
+            background-color: #2B2D42;
+            color: #FFFFFF;
         }
 
         .sidebar ul li a:hover {
@@ -167,11 +185,11 @@
                     <div class="mb-3">
                         <label for="email" class="form-label">E-mail</label>
                         <input type="email" name="email" id="email" class="form-control" value="{{ user.email }}">
+                    </div><br><br>
+                    <div class="d-flex justify-content-center"> <!-- Centered the button using Flexbox -->
+                        <button type="submit" class="btn">Uložit</button>
                     </div>
-                    <div>
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </div>
-
+                    <br>
                 </form>
             </div>
         </div>

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Swissapp Dashboard</title>
+  <title>Update</title>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
   <!-- Font Awesome Icons -->
@@ -25,6 +25,24 @@
       width: 80px;
       height: 50px;
     }
+
+    .btn {
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 24px;
+            background-color: #D80032;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            align-items: center;
+        }
+
+        .btn:hover {
+            background-color: #2B2D42;
+            color: #FFFFFF;
+        }
 
     .sidebar {
       height: 99vh;
@@ -56,6 +74,20 @@
       display: block;
       padding: 10px;
     }
+
+    .btn {
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 24px;
+            background-color: #D80032;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            align-items: center;
+
+        }
 
     .sidebar ul li a:hover {
       background: linear-gradient(45deg, #D80032, #2B2D42);
@@ -104,7 +136,7 @@
             {% csrf_token %}
             {{ form.as_p }}
             <br>
-            <button type="submit" class="btn btn-primary">Aktualizovat</button>
+            <button type="submit" class="btn">Aktualizovat</button>
           </form>
         </div>
       </div>
