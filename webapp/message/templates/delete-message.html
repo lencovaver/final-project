@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Smazat zprávu</title>
+
+
+</head>
+<body>
+{% block content %}
+    <h1>Smazat zprávu?</h1>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Smazat">
+    </form>
+    <a href="{% url 'inbox' %}">Zpět</a>
+{% endblock %}
+</body>
+</html>

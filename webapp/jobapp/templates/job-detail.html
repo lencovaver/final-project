@@ -109,17 +109,20 @@
                 </div>
                 <ul>
                     {% if user.is_useragent %}
-                    <li><a class="nav-link" href="{% url 'dashboard' %}"><i class="fas fa-home me-2"></i>Inzeráty</a>
-                    </li>
+                        <li><a class="nav-link" href="{% url 'dashboard' %}"><i
+                                class="fas fa-home me-2"></i>Inzeráty</a>
+                        </li>
                     {% else %}
-                    <li><a class="nav-link" href="{% url 'all-jobs' %}"><i class="fas fa-home me-2"></i>Inzeráty</a></li>
+                        <li><a class="nav-link" href="{% url 'all-jobs' %}"><i class="fas fa-home me-2"></i>Inzeráty</a>
+                        </li>
                     {% endif %}
-                    <li><a href="#"><i class="fas fa-envelope me-2"></i>Zprávy</a></li>
+                    <li><a class="nav-link" href="{% url 'inbox' %}"><i class="fas fa-envelope me-2"></i>Zprávy</a></li>
                     <li><a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-user me-2"></i>Profil</a></li>
-                    <li><a class="nav-link" onclick="logout()" href="{% url 'logout' %}"><i class="fas fa-backspace me-2"></i>Odhlásit</a></li>
+                    <li><a class="nav-link" onclick="logout()" href="{% url 'logout' %}"><i
+                            class="fas fa-backspace me-2"></i>Odhlásit</a></li>
                     <script>
                         function logout() {
-                        alert("Byl/a jste odhlášen/a.");
+                            alert("Byl/a jste odhlášen/a.");
                         }
                     </script>
                 </ul>
@@ -137,7 +140,7 @@
                 <p class="text-center"><b>Požadovaná úroveň jazyka:</b>
                     {% for language in job.language.all %}
                         {{ language }}
-                    {% empty %}
+                        {% empty %}
                         Neuvedeno
                     {% endfor %}
                 </p>
@@ -146,27 +149,28 @@
                 <p class="text-center"><b>Požadavek na řidičák:</b>
                     {% for licence in job.driving_licence.all %}
                         {{ licence }}
-                    {% empty %}
+                        {% empty %}
                         No requirements
                     {% endfor %}
                 </p>
                 <p class="text-center"><b>Typ úvazku:</b> {{ job.work_type }}</p>
                 <p class="text-center"><b>Nástup od:</b> {{ job.start_date }}</p>
-                <p class="text-center"><b>Hodinová mzda:</b> {{ job.salary }} CHF <b>Diety:</b> {{ job.diet }} CHF</p><br><br>
+                <p class="text-center"><b>Hodinová mzda:</b> {{ job.salary }} CHF <b>Diety:</b> {{ job.diet }} CHF</p>
+                <br><br>
                 {% if user.is_useragent %}
                     <div class="d-flex justify-content-between"> <!-- Buttons will be placed next to each other -->
-                <form method="post" action="{% url 'archive-job' pk=job.pk %}">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-primary">Smazat</button>
-                </form>
-                <form method="post" action="{% url 'update' pk=job.pk %}">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-primary">Upravit</button>
-                </form>
-            </div>
+                        <form method="post" action="{% url 'archive-job' pk=job.pk %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">Smazat</button>
+                        </form>
+                        <form method="post" action="{% url 'update' pk=job.pk %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">Upravit</button>
+                        </form>
+                    </div>
                 {% else %}
                     <div class="d-flex justify-content-center"> <!-- Centered the button using Flexbox -->
-                        <button type="submit" class="btn">Mám zájem</button>
+                        <a href="{% url 'compose' job.id %}">Odpovědět na inzerát</a>
                     </div>
                     <br>
                 {% endif %}

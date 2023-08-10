@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
+
 # import dj_database_url
 from pathlib import Path
 
@@ -21,11 +22,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = "django-insecure-!)xg$4q+&ict$pj(u4fe4lgq(#u!p21n&8ttd+xjf+^@=v_gha"
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'cg#p$g+j9tax!#a3cup@1$8obt2_+&k3q+pmu)5%asj6yjpkag')
+SECRET_KEY = os.environ.get(
+    "DJANGO_SECRET_KEY", "cg#p$g+j9tax!#a3cup@1$8obt2_+&k3q+pmu)5%asj6yjpkag"
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
+DEBUG = os.environ.get("DJANGO_DEBUG", "") != "False"
 
 ALLOWED_HOSTS = ["*"]
 CSRF_TRUSTED_ORIGINS = ["https://*.railway.app"]
@@ -42,11 +45,12 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "jobapp.apps.JobappConfig",
     "users.apps.UsersConfig",
+    "message.apps.MessageConfig",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -61,9 +65,9 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-            os.path.join(BASE_DIR, 'templates'),
-            os.path.join(BASE_DIR, "jobapp", 'templates'),
-            os.path.join(BASE_DIR, "users", 'templates'),
+            os.path.join(BASE_DIR, "templates"),
+            os.path.join(BASE_DIR, "jobapp", "templates"),
+            os.path.join(BASE_DIR, "users", "templates"),
         ],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -119,8 +123,8 @@ USE_I18N = True
 USE_TZ = True
 
 LANGUAGES = [
-    ('en', 'English'),  # Seznam podporovaných jazyků a jejich názvů
-    ('cz', 'Česky'),    # Můžete přidat další jazyky podle potřeby
+    ("en", "English"),  # Seznam podporovaných jazyků a jejich názvů
+    ("cz", "Česky"),  # Můžete přidat další jazyky podle potřeby
 ]
 
 # Static files (CSS, JavaScript, Images)
@@ -128,7 +132,7 @@ LANGUAGES = [
 
 STATIC_URL = "static/"
 
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -137,12 +141,12 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "users.User"
 
-LOGIN_URL = 'login'
+LOGIN_URL = "login"
 
-LOGIN_REDIRECT_URL = 'homepage'
+LOGIN_REDIRECT_URL = "homepage"
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
 
-#db_from_env = dj_database_url.config(conn_max_age=500)
-#DATABASES['default'].update(db_from_env)
+# db_from_env = dj_database_url.config(conn_max_age=500)
+# DATABASES['default'].update(db_from_env)

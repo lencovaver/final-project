@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Odesláno!</title>
+</head>
+<body>
+<h2>Hotovo!!!</h2>
+    <br>
+    <p>🎉🎉🎉</p>
+    <h4>Zpráva byla úspěšně odeslána! 🎉🎉🎉</h4>
+    <br>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+        function redirectToNewPage() {
+            setTimeout(function() {
+                window.location.href = "{% url 'all-jobs' %}";
+            }, 600);
+        }
+
+        window.onload = redirectToNewPage;
+    </script>
+</body>
+</html>

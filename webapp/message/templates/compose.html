@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Compose message</title>
+
+</head>
+<body>
+{% block content %}
+    <h1>Odpovědět na inzerát</h1>
+    <li>Příjemce: {{ form.initial.recipient.username }}</li>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.recipient }}
+        {{ form.content }}
+        <br>
+        Ke zprávě můžete přiložit životopis ve formátu PDF do velikosti 1 mb. {{ form.attachment }} 
+        <br>
+        <button type="submit">Odeslat odpověď</button>
+    </form>
+{% endblock %}
+
+</body>
+</html>

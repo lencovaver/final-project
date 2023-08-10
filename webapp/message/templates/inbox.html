@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Inbox</title>
+</head>
+<body>
+<div>
+    {% block content %}
+        <h1>Inbox</h1>
+        <ul>
+            {% for message in inbox %}
+                <li>Odesilatel: {{ message.sender }} <small> ({{ message.timestamp }}) </small>
+                    {% if message.is_read == False %}
+                        <span style="color: red;">Nepřečteno</span>
+                    {% endif %}
+                </li>
+                <li>Text zprávy: {{ message.content|truncatewords:4 }} </li>
+                <li><a href="{% url 'message' message.id %}">Zobrazit detail -></a></li>
+                <hr>
+            {% endfor %}
+        </ul>
+    {% endblock %}
+
+</div>
+</body>
+</html>
