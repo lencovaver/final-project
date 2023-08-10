@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Inbox</title>
+</head>
+<body>
+<div>
+{% block content %}
+    <h1>Inbox</h1>
+    <ul>
+        {% for message in inbox %}
+            {% if user == message.recipient %}
+                <li>Odesilatel: {{ message.sender }} <small> ({{ message.timestamp }}) </small></li>
+                {% if not message.is_read %}
+                    <span style="color: red;">Nepřečteno</span>
+                {% endif %}
+                <li>Text zprávy: {{ message.content|truncatewords:4 }} </li>
+                <li><a href="{% url 'message' message.id %}">Zobrazit detail -></a></li>
+                <hr>
+            {% elif user == message.sender %}
+                <li>Adresát: {{ message.recipient }} <small> ({{ message.timestamp }}) </small></li>
+                <li>Text zprávy: {{ message.content|truncatewords:4 }} </li>
+                <li><a href="{% url 'message' message.id %}">Zobrazit detail -></a></li>
+                <hr>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+
+
+
+
+
+</div>
+</body>
+</html>

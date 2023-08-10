@@ -31,8 +31,15 @@ from jobapp.views import (
     LanguageSearchView,
     JobArchiveView,
     MyJobView,
+    archive_job,
 )
-from jobapp.views import archive_job
+from message.views import (
+    InboxView,
+    MessageView,
+    ComposeMessageView,
+    DeleteMessageView,
+    MessageSuccessView,
+)
 from users.views import (
     RegSuccessView,
     RegistrationView,
@@ -65,6 +72,13 @@ urlpatterns = [
     path("state-search/", LanguageSearchView.as_view(), name="state-search"),
     path("archiv/", JobArchiveView.as_view(), name="job-archive"),
     path("archivovat/<int:pk>/", archive_job, name="archive-job"),
+    path("inbox/", InboxView.as_view(), name="inbox"),
+    path("compose/<int:job_id>/", ComposeMessageView.as_view(), name="compose"),
+    path("message/<int:pk>/", MessageView.as_view(), name="message"),
+    path(
+        "message/<int:pk>/delete/", DeleteMessageView.as_view(), name="delete-message"
+    ),
+    path("message-success/", MessageSuccessView.as_view(), name="message-success"),
 ]
 
 if settings.DEBUG:
