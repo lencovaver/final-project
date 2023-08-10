@@ -12,8 +12,10 @@
     <li><b>Text zprávy:</b> {{ message.content }}</li>
     <li><b>Kontakt na uchazeče:</b> <a href="mailto:{{ user.email }}">{{ user.email }}</a></li>
     <br>
-    <li><a href="{% url 'job-detail' job.id %}">Týká se vámi nabízené pozice {{ position_name }} v {{ place }} </a></li>
-    <li><a href="{% url 'delete-message' message.id %}">Smazat zprávu</a></li>
+    <li><a href="{% url 'job-detail' job.id %}">Týká se pozice {{ position_name }} v {{ place }} </a></li>
+    {% if user == message.recipient %}
+        <li><a href="{% url 'delete-message' message.id %}">Smazat zprávu</a></li>
+    {% endif %}
     <li><a href="{% url 'inbox' %}">Zpět na zprávy</a></li>
 {% endblock %}
 

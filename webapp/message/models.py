@@ -38,6 +38,7 @@ class Message(models.Model):
     message.content = "Updated content"
     message.save()
     """
+
     sender = models.ForeignKey(
         User, related_name="sent_messages", on_delete=models.CASCADE
     )

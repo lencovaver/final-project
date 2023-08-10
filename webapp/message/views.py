@@ -34,10 +34,13 @@ class MessageView(LoginRequiredMixin, DetailView):
         message_id = self.kwargs.get("pk")
         message = get_object_or_404(Message, id=message_id)
 
-        if message.recipient != self.request.user:
+        if (
+            self.request.user != message.recipient
+            and self.request.user != message.sender
+        ):
             raise Http404("Ups. Chyba.")
 
-        if not message.is_read:
+        if self.request.user == message.recipient and not message.is_read:
             message.is_read = True
             message.save()
 
