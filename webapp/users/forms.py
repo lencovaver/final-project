@@ -19,13 +19,23 @@ class RegistrationForm(UserCreationForm):
     def clean_email(self):
         """
         Checks if email is already in use.
-        #FIX ERROR MESSAGE!
         """
-
         email = self.cleaned_data.get("email")
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError("Email is already in use.")
         return email
+
+    def save(self, commit=True):
+        """
+        Save the provided password in hashed format and print a statement.
+        """
+        user = super(RegistrationForm, self).save(commit=False)
+
+        print(f"Saving user: {user.username}, Password (hashed): {user.password}")
+
+        if commit:
+            user.save()
+        return user
 
 
 class EditProfileForm(UserChangeForm):

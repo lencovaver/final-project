@@ -2,7 +2,7 @@ from PIL import Image
 import io
 from django.core.files.base import ContentFile
 from django.contrib import messages
-from django.contrib.auth import logout
+from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
@@ -18,23 +18,36 @@ from django.shortcuts import redirect
 
 
 class RegistrationView(CreateView):
-    # View for user registration.
+    """
+    View for user registration.
+    """
 
     template_name = "registration.html"
     form_class = RegistrationForm
     success_url = reverse_lazy("registration-success")
 
     def form_valid(self, form):
-        form.save()
-        return super().form_valid(form)
+        response = super().form_valid(form)
+        login(self.request, self.object)
+        return response
 
 
 class UserLoginView(LoginView):
-    # View for user login.
+    """
+    View for user login.
+    """
 
     template_name = "login.html"
     form_class = AuthenticationForm
     redirect_authenticated_user = True
+
+    def form_valid(self, form):
+        print(f"Trying to log in user: {self.request.POST.get('username')}")
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        print(f"Login failed for user: {self.request.POST.get('username')}")
+        return super().form_invalid(form)
 
     def get_success_url(self):
         if self.request.user.is_useragent:
@@ -42,12 +55,9 @@ class UserLoginView(LoginView):
         else:
             return reverse("homepage")
 
-    def form_invalid(self, form):
-        return super().form_invalid(form)
-
 
 class UserLogoutView(View):
-    # View for user logout.
+    """View for user logout."""
 
     def get(self, request, *args, **kwargs):
         logout(request)
@@ -55,6 +65,8 @@ class UserLogoutView(View):
 
 
 class UserProfileView(DetailView):
+    """View for user profile."""
+
     model = User
     form_class = EditProfileForm
     template_name = "profile.html"
@@ -76,6 +88,8 @@ class UserProfileView(DetailView):
 
 
 class EditProfileView(LoginRequiredMixin, UpdateView):
+    """View for editing user profile."""
+
     model = User
     form_class = EditProfileForm
     template_name = "edit-profile.html"
@@ -123,7 +137,7 @@ class EditProfileView(LoginRequiredMixin, UpdateView):
 
 
 class RegSuccessView(View):
-    # View for showing registration success page.
+    """View for registration success."""
 
     def get(self, request, *args, **kwargs):
         return render(request, "registration-success.html")
