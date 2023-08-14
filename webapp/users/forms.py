@@ -39,14 +39,20 @@ class RegistrationForm(UserCreationForm):
 
 
 class EditProfileForm(UserChangeForm):
-    email = forms.EmailField(widget=forms.EmailInput(attrs={"class": "form-control"}))
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={"class": "form-control"}),
+        required=False,
+    )
+
     language = forms.ChoiceField(
         choices=Language.STATE_CHOICES,
         widget=forms.Select(attrs={"class": "form-control"}),
+        required=False,
     )
     lang_level = forms.ChoiceField(
         choices=Language.LEVEL_CHOICES,
         widget=forms.Select(attrs={"class": "form-control"}),
+        required=False,
     )
 
     class Meta:
@@ -60,8 +66,10 @@ class EditProfileForm(UserChangeForm):
             "bio",
             "phone_number",
             "company",
+            "email",
+            "language",
+            "lang_level",
         ]
-        exclude = ["password"]
 
     def clean_profile_pic(self):
         # Checks if profile picture is too large.
