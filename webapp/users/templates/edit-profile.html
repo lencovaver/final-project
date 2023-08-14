@@ -152,7 +152,7 @@
                         <div class="mb-3 d-flex justify-content-between">
                             <div class="flex-grow-1 me-2">
                                 <label for="company_address" class="form-label">Adresa společnosti:</label>
-                                <input type="text" name="company_address" id="company_address" class="form-control"
+                                <input type="text" name="address" id="company_address" class="form-control"
                                        value="{{ user.address }}">
                             </div>
                         </div>
@@ -185,10 +185,16 @@
                     <div class="mb-3">
                         <label for="email" class="form-label">E-mail</label>
                         <input type="email" name="email" id="email" class="form-control" value="{{ user.email }}">
-                    </div><br><br>
+                    </div>
+                    <br><br>
                     <div class="d-flex justify-content-center"> <!-- Centered the button using Flexbox -->
                         <button type="submit" class="btn">Uložit</button>
                     </div>
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {{ form.non_field_errors }}
+                        </div>
+                    {% endif %}
                     <br>
                 </form>
             </div>

@@ -101,10 +101,8 @@ class JobUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     success_url = reverse_lazy("job-success")
 
     def test_func(self):
-        return (
-            self.request.user == self.get_object().author
-            or self.request.user.is_superuser
-        )
+        job = self.get_object()
+        return self.request.user == job.author or self.request.user.is_superuser
 
     permission_required = "jobapp.add_postjob"
 

@@ -117,11 +117,13 @@
                     <li><a class="nav-link" href="{% url 'dashboard' %}"><i class="fas fa-home me-2"></i>Domů</a></li>
                     <li><a class="nav-link" href="{% url 'inbox' %}"><i class="fas fa-envelope me-2"></i>Zprávy</a></li>
                     <li><a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-user me-2"></i>Profil</a></li>
-                    <li><a class="nav-link" href="{% url 'create' %}"><i class="fas fa-cog me-2"></i>Nový inzerát</a></li>
-                    <li><a class="nav-link" onclick="logout()" href="{% url 'logout' %}"><i class="fas fa-backspace me-2"></i>Odhlásit</a></li>
+                    <li><a class="nav-link" href="{% url 'create' %}"><i class="fas fa-cog me-2"></i>Nový inzerát</a>
+                    </li>
+                    <li><a class="nav-link" onclick="logout()" href="{% url 'logout' %}"><i
+                            class="fas fa-backspace me-2"></i>Odhlásit</a></li>
                     <script>
                         function logout() {
-                        alert("Byl/a jste odhlášen/a.");
+                            alert("Byl/a jste odhlášen/a.");
                         }
                     </script>
                 </ul>
@@ -133,19 +135,21 @@
         <div class="col-md-9">
             <div class="card-container">
                 {% for job in dashboard %}
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ job.position.name_position }}</h5>
-                            <div class="job-details">
-                                <span class="job-label">Kategorie:</span> {{ job.position.category }}<br>
-                                <span class="job-label">Kanton:</span> {{ job.place }}<br>
-                                <span class="job-label">Požadovaná praxe:</span> {{ job.experience }}<br>
-                                <span class="job-label">Hodinová mzda:</span> {{ job.salary }} CHF<br>
-                                <span class="job-label">Diety:</span> {{ job.diet }} CHF<br>
-                                <a href="{% url 'job-detail' job.id %}">Detail</a>
+                    {% if not job.archived %}
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ job.position.name_position }}</h5>
+                                <div class="job-details">
+                                    <span class="job-label">Kategorie:</span> {{ job.position.category }}<br>
+                                    <span class="job-label">Kanton:</span> {{ job.place }}<br>
+                                    <span class="job-label">Požadovaná praxe:</span> {{ job.experience }}<br>
+                                    <span class="job-label">Hodinová mzda:</span> {{ job.salary }} CHF<br>
+                                    <span class="job-label">Diety:</span> {{ job.diet }} CHF<br>
+                                    <a href="{% url 'job-detail' job.id %}">Detail</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>

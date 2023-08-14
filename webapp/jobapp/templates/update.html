@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Update</title>
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  <!-- Custom CSS -->
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      color: #FFFFFF;
-    }
+        .logo {
+            display: flex;
+            align-items: center;
+            color: #FFFFFF;
+        }
 
-    .logo img {
-      margin-right: 10px;
-      width: 80px;
-      height: 50px;
-    }
+        .logo img {
+            margin-right: 10px;
+            width: 80px;
+            height: 50px;
+        }
 
-    .btn {
+        .btn {
             font-size: 16px;
             text-align: center;
             margin-bottom: 24px;
@@ -44,38 +44,38 @@
             color: #FFFFFF;
         }
 
-    .sidebar {
-      height: 99vh;
-      background: #2B2D42;
-      color: #fff;
-      padding-top: 20px;
-      border-radius: 15px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+        .sidebar {
+            height: 99vh;
+            background: #2B2D42;
+            color: #fff;
+            padding-top: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
-    .sidebar h2 {
-      font-size: 24px;
-      text-align: center;
-      margin-bottom: 30px;
-    }
+        .sidebar h2 {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
 
-    .sidebar ul {
-      list-style: none;
-      padding: 0;
-    }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
 
-    .sidebar ul li {
-      margin-bottom: 10px;
-    }
+        .sidebar ul li {
+            margin-bottom: 10px;
+        }
 
-    .sidebar ul li a {
-      color: #fff;
-      text-decoration: none;
-      display: block;
-      padding: 10px;
-    }
+        .sidebar ul li a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+        }
 
-    .btn {
+        .btn {
             font-size: 16px;
             text-align: center;
             margin-bottom: 24px;
@@ -89,62 +89,149 @@
 
         }
 
-    .sidebar ul li a:hover {
-      background: linear-gradient(45deg, #D80032, #2B2D42);
-    }
+        .sidebar ul li a:hover {
+            background: linear-gradient(45deg, #D80032, #2B2D42);
+        }
 
-    .content {
-      padding: 20px;
-    }
+        .content {
+            padding: 20px;
+        }
 
-    .profile-pic {
-      width: 200px;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 5px solid #fff;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-      margin: 20px auto;
-      display: block;
-    }
+        .profile-pic {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            margin: 20px auto;
+            display: block;
+        }
 
-  </style>
+    </style>
 </head>
 <body>
-  <div class="container-fluid">
+<div class="container-fluid">
     <div class="row">
-      <!-- Dashboard sidebar -->
-      <div class="col-md-3">
-        <div class="sidebar">
-          <div class="logo">
-            <img src="https://www.wyssenseilbahnen.com/wp-content/uploads/2014/07/ch.jpeg" alt="Swissapp logo">
-            <h1 class="display-4">SwissApp</h1>
-          </div>
-          <ul>
-            <li><a class="nav-link" href="{% url 'dashboard' %}"><i class="fas fa-home me-2"></i>Domů</a></li>
-            <li><a class="nav-link" href="{% url 'inbox' %}"><i class="fas fa-envelope me-2"></i>Zprávy</a></li>
-            <li><a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-user me-2"></i>Profil</a></li>
-          </ul>
+        <!-- Dashboard sidebar -->
+        <div class="col-md-3">
+            <div class="sidebar">
+                <div class="logo">
+                    <img src="https://www.wyssenseilbahnen.com/wp-content/uploads/2014/07/ch.jpeg" alt="Swissapp logo">
+                    <h1 class="display-4">SwissApp</h1>
+                </div>
+                <ul>
+                    <li><a class="nav-link" href="{% url 'dashboard' %}"><i class="fas fa-home me-2"></i>Domů</a></li>
+                    <li><a class="nav-link" href="{% url 'inbox' %}"><i class="fas fa-envelope me-2"></i>Zprávy</a></li>
+                    <li><a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-user me-2"></i>Profil</a></li>
+                </ul>
+            </div>
         </div>
-      </div>
 
-      <!-- Dashboard content -->
-      <div class="col-md-9">
-        <div class="content">
-          <h2>Úprava inzerátu</h2>
-          <form method="POST">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <br>
-            <button type="submit" class="btn">Upravit</button>
-          </form>
+        <!-- Dashboard content -->
+        <div class="col-md-9">
+            <div class="content">
+                <h2>Úprava inzerátu</h2>
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <!-- Start Date Field -->
+                    <div class="form-group">
+                        <label for="{{ form.start_date.id_for_label }}">Start Date</label>
+                        {{ form.start_date }}
+                    </div>
+
+                    <!-- Category Field -->
+                    <div class="form-group">
+                        <label for="{{ form.category.id_for_label }}">Category</label>
+                        {{ form.category }}
+                    </div>
+
+                    <!-- Position Field -->
+                    <div class="form-group">
+                        <label for="{{ form.position.id_for_label }}">Position</label>
+                        {{ form.position }}
+                    </div>
+
+                    <!-- Experience Field -->
+                    <div class="form-group">
+                        <label for="{{ form.experience.id_for_label }}">Experience</label>
+                        {{ form.experience }}
+                    </div>
+
+                    <!-- Work Type Field -->
+                    <div class="form-group">
+                        <label for="{{ form.work_type.id_for_label }}">Work Type</label>
+                        {{ form.work_type }}
+                    </div>
+
+                    <!-- Place Field -->
+                    <div class="form-group">
+                        <label for="{{ form.place.id_for_label }}">Place</label>
+                        {{ form.place }}
+                    </div>
+
+                    <!-- Accommodation Field -->
+                    <div class="form-group">
+                        <label for="{{ form.accommodation.id_for_label }}">Accommodation</label>
+                        {{ form.accommodation }}
+                    </div>
+
+                    <!-- Info Position Field -->
+                    <div class="form-group">
+                        <label for="{{ form.info_position.id_for_label }}">Info Position</label>
+                        {{ form.info_position }}
+                    </div>
+
+                    <!-- Language Field (Checkbox Style) -->
+                    <div class="form-group">
+                        <label>Languages</label><br>
+                        {% for choice in form.language %}
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    {{ choice.tag }} {{ choice.choice_label }}
+                                </label>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Driving Licence Field (Checkbox Style) -->
+                    <div class="form-group">
+                        <label>Driving Licence</label><br>
+                        {% for choice in form.driving_licence %}
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    {{ choice.tag }} {{ choice.choice_label }}
+                                </label>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Salary Field -->
+                    <div class="form-group">
+                        <label for="{{ form.salary.id_for_label }}">Salary</label>
+                        {{ form.salary }}
+                    </div>
+
+                    <!-- Diet Field -->
+                    <div class="form-group">
+                        <label for="{{ form.diet.id_for_label }}">Diet</label>
+                        {{ form.diet }}
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="form-group">
+                        <button type="submit" class="btn">Upravit</button>
+                    </div>
+                </form>
+            
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
 
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>

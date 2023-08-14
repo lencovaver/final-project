@@ -98,42 +98,35 @@ class EditProfileView(LoginRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
         return self.request.user
 
+    def post(self, request, *args, **kwargs):
+        messages.info(self.request, "POST request received")
+        return super().post(request, *args, **kwargs)
+
     def form_valid(self, form):
+        user = self.request.user
+        image_field = "company_logo" if user.is_useragent else "profile_pic"
+        image = form.cleaned_data.get(image_field)
+
+        if image:
+            img = Image.open(image)
+            output = io.BytesIO()
+
+            resized_img = img.resize((300, 300))
+            resized_img.save(output, format="PNG", quality=85)
+            output.seek(0)
+
+            django_file = ContentFile(output.read())
+            django_file.name = image.name
+
+            setattr(user, image_field, django_file)
+
         messages.success(self.request, "Profile updated successfully!")
         return super().form_valid(form)
 
-    def profile_pic_save(self, request, *args, **kwargs):
-        user = self.get_object()
-        form = EditProfileForm(request.POST, request.FILES, instance=user)
-
-        if form.is_valid():
-            image_field = "company_logo" if user.is_useragent else "profile_pic"
-            image = form.cleaned_data.get(image_field)
-
-            if image:
-                img = Image.open(image)
-                output = io.BytesIO()
-
-                resized_img = img.resize((300, 300))
-                resized_img.save(
-                    output, format="PNG", quality=85
-                )  # Adjust quality according to your needs
-                output.seek(0)  # move back to the beginning of the file stream
-
-                django_file = ContentFile(output.read())
-                django_file.name = (
-                    image.name
-                )  # make sure to keep the same name as the original file
-
-                form.cleaned_data[image_field] = django_file
-
-            form.save()
-            return redirect("profile")
-        else:
-            return render(request, self.template_name, {"form": form})
-
-    def post(self, request, *args, **kwargs):
-        return self.profile_pic_save(request, *args, **kwargs)
+    def form_invalid(self, form):
+        print(form.errors)
+        messages.error(self.request, f"Form validation failed: {form.errors}")
+        return super().form_invalid(form)
 
 
 class RegSuccessView(View):
