@@ -10,7 +10,7 @@
     <h1>Inbox</h1>
     <ul>
         {% for message in inbox %}
-            {% if user == message.recipient and not message.is_active %}
+            {% if user == message.recipient %}
                 <li>Odesilatel: {{ message.sender }} <small> ({{ message.timestamp }}) </small></li>
                 {% if not message.is_read %}
                     <span style="color: red;">Nepřečteno</span>
