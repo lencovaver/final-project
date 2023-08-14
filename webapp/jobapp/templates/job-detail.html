@@ -139,9 +139,11 @@
                 <p class="text-center"><b>Požadované zkušenosti:</b> {{ job.experience }}</p>
                 <p class="text-center"><b>Požadovaná úroveň jazyka:</b>
                     {% for language in job.language.all %}
-                        {{ language }}
-                        {% empty %}
-                        Neuvedeno
+                        <p class="text-center">
+                            {{ language.get_language_display }} - {{ language.get_level_display }}
+                        </p>
+                    {% empty %}
+                        <p class="text-center">Neuvedeno</p>
                     {% endfor %}
                 </p>
                 <p class="text-center"><b>Podrobný popis pozice:</b> {{ job.info_position }}</p>
