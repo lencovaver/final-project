@@ -4,9 +4,19 @@ from .models import Place, PostJob, Position, Language, DrivingLicence, Position
 
 
 class PostJobAdmin(admin.ModelAdmin):
-    list_display = ["id", 'position', 'place', 'work_type', 'status', 'author']      # Zobrazovaná pole v seznamu
-    list_filter = ['status']                    # Filtr pro archivaci
-    actions = ['archive_selected_jobs']         # Přidání akce pro archivaci více inzerátů najednou
+    list_display = [
+        "id",
+        "position",
+        "place",
+        "work_type",
+        "status",
+        "author",
+    ]  # Zobrazovaná pole v seznamu
+    filter_horizontal = ("language",)
+    list_filter = ["status"]  # Filtr pro archivaci
+    actions = [
+        "archive_selected_jobs"
+    ]  # Přidání akce pro archivaci více inzerátů najednou
 
     def archive_selected_jobs(self, request, queryset):
         queryset.update(status="archived")
