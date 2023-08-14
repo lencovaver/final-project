@@ -37,7 +37,7 @@ from message.views import (
     InboxView,
     MessageView,
     ComposeMessageView,
-    DeleteMessageView,
+    ArchiveMessageView,
     MessageSuccessView,
 )
 from users.views import (
@@ -76,7 +76,9 @@ urlpatterns = [
     path("compose/<int:job_id>/", ComposeMessageView.as_view(), name="compose"),
     path("message/<int:pk>/", MessageView.as_view(), name="message"),
     path(
-        "message/<int:pk>/delete/", DeleteMessageView.as_view(), name="delete-message"
+        "message/<int:pk>/delete/",
+        ArchiveMessageView.as_view(),
+        name="archive-message",
     ),
     path("message-success/", MessageSuccessView.as_view(), name="message-success"),
 ]
