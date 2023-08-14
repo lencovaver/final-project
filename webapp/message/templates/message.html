@@ -13,10 +13,18 @@
     <li><b>Kontakt na uchazeče:</b> <a href="mailto:{{ user.email }}">{{ user.email }}</a></li>
     <br>
     <li><a href="{% url 'job-detail' job.id %}">Týká se pozice {{ position_name }} v {{ place }} </a></li>
+    <br>
     {% if user == message.recipient %}
-        <li><a href="{% url 'delete-message' message.id %}">Smazat zprávu</a></li>
+        <form action="{% url 'archive-message' message.id %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Smazat zprávu"
+                   style="padding: 10px 15px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer;">
+        </form>
     {% endif %}
-    <li><a href="{% url 'inbox' %}">Zpět na zprávy</a></li>
+<br>
+    <a href="{% url 'inbox' %}"
+       style="display: inline-block; padding: 10px 15px; background-color: #007bff; color: #fff; text-decoration: none; border-radius: 5px; cursor: pointer;">Zpět
+        na zprávy</a>
 {% endblock %}
 
 </body>

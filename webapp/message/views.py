@@ -1,8 +1,9 @@
+from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.http import JsonResponse, Http404
-from django.views.generic import ListView, DetailView, FormView, DeleteView
+from django.views.generic import ListView, DetailView, FormView, UpdateView
 from jobapp.models import PostJob
 from message.forms import MessageForm
 from message.models import Message
@@ -92,24 +93,25 @@ class MessageSuccessView(DetailView):
         return render(request, "message-success.html")
 
 
-class DeleteMessageView(LoginRequiredMixin, DeleteView):
-    """Soft delete a message."""
-
+class ArchiveMessageView(UpdateView):
     model = Message
     template_name = "inbox.html"
+    fields = ["is_archived"]
 
-    def form_valid(self, request, *args, **kwargs):
-        print("DeleteMessageView is being called.")
-        self.object = self.get_object()
-        print(f"Retrieved message with ID: {self.object.id}")
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse_lazy("inbox")
+
+    def form_valid(self, form):
         if (
             self.object.recipient != self.request.user
             and self.object.sender != self.request.user
         ):
-            raise Http404("Chyba.")
+            raise Http404("Tohle se nemělo stát.")
 
         self.object.is_archived = True
-        print(f"Setting is_archived for message ID {self.object.id}")
         self.object.save()
 
-        return redirect("inbox")
+        return super().form_valid(form)
